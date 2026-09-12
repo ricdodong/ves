@@ -17,9 +17,17 @@ jobs:
 
       - name: Generate image list JSON
         run: |
-          cd imgslide
-          jq -n '[inputs]' < <(find . -maxdepth 1 \( -name "*.jpg" -o -name "*.jpeg" -o -name "*.png" -o -name "*.webp" -o -name "*.jfif" \) -printf "%f\n" | sort) > ../images.json
-          cd ..
+          python3 -c '
+          import os, json
+          img_dir = "imgslide"
+          extensions = (".jpg", ".jpeg", ".png", ".webp", ".jfif")
+          if os.path.exists(img_dir):
+              files = sorted([f for f in os.listdir(img_dir) if f.lower().endswith(extensions)])
+          else:
+              files = []
+          with open("images.json", "w") as f:
+              json.dump(files, f, indent=2)
+          '
 
       - name: Commit and push if changed
         run: |
