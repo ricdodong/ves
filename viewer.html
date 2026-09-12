@@ -158,7 +158,7 @@
             background: #ffffff;
         }
 
-        /* Lightbox Modal matching Homepage Banner Style */
+        /* Lightbox Modal with Carousel Controls */
         .modal {
             display: none;
             position: fixed;
@@ -197,7 +197,6 @@
             background: #090d16;
         }
 
-        /* Ambient blurred backdrop glow inside modal */
         .modal-bg-blur {
             position: absolute;
             inset: -20px;
@@ -212,7 +211,7 @@
             z-index: 2;
             max-width: 100%;
             max-height: 100%;
-            object-fit: contain; /* Forces full tarpaulin / image display */
+            object-fit: contain;
         }
 
         .modal-caption {
@@ -226,6 +225,35 @@
             border-top: 1px solid #1e293b;
             z-index: 5;
         }
+
+        /* Modal Navigation Buttons */
+        .modal-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(4px);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1010;
+            transition: background 0.2s, transform 0.2s;
+            font-size: 1.2rem;
+        }
+
+        .modal-btn:hover {
+            background: var(--primary);
+            transform: translateY(-50%) scale(1.08);
+        }
+
+        .modal-btn.prev { left: 1.5rem; }
+        .modal-btn.next { right: 1.5rem; }
 
         .close-modal {
             position: absolute;
@@ -242,7 +270,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 10;
+            z-index: 1020;
             transition: background 0.2s;
         }
         .close-modal:hover { background: rgba(255, 255, 255, 0.3); }
@@ -261,6 +289,9 @@
             header { padding: 0.85rem 1rem; }
             .container { width: 95%; margin: 1.5rem auto; }
             .modal-img-wrapper { height: 50vh; }
+            .modal-btn { width: 40px; height: 40px; font-size: 1rem; }
+            .modal-btn.prev { left: 0.5rem; }
+            .modal-btn.next { right: 0.5rem; }
         }
     </style>
 </head>
@@ -283,9 +314,12 @@
         </div>
     </div>
 
-    <!-- Lightbox Modal -->
+    <!-- Lightbox Modal with Slider Controls -->
     <div class="modal" id="imageModal" onclick="closeLightbox()">
         <button class="close-modal" onclick="closeLightbox()">&times;</button>
+        <button class="modal-btn prev" onclick="event.stopPropagation(); navigateLightbox(-1)">❮</button>
+        <button class="modal-btn next" onclick="event.stopPropagation(); navigateLightbox(1)">❯</button>
+        
         <div class="modal-content" onclick="event.stopPropagation()">
             <div class="modal-img-wrapper" id="modalImgWrapper">
                 <div class="modal-bg-blur" id="modalBgBlur"></div>
@@ -302,6 +336,8 @@
     <script>
         const imgFolder = "imgslide/";
         let allImagesData = [];
+        let currentFilteredImages = [];
+        let currentLightboxIndex = 0;
 
         function generateSmartCaption(filename) {
             let nameWithoutExt = filename.substring(0, filename.lastIndexOf('.')) || filename;
@@ -324,6 +360,7 @@
             try {
                 const response = await fetch('images.json');
                 allImagesData = await response.json();
+                currentFilteredImages = allImagesData;
                 renderGrid(allImagesData);
             } catch (err) {
                 console.error("Could not load gallery images:", err);
@@ -339,13 +376,13 @@
                 return;
             }
 
-            images.forEach(imgFile => {
+            images.forEach((imgFile, index) => {
                 const caption = generateSmartCaption(imgFile);
                 const fullPath = imgFolder + imgFile;
 
                 const card = document.createElement('div');
                 card.className = 'photo-card';
-                card.onclick = () => openLightbox(fullPath, caption);
+                card.onclick = () => openLightbox(index);
 
                 const thumbContainer = document.createElement('div');
                 thumbContainer.className = 'photo-thumb-container';
@@ -354,7 +391,6 @@
                 imgElem.src = fullPath;
                 imgElem.alt = caption;
 
-                // Smart aspect ratio detection for grid thumbnails
                 imgElem.onload = function() {
                     const aspectRatio = this.naturalWidth / this.naturalHeight;
                     if (aspectRatio < 1.0 || aspectRatio > 1.25) {
@@ -380,23 +416,49 @@
 
         function filterGallery() {
             const query = document.getElementById('searchInput').value.toLowerCase();
-            const filtered = allImagesData.filter(imgFile => {
+            currentFilteredImages = allImagesData.filter(imgFile => {
                 const caption = generateSmartCaption(imgFile).toLowerCase();
                 return caption.includes(query) || imgFile.toLowerCase().includes(query);
             });
-            renderGrid(filtered);
+            renderGrid(currentFilteredImages);
         }
 
-        function openLightbox(src, caption) {
-            document.getElementById('modalImg').src = src;
-            document.getElementById('modalBgBlur').style.backgroundImage = `url('${src}')`;
-            document.getElementById('modalCaption').innerText = caption;
+        function openLightbox(index) {
+            currentLightboxIndex = index;
+            updateLightboxContent();
             document.getElementById('imageModal').classList.add('open');
+        }
+
+        function updateLightboxContent() {
+            if (currentFilteredImages.length === 0) return;
+            const imgFile = currentFilteredImages[currentLightboxIndex];
+            const fullPath = imgFolder + imgFile;
+            const caption = generateSmartCaption(imgFile);
+
+            document.getElementById('modalImg').src = fullPath;
+            document.getElementById('modalBgBlur').style.backgroundImage = `url('${fullPath}')`;
+            document.getElementById('modalCaption').innerText = `${caption} (${currentLightboxIndex + 1} of ${currentFilteredImages.length})`;
+        }
+
+        function navigateLightbox(step) {
+            if (currentFilteredImages.length === 0) return;
+            currentLightboxIndex = (currentLightboxIndex + step + currentFilteredImages.length) % currentFilteredImages.length;
+            updateLightboxContent();
         }
 
         function closeLightbox() {
             document.getElementById('imageModal').classList.remove('open');
         }
+
+        // Keyboard arrow support (Left/Right to slide, Escape to close)
+        window.addEventListener('keydown', (e) => {
+            const modal = document.getElementById('imageModal');
+            if (!modal.classList.contains('open')) return;
+
+            if (e.key === 'ArrowLeft') navigateLightbox(-1);
+            if (e.key === 'ArrowRight') navigateLightbox(1);
+            if (e.key === 'Escape') closeLightbox();
+        });
 
         window.addEventListener('DOMContentLoaded', loadGallery);
     </script>
