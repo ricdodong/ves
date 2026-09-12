@@ -6,15 +6,16 @@
     <title>Villangit Elementary School — Official Homepage</title>
     <style>
         :root {
-            /* Palette inspired by the Brigada Eskwela Tarpaulin */
-            --tarp-navy: #0b192c;
-            --tarp-blue: #1e3e62;
-            --tarp-gold: #ffc107;
-            --tarp-gold-light: #ffecb3;
-            --tarp-green: #198754;
+            --bg-gradient: linear-gradient(135deg, #f0fdf4 0%, #fefce8 50%, #f0f4ff 100%);
             --surface-color: #ffffff;
-            --text-main: #111827;
-            --text-secondary: #4b5563;
+            --text-main: #1e293b;
+            --text-secondary: #64748b;
+            --border-color: #cbd5e1;
+            /* Tuned directly to match your logo's green and gold tones */
+            --primary: #15803d; 
+            --primary-hover: #166534;
+            --accent: #f59e0b;
+            --accent-green: #0d9488;
         }
 
         * {
@@ -24,7 +25,7 @@
         }
 
         body {
-            background: linear-gradient(135deg, #0b192c 0%, #1e3e62 50%, #0f172a 100%);
+            background: var(--bg-gradient);
             color: var(--text-main);
             font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             min-height: 100vh;
@@ -32,51 +33,45 @@
             flex-direction: column;
         }
 
-        /* Tarp-Styled Header */
+        /* Header / Navbar matched to logo palette */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.25rem 2.5rem;
-            background: rgba(11, 25, 44, 0.95);
-            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #14532d 0%, #166534 100%);
             color: #ffffff;
-            border-bottom: 3px solid var(--tarp-gold);
+            box-shadow: 0 4px 20px -3px rgba(20, 83, 45, 0.4);
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
         }
 
         .logo-area {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 0.85rem;
         }
 
         .school-logo {
-            width: 54px;
-            height: 54px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid var(--tarp-gold);
-            box-shadow: 0 0 12px rgba(255, 193, 7, 0.4);
+            border: 2px solid #fef08a;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
             background: #ffffff;
         }
 
         .school-title h1 {
-            font-size: 1.35rem;
-            font-weight: 800;
-            letter-spacing: 0.02em;
-            color: #ffffff;
-            text-transform: uppercase;
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: -0.025em;
         }
 
         .school-title p {
-            font-size: 0.8rem;
-            color: var(--tarp-gold);
-            font-weight: 600;
-            letter-spacing: 0.05em;
+            font-size: 0.75rem;
+            color: #fef08a;
         }
 
         .nav-links {
@@ -86,44 +81,42 @@
         }
 
         .nav-btn {
-            background: var(--tarp-gold);
-            color: #0b192c;
-            padding: 0.6rem 1.25rem;
+            background: rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            padding: 0.5rem 1.1rem;
             border-radius: 9999px;
             text-decoration: none;
             font-size: 0.9rem;
-            font-weight: 700;
-            border: 2px solid #ffffff;
+            font-weight: 500;
+            border: 1px solid rgba(255, 255, 255, 0.3);
             transition: all 0.2s ease;
             display: inline-flex;
             align-items: center;
             gap: 0.4rem;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
 
         .nav-btn:hover {
-            background: #ffffff;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(255, 193, 7, 0.4);
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-1px);
         }
 
-        /* Tarp Banner Hero Section */
+        /* Hero Carousel Section */
         .hero-container {
-            max-width: 1100px;
+            max-width: 1050px;
             width: 92%;
             margin: 2.5rem auto 1.5rem auto;
-            background: #ffffff;
-            border-radius: 16px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            background: var(--surface-color);
+            border-radius: 18px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
             overflow: hidden;
-            border: 4px solid var(--tarp-gold);
+            border: 1px solid var(--border-color);
         }
 
         .carousel-wrapper {
             position: relative;
             width: 100%;
-            height: 500px;
-            background: #000000;
+            height: 480px;
+            background: #090d16;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -155,7 +148,7 @@
             inset: -20px;
             background-size: cover;
             background-position: center;
-            filter: blur(25px) brightness(0.3);
+            filter: blur(22px) brightness(0.35);
             z-index: 1;
             opacity: 0;
             transition: opacity 0.4s ease;
@@ -184,184 +177,173 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: linear-gradient(to top, rgba(11, 25, 44, 0.95) 0%, rgba(11, 25, 44, 0.7) 75%, transparent 100%);
+            background: linear-gradient(to top, rgba(15, 23, 42, 0.92) 0%, rgba(15, 23, 42, 0.5) 75%, transparent 100%);
             color: #ffffff;
-            padding: 2.5rem 2rem 1.5rem 2rem;
+            padding: 2.25rem 1.75rem 1.25rem 1.75rem;
             z-index: 5;
             display: flex;
             flex-direction: column;
-            gap: 0.35rem;
+            gap: 0.25rem;
             pointer-events: none;
-            border-top: 2px solid var(--tarp-gold);
         }
 
         .carousel-caption span {
             font-size: 0.75rem;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--tarp-gold);
-            font-weight: 800;
+            letter-spacing: 0.05em;
+            color: #fde047;
+            font-weight: 700;
         }
 
         .carousel-caption h3 {
-            font-size: 1.5rem;
-            font-weight: 800;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-            letter-spacing: 0.01em;
+            font-size: 1.4rem;
+            font-weight: 600;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
 
         .carousel-btn {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(11, 25, 44, 0.8);
+            background: rgba(20, 83, 45, 0.75);
             backdrop-filter: blur(4px);
-            color: var(--tarp-gold);
-            border: 2px solid var(--tarp-gold);
-            width: 52px;
-            height: 52px;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 10;
-            transition: all 0.2s;
-            font-size: 1.25rem;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: background 0.2s, transform 0.2s;
+            font-size: 1.1rem;
         }
 
         .carousel-btn:hover {
-            background: var(--tarp-gold);
-            color: #0b192c;
-            transform: translateY(-50%) scale(1.1);
+            background: var(--primary-hover);
+            transform: translateY(-50%) scale(1.08);
         }
 
-        .carousel-btn.prev { left: 1.5rem; }
-        .carousel-btn.next { right: 1.5rem; }
+        .carousel-btn.prev { left: 1.25rem; }
+        .carousel-btn.next { right: 1.25rem; }
 
         .carousel-dots {
             position: absolute;
-            bottom: 1.25rem;
-            right: 2rem;
+            bottom: 1rem;
+            right: 1.75rem;
             display: flex;
-            gap: 8px;
+            gap: 6px;
             z-index: 10;
         }
 
         .dot {
-            width: 10px;
-            height: 10px;
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.4);
             cursor: pointer;
-            transition: all 0.3s;
+            transition: background 0.3s, transform 0.3s;
         }
 
         .dot.active {
-            background: var(--tarp-gold);
-            transform: scale(1.4);
-            box-shadow: 0 0 8px var(--tarp-gold);
+            background: #fde047;
+            transform: scale(1.3);
         }
 
-        /* Tarp-Styled Content Cards */
+        /* Content Cards Grid */
         .content-section {
-            max-width: 1100px;
+            max-width: 1050px;
             width: 92%;
-            margin: 0 auto 4rem auto;
+            margin: 0 auto 3.5rem auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+            gap: 1.75rem;
         }
 
         .card {
-            background: #ffffff;
-            border-radius: 16px;
-            padding: 2.25rem;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-            border-top: 6px solid var(--tarp-gold);
+            background: var(--surface-color);
+            border-radius: 14px;
+            padding: 2rem;
+            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border-color);
             display: flex;
             flex-direction: column;
-            gap: 1.15rem;
+            gap: 1rem;
             transition: transform 0.25s ease, box-shadow 0.25s ease;
         }
 
         .card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 20px 40px rgba(255, 193, 7, 0.25);
+            transform: translateY(-4px);
+            box-shadow: 0 18px 30px -8px rgba(21, 128, 61, 0.15);
         }
 
         .card-icon {
-            width: 56px;
-            height: 56px;
-            border-radius: 14px;
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #ffffff;
-            font-size: 1.5rem;
-            background: var(--tarp-blue);
-            border: 2px solid var(--tarp-gold);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            color: white;
+            font-size: 1.35rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
         .card h3 {
-            font-size: 1.3rem;
-            color: var(--tarp-navy);
-            font-weight: 800;
+            font-size: 1.2rem;
+            color: var(--text-main);
         }
 
         .card p {
-            font-size: 0.975rem;
+            font-size: 0.95rem;
             color: var(--text-secondary);
-            line-height: 1.65;
+            line-height: 1.6;
         }
 
         .card-link {
             margin-top: auto;
-            color: var(--tarp-blue);
+            color: var(--primary);
             text-decoration: none;
-            font-weight: 700;
-            font-size: 0.95rem;
+            font-weight: 600;
+            font-size: 0.925rem;
             display: inline-flex;
             align-items: center;
-            gap: 0.4rem;
-            transition: gap 0.2s, color 0.2s;
+            gap: 0.35rem;
+            transition: gap 0.2s;
         }
 
         .card-link:hover {
-            gap: 0.75rem;
-            color: var(--tarp-green);
+            gap: 0.6rem;
+            text-decoration: underline;
         }
 
-        /* Tarp-Styled Footer */
+        /* Footer */
         footer {
-            background: #07111d;
+            background: #14532d;
             color: #cbd5e1;
             text-align: center;
-            padding: 2.5rem 1.5rem;
-            font-size: 0.9rem;
+            padding: 2rem 1.5rem;
+            font-size: 0.875rem;
             margin-top: auto;
-            border-top: 3px solid var(--tarp-gold);
+            border-top: 1px solid #166534;
         }
 
         footer p {
-            color: var(--tarp-gold);
-            font-weight: 700;
-            font-size: 1.05rem;
-            margin-bottom: 0.4rem;
-            letter-spacing: 0.02em;
+            color: #fef08a;
+            margin-bottom: 0.3rem;
         }
 
         footer span {
-            color: #94a3b8;
-            font-size: 0.85rem;
+            color: #a7f3d0;
+            font-size: 0.8rem;
         }
 
         @media(max-width: 768px) {
-            header { padding: 1rem; }
-            .carousel-wrapper { height: 360px; }
-            .school-title h1 { font-size: 1.1rem; }
+            header { padding: 0.85rem 1rem; }
+            .carousel-wrapper { height: 350px; }
+            .school-title h1 { font-size: 1.05rem; }
         }
     </style>
 </head>
@@ -377,7 +359,7 @@
             </div>
         </div>
         <div class="nav-links">
-            <a href="viewer.html" class="nav-btn">🖼️ Gallery Viewer</a>
+            <a href="viewer.html" class="nav-btn" style="background: var(--accent); border-color: rgba(255,255,255,0.4); color: #1e293b; font-weight: 600;">🖼️ Gallery Viewer</a>
         </div>
     </header>
 
@@ -393,21 +375,21 @@
     <!-- Website Content Cards -->
     <div class="content-section">
         <div class="card">
-            <div class="card-icon">📢</div>
+            <div class="card-icon" style="background: var(--primary);">📢</div>
             <h3>School Announcements</h3>
             <p>Stay updated with official Department of Education memoranda, school calendar events, modular learning updates, and local barangay collaborations.</p>
             <a href="#" class="card-link">View Announcements &rarr;</a>
         </div>
 
         <div class="card">
-            <div class="card-icon">🏆</div>
+            <div class="card-icon" style="background: var(--accent);">🏆</div>
             <h3>Programs & Achievements</h3>
             <p>Showcasing student academic excellence, teacher professional development sessions, reading literacy programs, and community outreach efforts.</p>
             <a href="#" class="card-link">Explore Programs &rarr;</a>
         </div>
 
         <div class="card">
-            <div class="card-icon">👥</div>
+            <div class="card-icon" style="background: var(--accent-green);">👥</div>
             <h3>Administration & SPTA</h3>
             <p>Meet our school faculty, dedicated leadership staff, and parent-teacher association officers working hand-in-hand to build a bright future for learners.</p>
             <a href="viewer.html" class="card-link">Meet Key Leaders &rarr;</a>
