@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Photo Gallery — Villangit Elementary School</title>
+    <title>Photo Gallery Archive — Villangit Elementary School</title>
     <style>
         :root {
             --bg-gradient: linear-gradient(135deg, #f0f4ff 0%, #fdf2f8 50%, #f0fdf4 100%);
@@ -38,6 +38,10 @@
             z-index: 100;
         }
 
+        header h2 {
+            font-size: 1.25rem;
+        }
+
         .back-btn {
             background: rgba(255,255,255,0.2);
             color: white;
@@ -51,7 +55,7 @@
         .back-btn:hover { background: rgba(255,255,255,0.35); }
 
         .container {
-            max-width: 1100px;
+            max-width: 1200px;
             width: 92%;
             margin: 2.5rem auto;
             flex: 1;
@@ -60,12 +64,15 @@
         .gallery-header {
             margin-bottom: 2rem;
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
         }
 
-        .gallery-header h2 {
+        .gallery-header h1 {
             font-size: 2rem;
             color: var(--text-main);
-            margin-bottom: 0.5rem;
         }
 
         .gallery-header p {
@@ -73,103 +80,161 @@
             font-size: 0.95rem;
         }
 
-        /* Grid layout */
+        /* Search Bar */
+        .search-box {
+            width: 100%;
+            max-width: 450px;
+            padding: 0.75rem 1.25rem;
+            border-radius: 9999px;
+            border: 1px solid var(--border);
+            font-size: 0.95rem;
+            outline: none;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.03);
+            transition: border-color 0.2s, box-shadow 0.2s;
+            background: #ffffff;
+        }
+
+        .search-box:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+        }
+
+        /* Smart Grid Layout */
         .photo-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.75rem;
         }
 
         .photo-card {
             background: var(--surface);
-            border-radius: 12px;
+            border-radius: 14px;
             overflow: hidden;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
             border: 1px solid var(--border);
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: transform 0.25s, box-shadow 0.25s;
             display: flex;
             flex-direction: column;
         }
 
         .photo-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 24px rgba(79, 70, 229, 0.12);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(79, 70, 229, 0.15);
         }
 
-        .photo-thumb {
+        .photo-thumb-container {
             width: 100%;
-            height: 200px;
+            height: 210px;
+            background: #090d16;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .photo-thumb-container img {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
-            background: #0f172a;
+            object-position: center 25%;
+            transition: transform 0.3s;
+        }
+
+        .photo-card:hover .photo-thumb-container img {
+            transform: scale(1.03);
+        }
+
+        .photo-thumb-container img.is-contained {
+            object-fit: contain !important;
         }
 
         .photo-info {
-            padding: 1rem;
+            padding: 1.15rem;
             font-size: 0.95rem;
             font-weight: 600;
             color: var(--text-main);
+            background: #ffffff;
         }
 
-        /* Modal Lightbox */
+        /* Lightbox Modal */
         .modal {
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(15, 23, 42, 0.9);
+            background: rgba(15, 23, 42, 0.92);
             z-index: 1000;
             align-items: center;
             justify-content: center;
             padding: 2rem;
+            backdrop-filter: blur(5px);
         }
 
         .modal.open { display: flex; }
 
         .modal-content {
-            max-width: 850px;
+            max-width: 900px;
+            width: 100%;
             max-height: 85vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            background: #ffffff;
-            border-radius: 12px;
+            background: #0f172a;
+            border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.1);
+            position: relative;
         }
 
-        .modal-content img {
-            max-width: 100%;
-            max-height: 70vh;
-            object-fit: contain;
+        .modal-img-wrapper {
+            width: 100%;
+            height: 65vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
             background: #000;
         }
 
+        .modal-img-wrapper img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
         .modal-caption {
-            padding: 1.25rem;
+            padding: 1.25rem 1.5rem;
             font-size: 1.1rem;
             font-weight: 600;
-            color: var(--text-main);
+            color: #ffffff;
             text-align: center;
             width: 100%;
+            background: #0f172a;
+            border-top: 1px solid #1e293b;
         }
 
         .close-modal {
             position: absolute;
-            top: 1.5rem;
-            right: 2rem;
-            background: rgba(255,255,255,0.2);
+            top: 1.25rem;
+            right: 1.5rem;
+            background: rgba(255, 255, 255, 0.15);
             color: white;
             border: none;
             font-size: 1.5rem;
-            width: 40px;
-            height: 40px;
+            width: 42px;
+            height: 42px;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
+            z-index: 10;
+            transition: background 0.2s;
         }
-        .close-modal:hover { background: rgba(255,255,255,0.4); }
+        .close-modal:hover { background: rgba(255, 255, 255, 0.3); }
 
         footer {
             background: #0f172a;
@@ -178,6 +243,13 @@
             padding: 1.5rem;
             font-size: 0.85rem;
             margin-top: auto;
+            border-top: 1px solid #1e293b;
+        }
+
+        @media(max-width: 768px) {
+            header { padding: 0.85rem 1rem; }
+            .container { width: 95%; margin: 1.5rem auto; }
+            .modal-img-wrapper { height: 50vh; }
         }
     </style>
 </head>
@@ -190,8 +262,9 @@
 
     <div class="container">
         <div class="gallery-header">
-            <h2>School Image Gallery</h2>
-            <p>Click any photo to view in high resolution.</p>
+            <h1>School Image Gallery</h1>
+            <p>Explore official records, events, and school programs. Click any photo for a closer look.</p>
+            <input type="text" id="searchInput" class="search-box" placeholder="🔍 Search photos (e.g. Principal, Brigada, Faculty)..." onkeyup="filterGallery()">
         </div>
 
         <div class="photo-grid" id="photoGrid">
@@ -201,9 +274,11 @@
 
     <!-- Lightbox Modal -->
     <div class="modal" id="imageModal" onclick="closeLightbox()">
-        <button class="close-modal">&times;</button>
+        <button class="close-modal" onclick="closeLightbox()">&times;</button>
         <div class="modal-content" onclick="event.stopPropagation()">
-            <img id="modalImg" src="" alt="">
+            <div class="modal-img-wrapper">
+                <img id="modalImg" src="" alt="">
+            </div>
             <div class="modal-caption" id="modalCaption"></div>
         </div>
     </div>
@@ -214,6 +289,7 @@
 
     <script>
         const imgFolder = "imgslide/";
+        let allImagesData = [];
 
         function generateSmartCaption(filename) {
             let nameWithoutExt = filename.substring(0, filename.lastIndexOf('.')) || filename;
@@ -225,6 +301,9 @@
             if (cleanStr.includes('spta press ricky moreno banuelos')) {
                 return "Current SPTA President — Mr. Ricky Moreno Banuelos";
             }
+            if (cleanStr.includes('brigada eskwela')) {
+                return "Brigada Eskwela 2026 — Faculty & Community Volunteers";
+            }
 
             return cleanStr.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
         }
@@ -233,23 +312,69 @@
             const grid = document.getElementById('photoGrid');
             try {
                 const response = await fetch('images.json');
-                const rawImages = await response.json();
+                allImagesData = await response.json();
 
-                rawImages.forEach(imgFile => {
-                    const caption = generateSmartCaption(imgFile);
-                    const card = document.createElement('div');
-                    card.className = 'photo-card';
-                    card.onclick = () => openLightbox(imgFolder + imgFile, caption);
-
-                    card.innerHTML = `
-                        <img src="${imgFolder}${imgFile}" alt="${caption}" class="photo-thumb" onerror="this.src='https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=500&q=80'">
-                        <div class="photo-info">${caption}</div>
-                    `;
-                    grid.appendChild(card);
-                });
+                renderGrid(allImagesData);
             } catch (err) {
                 console.error("Could not load gallery images:", err);
             }
+        }
+
+        function renderGrid(images) {
+            const grid = document.getElementById('photoGrid');
+            grid.innerHTML = "";
+
+            if (images.length === 0) {
+                grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-sec); padding: 3rem;">No matching photos found.</p>`;
+                return;
+            }
+
+            images.forEach(imgFile => {
+                const caption = generateSmartCaption(imgFile);
+                const fullPath = imgFolder + imgFile;
+
+                const card = document.createElement('div');
+                card.className = 'photo-card';
+                card.onclick = () => openLightbox(fullPath, caption);
+
+                const thumbContainer = document.createElement('div');
+                thumbContainer.className = 'photo-thumb-container';
+
+                const imgElem = document.createElement('img');
+                imgElem.src = fullPath;
+                imgElem.alt = caption;
+
+                // SMART DETECTOR for Grid Thumbnails
+                imgElem.onload = function() {
+                    const aspectRatio = this.naturalWidth / this.naturalHeight;
+                    if (aspectRatio < 1.0 || aspectRatio > 1.5) {
+                        this.classList.add('is-contained');
+                    }
+                };
+
+                imgElem.onerror = function() {
+                    this.src = 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=500&q=80';
+                };
+
+                thumbContainer.appendChild(imgElem);
+
+                const infoDiv = document.createElement('div');
+                infoDiv.className = 'photo-info';
+                infoDiv.innerText = caption;
+
+                card.appendChild(thumbContainer);
+                card.appendChild(infoDiv);
+                grid.appendChild(card);
+            });
+        }
+
+        function filterGallery() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = allImagesData.filter(imgFile => {
+                const caption = generateSmartCaption(imgFile).toLowerCase();
+                return caption.includes(query) || imgFile.toLowerCase().includes(query);
+            });
+            renderGrid(filtered);
         }
 
         function openLightbox(src, caption) {
