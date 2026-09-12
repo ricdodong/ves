@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Villangit Elementary School — Brigada Eskwela 2026</title>
+    <title>Villangit Elementary School — Official Homepage</title>
     <style>
         :root {
+            /* Palette inspired by the Brigada Eskwela Tarpaulin */
             --tarp-navy: #0b192c;
             --tarp-blue: #1e3e62;
             --tarp-gold: #ffc107;
-            --tarp-gold-light: #fff3cd;
+            --tarp-gold-light: #ffecb3;
             --tarp-green: #198754;
             --surface-color: #ffffff;
             --text-main: #111827;
@@ -23,7 +24,7 @@
         }
 
         body {
-            background: linear-gradient(135deg, #0b192c 0%, #163052 50%, #0f172a 100%);
+            background: linear-gradient(135deg, #0b192c 0%, #1e3e62 50%, #0f172a 100%);
             color: var(--text-main);
             font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             min-height: 100vh;
@@ -36,15 +37,15 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 2.5rem;
-            background: rgba(11, 25, 44, 0.96);
+            padding: 1.25rem 2.5rem;
+            background: rgba(11, 25, 44, 0.95);
             backdrop-filter: blur(10px);
             color: #ffffff;
             border-bottom: 3px solid var(--tarp-gold);
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
         }
 
         .logo-area {
@@ -54,25 +55,25 @@
         }
 
         .school-logo {
-            width: 52px;
-            height: 52px;
+            width: 54px;
+            height: 54px;
             border-radius: 50%;
             object-fit: cover;
             border: 2px solid var(--tarp-gold);
-            box-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
+            box-shadow: 0 0 12px rgba(255, 193, 7, 0.4);
             background: #ffffff;
         }
 
         .school-title h1 {
-            font-size: 1.25rem;
+            font-size: 1.35rem;
             font-weight: 800;
-            letter-spacing: 0.03em;
+            letter-spacing: 0.02em;
             color: #ffffff;
             text-transform: uppercase;
         }
 
         .school-title p {
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             color: var(--tarp-gold);
             font-weight: 600;
             letter-spacing: 0.05em;
@@ -87,11 +88,11 @@
         .nav-btn {
             background: var(--tarp-gold);
             color: #0b192c;
-            padding: 0.55rem 1.15rem;
+            padding: 0.6rem 1.25rem;
             border-radius: 9999px;
             text-decoration: none;
-            font-size: 0.875rem;
-            font-weight: 800;
+            font-size: 0.9rem;
+            font-weight: 700;
             border: 2px solid #ffffff;
             transition: all 0.2s ease;
             display: inline-flex;
@@ -106,95 +107,11 @@
             box-shadow: 0 6px 15px rgba(255, 193, 7, 0.4);
         }
 
-        /* Main Tarp Header Banner */
-        .tarp-banner {
-            max-width: 1150px;
-            width: 92%;
-            margin: 2rem auto 1rem auto;
-            background: linear-gradient(135deg, #0b192c 0%, #1e3e62 100%);
-            border-radius: 16px;
-            padding: 2rem 2.5rem;
-            border: 4px solid var(--tarp-gold);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            gap: 0.75rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .tarp-banner::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at center, rgba(255,193,7,0.15) 0%, transparent 70%);
-            pointer-events: none;
-        }
-
-        .deped-tag {
-            background: rgba(255,255,255,0.1);
-            color: var(--tarp-gold);
-            font-size: 0.8rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            padding: 0.35rem 1rem;
-            border-radius: 999px;
-            border: 1px solid rgba(255,193,7,0.4);
-            letter-spacing: 0.1em;
-        }
-
-        .tarp-banner h2 {
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            font-weight: 900;
-            color: var(--tarp-gold);
-            text-transform: uppercase;
-            text-shadow: 3px 3px 0px #000, 0 0 20px rgba(255,193,7,0.4);
-            line-height: 1.1;
-            letter-spacing: 0.02em;
-        }
-
-        .tarp-banner h3 {
-            font-size: clamp(1.2rem, 3vw, 1.8rem);
-            color: #ffffff;
-            font-weight: 800;
-            text-transform: uppercase;
-            background: rgba(0,0,0,0.3);
-            padding: 0.4rem 1.5rem;
-            border-radius: 8px;
-            border-left: 4px solid var(--tarp-gold);
-            border-right: 4px solid var(--tarp-gold);
-        }
-
-        .tarp-banner p {
-            color: #e2e8f0;
-            font-size: 1.05rem;
-            font-style: italic;
-            max-width: 800px;
-            margin-top: 0.25rem;
-        }
-
-        .tarp-dates {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: var(--tarp-green);
-            color: white;
-            font-weight: 800;
-            padding: 0.5rem 1.25rem;
-            border-radius: 9999px;
-            font-size: 0.95rem;
-            box-shadow: 0 4px 12px rgba(25, 135, 84, 0.4);
-            margin-top: 0.5rem;
-            border: 2px solid #86efac;
-        }
-
-        /* Hero Carousel Section */
+        /* Tarp Banner Hero Section */
         .hero-container {
-            max-width: 1150px;
+            max-width: 1100px;
             width: 92%;
-            margin: 1.5rem auto;
+            margin: 2.5rem auto 1.5rem auto;
             background: #ffffff;
             border-radius: 16px;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
@@ -205,7 +122,7 @@
         .carousel-wrapper {
             position: relative;
             width: 100%;
-            height: 480px;
+            height: 500px;
             background: #000000;
             display: flex;
             align-items: center;
@@ -290,6 +207,7 @@
             font-size: 1.5rem;
             font-weight: 800;
             text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            letter-spacing: 0.01em;
         }
 
         .carousel-btn {
@@ -300,8 +218,8 @@
             backdrop-filter: blur(4px);
             color: var(--tarp-gold);
             border: 2px solid var(--tarp-gold);
-            width: 50px;
-            height: 50px;
+            width: 52px;
+            height: 52px;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
@@ -309,7 +227,7 @@
             justify-content: center;
             z-index: 10;
             transition: all 0.2s;
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
 
@@ -319,8 +237,8 @@
             transform: translateY(-50%) scale(1.1);
         }
 
-        .carousel-btn.prev { left: 1.25rem; }
-        .carousel-btn.next { right: 1.25rem; }
+        .carousel-btn.prev { left: 1.5rem; }
+        .carousel-btn.next { right: 1.5rem; }
 
         .carousel-dots {
             position: absolute;
@@ -346,19 +264,13 @@
             box-shadow: 0 0 8px var(--tarp-gold);
         }
 
-        /* Content Layout grid matching Tarp Sections */
+        /* Tarp-Styled Content Cards */
         .content-section {
-            max-width: 1150px;
+            max-width: 1100px;
             width: 92%;
-            margin: 0 auto 3rem auto;
+            margin: 0 auto 4rem auto;
             display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 2rem;
-        }
-
-        .main-col {
-            display: flex;
-            flex-direction: column;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 2rem;
         }
 
@@ -371,115 +283,58 @@
             display: flex;
             flex-direction: column;
             gap: 1.15rem;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(255, 193, 7, 0.25);
+        }
+
+        .card-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 1.5rem;
+            background: var(--tarp-blue);
+            border: 2px solid var(--tarp-gold);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
         .card h3 {
             font-size: 1.3rem;
             color: var(--tarp-navy);
             font-weight: 800;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
         }
 
-        .card p, .card li {
+        .card p {
             font-size: 0.975rem;
             color: var(--text-secondary);
             line-height: 1.65;
         }
 
-        .stakeholders-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 0.75rem;
-            margin-top: 0.5rem;
-            list-style: none;
-        }
-
-        .stakeholders-list li {
-            background: var(--tarp-gold-light);
-            padding: 0.65rem 1rem;
-            border-radius: 8px;
+        .card-link {
+            margin-top: auto;
+            color: var(--tarp-blue);
+            text-decoration: none;
             font-weight: 700;
-            color: var(--tarp-navy);
-            border-left: 4px solid var(--tarp-gold);
-            font-size: 0.9rem;
-        }
-
-        /* Tarp "Mga Buluhaton" Sidebar */
-        .sidebar-card {
-            background: linear-gradient(135deg, #1e3e62 0%, #0b192c 100%);
-            color: white;
-            border-radius: 16px;
-            padding: 2rem;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-            border: 3px solid var(--tarp-gold);
-            display: flex;
-            flex-direction: column;
-            gap: 1.25rem;
-        }
-
-        .sidebar-card h3 {
-            color: var(--tarp-gold);
-            font-size: 1.3rem;
-            font-weight: 800;
-            border-bottom: 2px solid rgba(255,193,7,0.3);
-            padding-bottom: 0.5rem;
-        }
-
-        .activity-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 0.85rem;
-        }
-
-        .activity-item {
-            display: flex;
+            font-size: 0.95rem;
+            display: inline-flex;
             align-items: center;
+            gap: 0.4rem;
+            transition: gap 0.2s, color 0.2s;
+        }
+
+        .card-link:hover {
             gap: 0.75rem;
-            background: rgba(255,255,255,0.08);
-            padding: 0.75rem 1rem;
-            border-radius: 10px;
-            font-size: 0.925rem;
-            font-weight: 600;
-            border: 1px solid rgba(255,255,255,0.1);
+            color: var(--tarp-green);
         }
 
-        .activity-item span { font-size: 1.2rem; }
-
-        /* Tarp Quote Callout */
-        .quote-banner {
-            max-width: 1150px;
-            width: 92%;
-            margin: 0 auto 3rem auto;
-            background: linear-gradient(135deg, #b91c1c 0%, #991b1b 100%);
-            border-radius: 16px;
-            padding: 2rem 2.5rem;
-            text-align: center;
-            color: white;
-            border: 4px solid var(--tarp-gold);
-            box-shadow: 0 15px 35px rgba(185, 28, 28, 0.4);
-        }
-
-        .quote-banner p {
-            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
-            font-weight: 800;
-            font-style: italic;
-            color: #fef08a;
-            margin-bottom: 0.5rem;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .quote-banner span {
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: #f3f4f6;
-            font-weight: 700;
-        }
-
-        /* Tarp Styled Footer */
+        /* Tarp-Styled Footer */
         footer {
             background: #07111d;
             color: #cbd5e1;
@@ -494,7 +349,8 @@
             color: var(--tarp-gold);
             font-weight: 700;
             font-size: 1.05rem;
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.4rem;
+            letter-spacing: 0.02em;
         }
 
         footer span {
@@ -502,10 +358,10 @@
             font-size: 0.85rem;
         }
 
-        @media(max-width: 900px) {
-            .content-section { grid-template-columns: 1fr; }
+        @media(max-width: 768px) {
             header { padding: 1rem; }
-            .carousel-wrapper { height: 350px; }
+            .carousel-wrapper { height: 360px; }
+            .school-title h1 { font-size: 1.1rem; }
         }
     </style>
 </head>
@@ -525,17 +381,6 @@
         </div>
     </header>
 
-    <!-- Tarp-Styled Main Headline Banner -->
-    <section class="tarp-banner">
-        <div class="deped-tag">Department of Education &bull; Region XIII Caraga</div>
-        <h2>Brigada Eskwela 2026</h2>
-        <h3>Villangit Elementary School</h3>
-        <p>📍 Villangit, Sibagat, Agusan del Sur &bull; “Bayanihan sa Paaralan: Nagkakaisa para sa Kaayusan at Kaalaman”</p>
-        <div class="tarp-dates">
-            📅 Schedule: June 1–5, 2026
-        </div>
-    </section>
-
     <!-- Smart Auto-Sliding Carousel Section -->
     <div class="hero-container">
         <div class="carousel-wrapper" id="smartCarousel">
@@ -545,51 +390,29 @@
         </div>
     </div>
 
-    <!-- Website Content Grid matching Tarp Sections -->
+    <!-- Website Content Cards -->
     <div class="content-section">
-        <!-- Main Column: Call to Action & Stakeholders -->
-        <div class="main-col">
-            <div class="card">
-                <h3>🤝 Tara Na, Magbrigada Na!</h3>
-                <p>Ang Villangit Elementary School nagdapit sa tanang stakeholders nga mopabil sa Brigada Eskwela 2026 aron magtinabangay sa pagpangandam sa atong eskwelahan alang sa umaabot nga klase.</p>
-                
-                <h4 style="font-size: 1rem; color: var(--tarp-navy); margin-top: 0.5rem; font-weight: 800;">Calling All Volunteers:</h4>
-                <ul class="stakeholders-list">
-                    <li>👨‍👩‍👧 Parents and Guardians</li>
-                    <li>🎓 Alumni</li>
-                    <li>🏛️ Barangay Officials</li>
-                    <li>✨ Youth Volunteers</li>
-                    <li>🤝 Private Partners</li>
-                    <li>🌍 Community Stakeholders</li>
-                </ul>
-            </div>
-
-            <div class="card">
-                <h3>📢 School Announcements & Updates</h3>
-                <p>Stay informed with official DepEd memoranda, faculty briefings, and preparation milestones leading up to the opening of classes for school year 2026–2027.</p>
-                <a href="viewer.html" style="color: var(--tarp-blue); font-weight: 700; text-decoration: none; margin-top: 0.5rem; display: inline-flex; align-items: center; gap: 0.4rem;">Browse Photo Archive &rarr;</a>
-            </div>
+        <div class="card">
+            <div class="card-icon">📢</div>
+            <h3>School Announcements</h3>
+            <p>Stay updated with official Department of Education memoranda, school calendar events, modular learning updates, and local barangay collaborations.</p>
+            <a href="#" class="card-link">View Announcements &rarr;</a>
         </div>
 
-        <!-- Sidebar Column: "Mga Buluhaton" (Activities) -->
-        <div class="sidebar-card">
-            <h3>📋 Mga Buluhaton:</h3>
-            <ul class="activity-list">
-                <li class="activity-item"><span>🧹</span> Classroom Cleaning</li>
-                <li class="activity-item"><span>🛠️</span> Minor Repairs and Maintenance</li>
-                <li class="activity-item"><span>🌿</span> School Ground Beautification</li>
-                <li class="activity-item"><span>📚</span> Reading Corner Enhancement</li>
-                <li class="activity-item"><span>🌱</span> Tree Planting and Gardening</li>
-                <li class="activity-item"><span>♻️</span> Waste Management and Sanitation</li>
-            </ul>
+        <div class="card">
+            <div class="card-icon">🏆</div>
+            <h3>Programs & Achievements</h3>
+            <p>Showcasing student academic excellence, teacher professional development sessions, reading literacy programs, and community outreach efforts.</p>
+            <a href="#" class="card-link">Explore Programs &rarr;</a>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">👥</div>
+            <h3>Administration & SPTA</h3>
+            <p>Meet our school faculty, dedicated leadership staff, and parent-teacher association officers working hand-in-hand to build a bright future for learners.</p>
+            <a href="viewer.html" class="card-link">Meet Key Leaders &rarr;</a>
         </div>
     </div>
-
-    <!-- Official Tarp Quote Banner -->
-    <section class="quote-banner">
-        <p>“Ang matag tabang, dako og ikatampo sa kalampusan sa atong mga kabataan.”</p>
-        <span>School Head: Daryn B. Bagnol, Principal I</span>
-    </section>
 
     <!-- Footer -->
     <footer>
