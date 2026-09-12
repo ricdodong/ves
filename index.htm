@@ -37,7 +37,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.25rem 2rem;
+            padding: 1rem 2rem;
             background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%);
             color: #ffffff;
             box-shadow: 0 4px 15px -3px rgba(79, 70, 229, 0.3);
@@ -49,31 +49,27 @@
         .logo-area {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
+            gap: 0.85rem;
         }
 
-        .logo-icon {
-            background: #ffffff;
-            color: var(--primary);
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .school-logo {
+            width: 46px;
+            height: 46px;
             border-radius: 50%;
-            font-weight: bold;
-            font-size: 1.2rem;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            object-fit: cover;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+            background: #ffffff;
         }
 
         .school-title h1 {
-            font-size: 1.25rem;
+            font-size: 1.2rem;
             font-weight: 700;
             letter-spacing: -0.025em;
         }
 
         .school-title p {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: #e0e7ff;
         }
 
@@ -287,7 +283,7 @@
     <!-- Header Navigation -->
     <header>
         <div class="logo-area">
-            <div class="logo-icon">V</div>
+            <img src="logo.jpg" alt="Villangit ES Logo" class="school-logo" onerror="this.src='https://images.unsplash.com/photo-1546410531-bb4caa6b424d?auto=format&fit=crop&w=100&q=80'">
             <div class="school-title">
                 <h1>Villangit Elementary School</h1>
                 <p>Sibagat, Agusan del Sur</p>
@@ -302,7 +298,6 @@
     <!-- Smart Sliding Carousel Container -->
     <div class="hero-container">
         <div class="carousel-wrapper" id="smartCarousel">
-            <!-- Slides will be dynamically injected here via JavaScript -->
             <button class="carousel-btn prev" onclick="moveSlide(-1)">❮</button>
             <button class="carousel-btn next" onclick="moveSlide(1)">❯</button>
         </div>
@@ -339,25 +334,19 @@
 
     <!-- Smart Auto-Caption Script -->
     <script>
-        // ADD OR MODIFY YOUR IMAGE FILENAMES HERE INSIDE THE FOLDER:
         const imgFolder = "imgslide/";
         const rawImages = [
             "principal-maam-felipa-layo.jpg",
             "spta-press-ricky-moreno-banuelos.jpg",
             "school-campus-front-view.jpg",
-            "teachers-collaborative-session.jpg",
+            "brigada-eskwela-2026.jpg",
             "students-learning-activities.jpg"
         ];
 
-        // Smart function to convert filenames into professional human-readable captions
         function generateSmartCaption(filename) {
-            // Strip extension and path
             let nameWithoutExt = filename.substring(0, filename.lastIndexOf('.')) || filename;
-            
-            // Replace hyphens/underscores with spaces
             let cleanStr = nameWithoutExt.replace(/[-_]/g, ' ');
-
-            // Specific tailored overrides for major key figures
+            
             if (cleanStr.includes('principal maam felipa layo')) {
                 return "School Principal — Ma'am Felipa Layo";
             }
@@ -365,17 +354,14 @@
                 return "Current SPTA President — Mr. Ricky Moreno Banuelos";
             }
 
-            // General title-casing algorithm for any other uploaded image filename
             return cleanStr.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
         }
 
-        // Build Carousel dynamically
         const carouselWrapper = document.getElementById('smartCarousel');
         let currentSlideIndex = 0;
         let slideInterval;
 
         function initCarousel() {
-            // Render slides
             rawImages.forEach((imgFile, index) => {
                 const slideDiv = document.createElement('div');
                 slideDiv.className = `carousel-slide ${index === 0 ? 'active' : ''}`;
@@ -400,7 +386,6 @@
             if (slides.length === 0) return;
             
             slides[currentSlideIndex].classList.remove('active');
-            
             currentSlideIndex = (index + slides.length) % slides.length;
             slides[currentSlideIndex].classList.add('active');
         }
@@ -414,7 +399,7 @@
         function startAutoPlay() {
             slideInterval = setInterval(() => {
                 showSlide(currentSlideIndex + 1);
-            }, 4500); // Transitions automatically every 4.5 seconds
+            }, 4500);
         }
 
         window.addEventListener('DOMContentLoaded', initCarousel);
