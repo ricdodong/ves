@@ -32,7 +32,6 @@
             flex-direction: column;
         }
 
-        /* Header / Navbar */
         header {
             display: flex;
             justify-content: space-between;
@@ -96,7 +95,6 @@
             transform: translateY(-1px);
         }
 
-        /* Hero Carousel Section */
         .hero-container {
             max-width: 1000px;
             width: 90%;
@@ -143,7 +141,6 @@
             object-fit: cover;
         }
 
-        /* Caption overlay styling */
         .carousel-caption {
             position: absolute;
             bottom: 0;
@@ -171,7 +168,6 @@
             font-weight: 600;
         }
 
-        /* Carousel Controls */
         .carousel-btn {
             position: absolute;
             top: 50%;
@@ -198,7 +194,6 @@
         .carousel-btn.prev { left: 1rem; }
         .carousel-btn.next { right: 1rem; }
 
-        /* Main Content Grid */
         .content-section {
             max-width: 1000px;
             width: 90%;
@@ -262,7 +257,6 @@
             text-decoration: underline;
         }
 
-        /* Footer */
         footer {
             background: #1e293b;
             color: #94a3b8;
@@ -280,7 +274,6 @@
 </head>
 <body>
 
-    <!-- Header Navigation -->
     <header>
         <div class="logo-area">
             <img src="logo.jpg" alt="Villangit ES Logo" class="school-logo" onerror="this.src='https://images.unsplash.com/photo-1546410531-bb4caa6b424d?auto=format&fit=crop&w=100&q=80'">
@@ -295,7 +288,6 @@
         </div>
     </header>
 
-    <!-- Smart Sliding Carousel Container -->
     <div class="hero-container">
         <div class="carousel-wrapper" id="smartCarousel">
             <button class="carousel-btn prev" onclick="moveSlide(-1)">❮</button>
@@ -303,7 +295,6 @@
         </div>
     </div>
 
-    <!-- Website Content Cards -->
     <div class="content-section">
         <div class="card">
             <div class="card-icon" style="background: var(--primary);">📢</div>
@@ -327,21 +318,14 @@
         </div>
     </div>
 
-    <!-- Footer -->
     <footer>
         <p>&copy; 2026 Villangit Elementary School | Municipality of Sibagat, Division of Agusan del Sur, Region XIII Caraga</p>
     </footer>
 
-    <!-- Smart Auto-Caption Script -->
     <script>
         const imgFolder = "imgslide/";
-        const rawImages = [
-            "principal-maam-felipa-layo.jpg",
-            "spta-press-ricky-moreno-banuelos.jpg",
-            "school-campus-front-view.jpg",
-            "brigada-eskwela-2026.jpg",
-            "students-learning-activities.jpg"
-        ];
+        let currentSlideIndex = 0;
+        let slideInterval;
 
         function generateSmartCaption(filename) {
             let nameWithoutExt = filename.substring(0, filename.lastIndexOf('.')) || filename;
@@ -357,28 +341,34 @@
             return cleanStr.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
         }
 
-        const carouselWrapper = document.getElementById('smartCarousel');
-        let currentSlideIndex = 0;
-        let slideInterval;
+        async function initCarousel() {
+            const carouselWrapper = document.jsdelivr || document.getElementById('smartCarousel');
+            
+            try {
+                // Fetch the automatically updated list from GitHub Pages
+                const response = await fetch('images.json');
+                const rawImages = await response.json();
 
-        function initCarousel() {
-            rawImages.forEach((imgFile, index) => {
-                const slideDiv = document.createElement('div');
-                slideDiv.className = `carousel-slide ${index === 0 ? 'active' : ''}`;
-                
-                const captionText = generateSmartCaption(imgFile);
+                rawImages.forEach((imgFile, index) => {
+                    const slideDiv = document.createElement('div');
+                    slideDiv.className = `carousel-slide ${index === 0 ? 'active' : ''}`;
+                    
+                    const captionText = generateSmartCaption(imgFile);
 
-                slideDiv.innerHTML = `
-                    <img src="${imgFolder}${imgFile}" alt="${captionText}" onerror="this.src='https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=1200&q=80'">
-                    <div class="carousel-caption">
-                        <span>Villangit Elementary School Gallery</span>
-                        <h3>${captionText}</h3>
-                    </div>
-                `;
-                carouselWrapper.insertBefore(slideDiv, carouselWrapper.querySelector('.carousel-btn.prev'));
-            });
+                    slideDiv.innerHTML = `
+                        <img src="${imgFolder}${imgFile}" alt="${captionText}" onerror="this.src='https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=1200&q=80'">
+                        <div class="carousel-caption">
+                            <span>Villangit Elementary School Gallery</span>
+                            <h3>${captionText}</h3>
+                        </div>
+                    `;
+                    document.getElementById('smartCarousel').insertBefore(slideDiv, document.querySelector('.carousel-btn.prev'));
+                });
 
-            startAutoPlay();
+                startAutoPlay();
+            } catch (error) {
+                console.error('Could not load automated images list:', error);
+            }
         }
 
         function showSlide(index) {
