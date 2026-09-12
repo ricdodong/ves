@@ -115,7 +115,7 @@
             position: relative;
             width: 100%;
             height: 480px;
-            background: #090d16; /* Dark background to beautifully frame wide tarpaulins */
+            background: #090d16;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -134,6 +134,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
         }
 
         .carousel-slide.active {
@@ -141,19 +142,36 @@
             z-index: 2;
         }
 
-        /* Smart Image Frame Logic Applied Here */
-        .carousel-slide img {
-            width: 100%;
-            height: 100%;
-            /* Default fallback */
-            object-fit: cover; 
-            object-position: center 25%; /* Automatically lifts portraits up to keep faces centered */
+        /* Smart Background Glow for Tall / Portrait Group Photos */
+        .slide-bg-blur {
+            position: absolute;
+            inset: -20px;
+            background-size: cover;
+            background-position: center;
+            filter: blur(20px) brightness(0.4);
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
         }
 
-        /* Smart Class added via JS for wide banners/tarpaulins */
-        .carousel-slide img.is-banner {
+        .carousel-slide.has-blur .slide-bg-blur {
+            opacity: 1;
+        }
+
+        /* Main Image Styling */
+        .carousel-slide img {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 25%;
+        }
+
+        /* Smart rules applied dynamically by JS */
+        .carousel-slide img.is-contained {
             object-fit: contain !important;
-            background: #090d16;
+            background: transparent;
         }
 
         /* Caption Overlay */
@@ -389,7 +407,7 @@
         <span>Municipality of Sibagat, Division of Agusan del Sur, Region XIII Caraga</span>
     </footer>
 
-    <!-- Smart Auto-Caption, Face Framing, & Tarpaulin Auto-Detection Script -->
+    <!-- Next-Gen Smart Aspect-Ratio & Blur Glow Engine -->
     <script>
         const imgFolder = "imgslide/";
         let currentSlideIndex = 0;
@@ -406,6 +424,9 @@
             }
             if (cleanStr.includes('spta press ricky moreno banuelos')) {
                 return "Current SPTA President — Mr. Ricky Moreno Banuelos";
+            }
+            if (cleanStr.includes('brigada eskwela')) {
+                return "Brigada Eskwela 2026 — Faculty & Community Volunteers";
             }
 
             return cleanStr.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
@@ -426,17 +447,26 @@
                     slideDiv.className = `carousel-slide ${index === 0 ? 'active' : ''}`;
                     
                     const captionText = generateSmartCaption(imgFile);
+                    const imageFullPath = imgFolder + imgFile;
 
+                    // 1. Create blurred ambient background layer for vertical/portrait photos
+                    const bgBlur = document.createElement('div');
+                    bgBlur.className = 'slide-bg-blur';
+                    bgBlur.style.backgroundImage = `url('${imageFullPath}')`;
+
+                    // 2. Main image element
                     const imgElement = document.createElement('img');
-                    imgElement.src = imgFolder + imgFile;
+                    imgElement.src = imageFullPath;
                     imgElement.alt = captionText;
 
-                    // SMART DETECTOR: Check image natural proportions once loaded
+                    // SMART DETECTOR: Automatically adjust layout based on shape
                     imgElement.onload = function() {
                         const aspectRatio = this.naturalWidth / this.naturalHeight;
-                        // If width is significantly larger than height (like banners, tarpaulins, or landscape group photos)
-                        if (aspectRatio > 1.4) {
-                            this.classList.add('is-banner');
+                        
+                        // If it's a portrait / vertical photo (like group photos with people on edges) OR very wide banner
+                        if (aspectRatio < 1.0 || aspectRatio > 1.5) {
+                            this.classList.add('is-contained');
+                            slideDiv.classList.add('has-blur');
                         }
                     };
 
@@ -444,6 +474,7 @@
                         this.src = 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=1200&q=80';
                     };
 
+                    // 3. Caption overlay
                     const captionDiv = document.createElement('div');
                     captionDiv.className = 'carousel-caption';
                     captionDiv.innerHTML = `
@@ -451,11 +482,12 @@
                         <h3>${captionText}</h3>
                     `;
 
+                    slideDiv.appendChild(bgBlur);
                     slideDiv.appendChild(imgElement);
                     slideDiv.appendChild(captionDiv);
                     carouselWrapper.insertBefore(slideDiv, document.querySelector('.carousel-btn.prev'));
 
-                    // Create dot
+                    // Create navigation dot
                     const dot = document.createElement('div');
                     dot.className = `dot ${index === 0 ? 'active' : ''}`;
                     dot.onclick = () => goToSlide(index);
@@ -470,7 +502,7 @@
                 carouselWrapper.addEventListener('mouseenter', stopAutoPlay);
                 carouselWrapper.addEventListener('mouseleave', startAutoPlay);
 
-                // Touch swipe support
+                // Touch swipe support for mobiles/tablets
                 let touchStartX = 0;
                 carouselWrapper.addEventListener('touchstart', e => {
                     touchStartX = e.changedTouches[0].screenX;
