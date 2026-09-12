@@ -115,7 +115,7 @@
             position: relative;
             width: 100%;
             height: 480px;
-            background: #0f172a;
+            background: #090d16; /* Dark background to beautifully frame wide tarpaulins */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -141,10 +141,19 @@
             z-index: 2;
         }
 
+        /* Smart Image Frame Logic Applied Here */
         .carousel-slide img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            /* Default fallback */
+            object-fit: cover; 
+            object-position: center 25%; /* Automatically lifts portraits up to keep faces centered */
+        }
+
+        /* Smart Class added via JS for wide banners/tarpaulins */
+        .carousel-slide img.is-banner {
+            object-fit: contain !important;
+            background: #090d16;
         }
 
         /* Caption Overlay */
@@ -153,13 +162,14 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: linear-gradient(to top, rgba(15, 23, 42, 0.9) 0%, rgba(15, 23, 42, 0.45) 75%, transparent 100%);
+            background: linear-gradient(to top, rgba(15, 23, 42, 0.92) 0%, rgba(15, 23, 42, 0.5) 75%, transparent 100%);
             color: #ffffff;
             padding: 2.25rem 1.75rem 1.25rem 1.75rem;
             z-index: 5;
             display: flex;
             flex-direction: column;
             gap: 0.25rem;
+            pointer-events: none;
         }
 
         .carousel-caption span {
@@ -379,7 +389,7 @@
         <span>Municipality of Sibagat, Division of Agusan del Sur, Region XIII Caraga</span>
     </footer>
 
-    <!-- Smart Auto-Caption & Touch Swipe Logic -->
+    <!-- Smart Auto-Caption, Face Framing, & Tarpaulin Auto-Detection Script -->
     <script>
         const imgFolder = "imgslide/";
         let currentSlideIndex = 0;
@@ -391,7 +401,6 @@
             let nameWithoutExt = filename.substring(0, filename.lastIndexOf('.')) || filename;
             let cleanStr = nameWithoutExt.replace(/[-_]/g, ' ');
             
-            // Custom tailored human overrides
             if (cleanStr.includes('principal maam felipa layo')) {
                 return "School Principal — Ma'am Felipa Layo";
             }
@@ -399,7 +408,6 @@
                 return "Current SPTA President — Mr. Ricky Moreno Banuelos";
             }
 
-            // Clean title-case generator for any other images
             return cleanStr.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
         }
 
@@ -414,22 +422,40 @@
                 if (!rawImages || rawImages.length === 0) return;
 
                 rawImages.forEach((imgFile, index) => {
-                    // Create slide element
                     const slideDiv = document.createElement('div');
                     slideDiv.className = `carousel-slide ${index === 0 ? 'active' : ''}`;
                     
                     const captionText = generateSmartCaption(imgFile);
 
-                    slideDiv.innerHTML = `
-                        <img src="${imgFolder}${imgFile}" alt="${captionText}" onerror="this.src='https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=1200&q=80'">
-                        <div class="carousel-caption">
-                            <span>Villangit Elementary School Gallery</span>
-                            <h3>${captionText}</h3>
-                        </div>
+                    const imgElement = document.createElement('img');
+                    imgElement.src = imgFolder + imgFile;
+                    imgElement.alt = captionText;
+
+                    // SMART DETECTOR: Check image natural proportions once loaded
+                    imgElement.onload = function() {
+                        const aspectRatio = this.naturalWidth / this.naturalHeight;
+                        // If width is significantly larger than height (like banners, tarpaulins, or landscape group photos)
+                        if (aspectRatio > 1.4) {
+                            this.classList.add('is-banner');
+                        }
+                    };
+
+                    imgElement.onerror = function() {
+                        this.src = 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=1200&q=80';
+                    };
+
+                    const captionDiv = document.createElement('div');
+                    captionDiv.className = 'carousel-caption';
+                    captionDiv.innerHTML = `
+                        <span>Villangit Elementary School Gallery</span>
+                        <h3>${captionText}</h3>
                     `;
+
+                    slideDiv.appendChild(imgElement);
+                    slideDiv.appendChild(captionDiv);
                     carouselWrapper.insertBefore(slideDiv, document.querySelector('.carousel-btn.prev'));
 
-                    // Create navigation dot
+                    // Create dot
                     const dot = document.createElement('div');
                     dot.className = `dot ${index === 0 ? 'active' : ''}`;
                     dot.onclick = () => goToSlide(index);
@@ -441,11 +467,10 @@
 
                 startAutoPlay();
 
-                // Pause autoplay on mouse hover
                 carouselWrapper.addEventListener('mouseenter', stopAutoPlay);
                 carouselWrapper.addEventListener('mouseleave', startAutoPlay);
 
-                // Add mobile touch swipe support
+                // Touch swipe support
                 let touchStartX = 0;
                 carouselWrapper.addEventListener('touchstart', e => {
                     touchStartX = e.changedTouches[0].screenX;
@@ -453,8 +478,8 @@
 
                 carouselWrapper.addEventListener('touchend', e => {
                     let touchEndX = e.changedTouches[0].screenX;
-                    if (touchStartX - touchEndX > 50) moveSlide(1); // Swipe left
-                    if (touchEndX - touchStartX > 50) moveSlide(-1); // Swipe right
+                    if (touchStartX - touchEndX > 50) moveSlide(1);
+                    if (touchEndX - touchStartX > 50) moveSlide(-1);
                 }, {passive: true});
 
             } catch (error) {
