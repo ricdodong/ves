@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Viewer — Villangit ES</title>
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #f0f4ff 0%, #fdf2f8 100%);
+            --surface-color: #ffffff;
+            --text-main: #1e293b;
+            --text-secondary: #64748b;
+            --border-color: #cbd5e1;
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --accent: #f97316;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            user-select: none;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%);
+            color: #ffffff;
+            border-bottom: 1px solid rgba(203, 213, 225, 0.4);
+            box-shadow: 0 4px 12px -2px rgba(79, 70, 229, 0.2);
+            z-index: 10;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #ffffff;
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            text-decoration: none;
+            padding: 0.5rem 1.1rem;
+            border-radius: 9999px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            backdrop-filter: blur(8px);
+            transition: background-color 0.2s, transform 0.15s;
+        }
+
+        .back-btn:hover {
+            background-color: rgba(255, 255, 255, 0.35);
+            transform: translateY(-1px);
+        }
+
+        .image-info {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #e0e7ff;
+        }
+
+        .viewer-container {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: grab;
+        }
+
+        .viewer-container:active {
+            cursor: grabbing;
+        }
+
+        .image-wrapper {
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform-origin: center center;
+            will-change: transform;
+            transform: translate3d(0, 0, 0); 
+        }
+
+        .viewer-container img {
+            width: auto;
+            height: auto;
+            max-width: none;
+            max-height: none;
+            display: block;
+            pointer-events: none;
+            box-shadow: 0 25px 50px -12px rgb(30 41 59 / 0.25);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+        }
+
+        .toolbar {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            padding: 0.5rem 1.25rem;
+            border-radius: 9999px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 25px -5px rgb(79 70 229 / 0.15);
+            z-index: 10;
+        }
+
+        .tool-btn {
+            background: transparent;
+            border: none;
+            color: var(--primary);
+            cursor: pointer;
+            padding: 0.6rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s, color 0.2s, transform 0.15s;
+        }
+
+        .tool-btn:hover {
+            background-color: #e0e7ff;
+            color: var(--primary-hover);
+            transform: scale(1.08);
+        }
+
+        .tool-btn svg {
+            width: 22px;
+            height: 22px;
+            fill: currentColor;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="back-btn">
+            <svg style="width:16px;height:16px" viewBox="0 0 24 24"><path fill="currentColor" d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+            Back to Main
+        </a>
+        <div class="image-info" id="zoomLevelIndicator">100% — resources/item4.jfif</div>
+    </header>
+
+    <div class="viewer-container" id="viewerContainer">
+        <div class="image-wrapper" id="imageWrapper">
+            <img id="mainImage" src="resources/item4.jfif" alt="Professional View">
+        </div>
+
+        <div class="toolbar">
+            <button class="tool-btn" onclick="zoomIn()" title="Zoom In">
+                <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zm.5-7H9v2H7v1h2v2h1v-2h2V9h-2V7z"/></svg>
+            </button>
+            <button class="tool-btn" onclick="zoomOut()" title="Zoom Out">
+                <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zM7 9h5v1H7V9z"/></svg>
+            </button>
+            <button class="tool-btn" onclick="resetTransform()" title="Reset View" style="color: var(--accent);">
+                <svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const container = document.getElementById('viewerContainer');
+        const wrapper = document.getElementById('imageWrapper');
+        const zoomIndicator = document.getElementById('zoomLevelIndicator');
+        const img = document.getElementById('mainImage');
+
+        let scale = 1;
+        let posX = 0;
+        let posY = 0;
+        let isDragging = false;
+        let startX, startY;
+
+        window.addEventListener('load', () => {
+            const containerWidth = container.clientWidth * 0.8;
+            const containerHeight = container.clientHeight * 0.75;
+            
+            if (img.naturalWidth > containerWidth || img.naturalHeight > containerHeight) {
+                const widthScale = containerWidth / img.naturalWidth;
+                const heightScale = containerHeight / img.naturalHeight;
+                scale = Math.min(widthScale, heightScale);
+            } else {
+                scale = 1;
+            }
+            updateTransform();
+        });
+
+        function updateTransform() {
+            wrapper.style.transform = `translate3d(${posX}px, ${posY}px, 0) scale(${scale})`;
+            zoomIndicator.innerText = `${Math.round(scale * 100)}% — resources/item4.jfif`;
+        }
+
+        container.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            const zoomIntensity = 0.15;
+            
+            const rect = container.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left - rect.width / 2;
+            const mouseY = e.clientY - rect.top - rect.height / 2;
+
+            const prevScale = scale;
+            if (e.deltaY < 0) {
+                scale *= (1 + zoomIntensity);
+            } else {
+                scale /= (1 + zoomIntensity);
+            }
+
+            scale = Math.max(0.05, Math.min(30, scale));
+
+            posX -= (mouseX - posX) * (scale / prevScale - 1);
+            posY -= (mouseY - posY) * (scale / prevScale - 1);
+
+            updateTransform();
+        }, { passive: false });
+
+        container.addEventListener('mousedown', (e) => {
+            if (e.target.closest('.toolbar')) return;
+            isDragging = true;
+            startX = e.clientX - posX;
+            startY = e.clientY - posY;
+        });
+
+        window.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            posX = e.clientX - startX;
+            posY = e.clientY - startY;
+            updateTransform();
+        });
+
+        window.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+
+        function zoomIn() {
+            scale = Math.min(30, scale * 1.25);
+            updateTransform();
+        }
+
+        function zoomOut() {
+            scale = Math.max(0.05, scale / 1.25);
+            updateTransform();
+        }
+
+        function resetTransform() {
+            const containerWidth = container.clientWidth * 0.8;
+            const containerHeight = container.clientHeight * 0.75;
+            if (img.naturalWidth > containerWidth || img.naturalHeight > containerHeight) {
+                const widthScale = containerWidth / img.naturalWidth;
+                const heightScale = containerHeight / img.naturalHeight;
+                scale = Math.min(widthScale, heightScale);
+            } else {
+                scale = 1;
+            }
+            posX = 0;
+            posY = 0;
+            updateTransform();
+        }
+    </script>
+</body>
+</html>

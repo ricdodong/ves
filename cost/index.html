@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Villangit ES CCTV & Internet Materials 2026</title>
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #f0f4ff 0%, #fdf2f8 100%);
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-secondary: #64748b;
+            --border-color: #cbd5e1;
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --accent: #f97316;
+            --accent-bg: #fff7ed;
+            --success-color: #059669;
+            --badge-set: #dbeafe;
+            --badge-set-text: #1d4ed8;
+            --badge-roll: #fef3c7;
+            --badge-roll-text: #b45309;
+            --badge-pcs: #fae8ff;
+            --badge-pcs-text: #86198f;
+            --badge-box: #ccfbf1;
+            --badge-box-text: #0f766e;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            padding: 2.5rem 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        .main-container {
+            width: 100%;
+            max-width: 1400px;
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: 0 20px 35px -10px rgba(79, 70, 229, 0.1), 0 10px 15px -5px rgba(0, 0, 0, 0.04);
+            border: 1px solid rgba(203, 213, 225, 0.6);
+            padding: 2.5rem;
+            overflow: hidden;
+        }
+
+        /* Vibrant Header Section */
+        .project-header {
+            background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            box-shadow: 0 10px 20px -5px rgba(79, 70, 229, 0.3);
+        }
+
+        .header-title-wrapper h1 {
+            font-size: 2.25rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            margin-bottom: 0.35rem;
+            color: #ffffff;
+        }
+
+        .header-title-wrapper p {
+            color: #e0e7ff;
+            font-size: 1.05rem;
+        }
+
+        .badge-year {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            font-weight: 700;
+            padding: 0.6rem 1.5rem;
+            border-radius: 9999px;
+            font-size: 1.2rem;
+            backdrop-filter: blur(8px);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Metric Summary Cards with Colorful Accents */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .metric-card {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-top: 4px solid var(--primary);
+            padding: 1.75rem;
+            border-radius: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);
+        }
+
+        .metric-card:nth-child(2) { border-top-color: #06b6d4; }
+        .metric-card:nth-child(3) { border-top-color: #10b981; }
+
+        .metric-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+        }
+
+        .metric-value {
+            font-size: 1.85rem;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+        .metric-value.accent {
+            color: #f97316;
+        }
+
+        /* Section Headings */
+        .section-heading {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--text-main);
+            margin: 2.5rem 0 1.25rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .section-heading::before {
+            content: '';
+            display: block;
+            width: 6px;
+            height: 20px;
+            background: linear-gradient(to bottom, #4f46e5, #ec4899);
+            border-radius: 3px;
+        }
+
+        /* Desktop Table View Container */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            border-radius: 14px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+            margin-bottom: 2rem;
+            background: #ffffff;
+        }
+
+        .pro-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.95rem;
+            white-space: nowrap;
+        }
+
+        .pro-table th {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            color: #ffffff;
+            font-weight: 700;
+            padding: 16px 20px;
+            text-transform: uppercase;
+            font-size: 0.78rem;
+            letter-spacing: 0.05em;
+        }
+
+        .pro-table td {
+            padding: 16px 20px;
+            border-bottom: 1px solid #f1f5f9;
+            color: var(--text-main);
+            vertical-align: middle;
+        }
+
+        .pro-table tbody tr {
+            transition: background-color 0.15s ease;
+            background-color: #ffffff;
+        }
+
+        .pro-table tbody tr:hover {
+            background-color: #f8fafc;
+        }
+
+        .pro-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .pro-table a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.15s;
+        }
+
+        .pro-table a:hover {
+            color: var(--primary-hover);
+            text-decoration: underline;
+        }
+
+        .link-cell {
+            max-width: 220px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .link-cell a {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* Pill Badges for Units */
+        .unit-badge {
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            display: inline-block;
+        }
+        .unit-set { background-color: var(--badge-set); color: var(--badge-set-text); }
+        .unit-roll { background-color: var(--badge-roll); color: var(--badge-roll-text); }
+        .unit-pcs { background-color: var(--badge-pcs); color: var(--badge-pcs-text); }
+        .unit-box { background-color: var(--badge-box); color: var(--badge-box-text); }
+
+        .total-row td {
+            font-weight: 800;
+            font-size: 1.2rem;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%) !important;
+            border-top: 2px solid var(--border-color);
+            color: var(--text-main);
+        }
+
+        .total-amount {
+            color: #f97316;
+            font-size: 1.35rem;
+        }
+
+        /* Mobile Responsive Card Layout System */
+        .mobile-card-list {
+            display: none;
+        }
+
+        /* Responsive Breakpoint for Mobile Switch */
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            .main-container {
+                padding: 1.25rem;
+            }
+            .project-header {
+                padding: 1.5rem;
+                text-align: center;
+                justify-content: center;
+            }
+            .header-title-wrapper h1 {
+                font-size: 1.6rem;
+            }
+
+            /* Hide Desktop Table */
+            .table-responsive {
+                display: none;
+            }
+
+            /* Show and Format Mobile Cards */
+            .mobile-card-list {
+                display: flex;
+                flex-direction: column;
+                gap: 1.25rem;
+                margin-bottom: 2rem;
+            }
+
+            .m-card {
+                background: #ffffff;
+                border: 1px solid var(--border-color);
+                border-left: 5px solid var(--primary);
+                border-radius: 14px;
+                padding: 1.25rem;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .m-card-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                gap: 0.5rem;
+                border-bottom: 1px solid #f1f5f9;
+                padding-bottom: 0.75rem;
+            }
+
+            .m-card-title {
+                font-weight: 700;
+                font-size: 1.05rem;
+                color: var(--text-main);
+                line-height: 1.35;
+            }
+
+            .m-card-title a {
+                color: var(--text-main);
+                text-decoration: none;
+            }
+
+            .m-card-title a:hover {
+                color: var(--primary);
+            }
+
+            .m-card-body {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.75rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .m-field {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .m-label {
+                font-size: 0.72rem;
+                text-transform: uppercase;
+                color: var(--text-secondary);
+                font-weight: 700;
+                letter-spacing: 0.04em;
+            }
+
+            .m-value {
+                font-weight: 700;
+                color: var(--text-main);
+                font-size: 0.95rem;
+            }
+
+            .m-value.highlight {
+                color: #f97316;
+                font-size: 1.15rem;
+            }
+
+            .m-card-footer {
+                border-top: 1px dashed #e2e8f0;
+                padding-top: 0.75rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                font-size: 0.9rem;
+            }
+
+            .m-card-footer a {
+                color: var(--primary);
+                font-weight: 700;
+                text-decoration: none;
+                display: inline-flex;
+                align-items: center;
+                gap: 4px;
+            }
+
+            .m-card-total-box {
+                background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+                color: white;
+                border-radius: 14px;
+                padding: 1.5rem;
+                text-align: center;
+                font-weight: 800;
+                font-size: 1.25rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                box-shadow: 0 10px 15px -3px rgba(30, 41, 59, 0.2);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="main-container">
+    <!-- Vibrant Header Section -->
+    <div class="project-header">
+        <div class="header-title-wrapper">
+            <h1>Villangit ES CCTV &amp; Internet Materials</h1>
+            <p>Procurement Tracking &amp; Inventory Management System</p>
+        </div>
+        <div class="badge-year">
+            <span>🚀</span> 2026 Project
+        </div>
+    </div>
+
+    <!-- Quick Metric Cards Dashboard -->
+    <div class="metrics-grid">
+        <div class="metric-card">
+            <span class="metric-label">Total Investment</span>
+            <span class="metric-value accent">₱39,290</span>
+        </div>
+        <div class="metric-card">
+            <span class="metric-label">Unique Item Lines</span>
+            <span class="metric-value">12 Items</span>
+        </div>
+        <div class="metric-card">
+            <span class="metric-label">Project Lead</span>
+            <span class="metric-value" style="font-size: 1.35rem; margin-top: 4px; color: #4f46e5;">Ricky Banuelos</span>
+        </div>
+    </div>
+
+    <!-- Items List Section -->
+    <div class="section-heading">Ordered Materials Inventory</div>
+    
+    <!-- DESKTOP TABLE VIEW -->
+    <div class="table-responsive">
+        <table class="pro-table">
+            <thead>
+                <tr>
+                    <th>Unit</th>
+                    <th>Item Description</th>
+                    <th>Qty</th>
+                    <th>Unit Cost</th>
+                    <th>Shipping</th>
+                    <th>Total Cost</th>
+                    <th>Reference Link</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="unit-badge unit-set">SET</span></td>
+                    <td><a href="Item1.html">HIKVISION CCTV DVR-8 channel, 2TB HDD</a></td>
+                    <td>1</td>
+                    <td>₱21,099</td>
+                    <td>₱433</td>
+                    <td><strong>₱21,532</strong></td>
+                    <td class="link-cell"><a target="_blank" href="https://shopee.ph/Hikvision-8CH-2MP-Bullet-CCTV-Kit-With-Night-Vision-Audio-PH-Stock-Pinoy-Family-Securit-i.1066541770.56354949099" title="View Product">Shopee Listing Link</a></td>
+                </tr>
+                <tr>
+                    <td><span class="unit-badge unit-roll">ROLL</span></td>
+                    <td><a href="Item2.html">Fiber Optic Wire 1km 1Core</a></td>
+                    <td>1</td>
+                    <td>₱2,200</td>
+                    <td>₱135</td>
+                    <td><strong>₱2,335</strong></td>
+                    <td class="link-cell"><a target="_blank" href="https://shopee.ph/Fiber-optic-cable-1km-1core-i.414846677.15898128444?xptdk=ef19218e-1e56-40c8-98cd-56517b9aa135" title="View Product">Shopee Listing Link</a></td>
+                </tr>
+                <tr>
+                    <td><span class="unit-badge unit-pcs">PIECES</span></td>
+                    <td><a href="Item3.html">Transceiver Media Converter 1Pair</a></td>
+                    <td>5</td>
+                    <td>₱500</td>
+                    <td>₱105</td>
+                    <td><strong>₱2,605</strong></td>
+                    <td class="link-cell"><a target="_blank" href="https://shopee.ph/NETLINK-HTB-A-B-One-pair-FIBER-MEDIA-CONVERTER-10-100Mbps-Gigabit-1000Mbps-i.78346282.21135167574" title="View Product">Shopee Listing Link</a></td>
+                </tr>
+                <tr>
+                    <td><span class="unit-badge unit-pcs">PIECES</span></td>
+                    <td><a href="Item4.html">Router Ruijie | RG-EW300N</a></td>
+                    <td>5</td>
+                    <td>₱699</td>
+                    <td>₱140</td>
+                    <td><strong>₱3,635</strong></td>
+                    <td class="link-cell"><a target="_blank" href="https://shopee.ph/Ruijie-RG-EW300N-300Mbps-Wireless-Smart-Router-i.181501780.47206008471" title="View Product">Shopee Listing Link</a></td>
+                </tr>
+                <tr>
+                    <td><span class="unit-badge unit-set">SET</span></td>
+                    <td><a href="Item5.html">SC-UPC - FIBER OPTIC CONNECTOR 10/SET</a></td>
+                    <td>2</td>
+                    <td>₱102</td>
+                    <td>₱135</td>
+                    <td><strong>₱339</strong></td>
+                    <td class="link-cell"><a target="_blank" href="https://shopee.ph/10-PCS-SC-UPC-Fiber-Optic-Connector-Fast-Connector-Embedded-Fiber-Optic-Quick-Cold-UPC-Open-Tail-i.688606080.17110602981" title="View Product">Shopee Listing Link</a></td>
+                </tr>
+                <tr>
+                    <td><span class="unit-badge unit-roll">ROLL</span></td>
+                    <td><a href="Item6.html">SKYLINK CAT6 Outdoor Cable UTP 305M</a></td>
+                    <td>2</td>
+                    <td>₱1,500</td>
+                    <td>₱525</td>
+                    <td><strong>₱3,525</strong></td>
+                    <td class="link-cell"><a target="_blank" href="https://shopee.ph/COMLINK-CAT6-Outdoor-Cable-UTP-Ethernet-Lan-Cable-Waterproof-Cable-Sold-Per-Meter-i.78346282.23916048588" title="View Product">Shopee Listing Link</a></td>
+                </tr>
+                <tr>
+                    <td><span class="unit-badge unit-box">BOX</span></td>
+                    <td><a href="Item7.html">Connectors RJ45 CAT6A Pass Through 100PCS</a></td>
+                    <td>1</td>
+                    <td>₱239</td>
+                    <td>₱115</td>
+                    <td><strong>₱354</strong></td>
+                    <td class="link-cell"><a target="_blank" href="https://shopee.ph/100pcs-Pass-Through-RJ45-Connectors-RJ45-CAT6A-Pass-Through-Connectors-i.44402121.17411051405" title="View Product">Shopee Listing Link</a></td>
+                </tr>
+                <tr>
+                    <td><span class="unit-badge unit-set">SET</span></td>
+                    <td><a href="Item8.html">Video Balun Clip Type (1-PAIR)</a></td>
+                    <td>6</td>
+                    <td>₱70</td>
+                    <td>₱105</td>
+                    <td><strong>₱525</strong></td>
+                    <td class="link-cell"><a target="_blank" href="https://shopee.ph/Video-Balun-Clip-Type-(1-PAIR)-PASSIVE-HDCVI-AHD-HDTVI-1080P-TRANSCEIVER-SINGLE-CHANNEL-BNC-CCTV-i.78346282.9258575721" title="View Product">Shopee Listing Link</a></td>
+                </tr>
+                <tr>
+                    <td><span class="unit-badge unit-set">SET</span></td>
+                    <td><a href="Item9.html">Allan 100pcs. Nail flat clips cable ties round</a></td>
+                    <td>1</td>
+                    <td>₱30</td>
+                    <td>₱105</td>
+                    <td><strong>₱135</strong></td>
+                    <td class="link-cell"><a target="_blank" href="https://shopee.ph/Allan-100pcs.-Nail-flat-clips-cable-ties-round-steel-nail-cable-clips-10mm-i.78346282.25632238024" title="View Product">Shopee Listing Link</a></td>
+                </tr>
+                <tr>
+                    <td><span class="unit-badge unit-pcs">PIECES</span></td>
+                    <td><a href="Item10.html">ROUND JUNCTION BOX 120*120*53MM FOR CCTV</a></td>
+                    <td>10</td>
+                    <td>₱80</td>
+                    <td>₱105</td>
+                    <td><strong>₱905</strong></td>
+                    <td class="link-cell"><a target="_blank" href="https://shopee.ph/ROUND-JUNCTION-BOX-120*120*53MM-FOR-CCTV-CAMERA-i.78346282.43967899433" title="View Product">Shopee Listing Link</a></td>
+                </tr>
+                <tr>
+                    <td><span class="unit-badge unit-pcs">PIECES</span></td>
+                    <td><a href="Item11.html">Hikvision DS-2CD1027G3-LIU 2MP ColorVu</a></td>
+                    <td>1</td>
+                    <td>₱3,110</td>
+                    <td>₱115</td>
+                    <td><strong>₱3,225</strong></td>
+                    <td class="link-cell"><a target="_blank" href="https://shopee.ph/(2026)-Hikvision-DS-2CD1027G3-LIU-2MP-ColorVu-3.0-Smart-Hybrid-Light-Audio-Bullet-Network-Camera-i.213244405.8268750532" title="View Product">Shopee Listing Link</a></td>
+                </tr>
+                <tr>
+                    <td><span class="unit-badge unit-pcs">PIECES</span></td>
+                    <td><a href="Item12.html">MMT Nylon Cable Ties 100Pcs</a></td>
+                    <td>1</td>
+                    <td>₱70</td>
+                    <td>₱105</td>
+                    <td><strong>₱175</strong></td>
+                    <td class="link-cell"><a target="_blank" href="https://shopee.ph/MMT-Nylon-Cable-Ties-100Pcs-High-Quality-Cable-Ties-i.278849991.12601920001" title="View Product">Shopee Listing Link</a></td>
+                </tr>
+                <!-- Total Row -->
+                <tr class="total-row">
+                    <td colspan="5" style="text-align: right;">TOTAL:</td>
+                    <td colspan="2" class="total-amount">₱39,290</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- MOBILE INFORMATIVE CARD VIEW -->
+    <div class="mobile-card-list">
+        <!-- Item 1 -->
+        <div class="m-card">
+            <div class="m-card-header">
+                <span class="m-card-title"><a href="Item1.html">HIKVISION CCTV DVR-8 channel, 2TB HDD</a></span>
+                <span class="unit-badge unit-set">SET</span>
+            </div>
+            <div class="m-card-body">
+                <div class="m-field"><span class="m-label">Quantity</span><span class="m-value">1</span></div>
+                <div class="m-field"><span class="m-label">Unit Cost</span><span class="m-value">₱21,099</span></div>
+                <div class="m-field"><span class="m-label">Shipping</span><span class="m-value">₱433</span></div>
+                <div class="m-field"><span class="m-label">Total Cost</span><span class="m-value highlight">₱21,532</span></div>
+            </div>
+            <div class="m-card-footer">
+                <a target="_blank" href="https://shopee.ph/Hikvision-8CH-2MP-Bullet-CCTV-Kit-With-Night-Vision-Audio-PH-Stock-Pinoy-Family-Securit-i.1066541770.56354949099">🔗 Open Shopee Link</a>
+            </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="m-card">
+            <div class="m-card-header">
+                <span class="m-card-title"><a href="Item2.html">Fiber Optic Wire 1km 1Core</a></span>
+                <span class="unit-badge unit-roll">ROLL</span>
+            </div>
+            <div class="m-card-body">
+                <div class="m-field"><span class="m-label">Quantity</span><span class="m-value">1</span></div>
+                <div class="m-field"><span class="m-label">Unit Cost</span><span class="m-value">₱2,200</span></div>
+                <div class="m-field"><span class="m-label">Shipping</span><span class="m-value">₱135</span></div>
+                <div class="m-field"><span class="m-label">Total Cost</span><span class="m-value highlight">₱2,335</span></div>
+            </div>
+            <div class="m-card-footer">
+                <a target="_blank" href="https://shopee.ph/Fiber-optic-cable-1km-1core-i.414846677.15898128444?xptdk=ef19218e-1e56-40c8-98cd-56517b9aa135">🔗 Open Shopee Link</a>
+            </div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="m-card">
+            <div class="m-card-header">
+                <span class="m-card-title"><a href="Item3.html">Transceiver Media Converter 1Pair</a></span>
+                <span class="unit-badge unit-pcs">PIECES</span>
+            </div>
+            <div class="m-card-body">
+                <div class="m-field"><span class="m-label">Quantity</span><span class="m-value">5</span></div>
+                <div class="m-field"><span class="m-label">Unit Cost</span><span class="m-value">₱500</span></div>
+                <div class="m-field"><span class="m-label">Shipping</span><span class="m-value">₱105</span></div>
+                <div class="m-field"><span class="m-label">Total Cost</span><span class="m-value highlight">₱2,605</span></div>
+            </div>
+            <div class="m-card-footer">
+                <a target="_blank" href="https://shopee.ph/NETLINK-HTB-A-B-One-pair-FIBER-MEDIA-CONVERTER-10-100Mbps-Gigabit-1000Mbps-i.78346282.21135167574">🔗 Open Shopee Link</a>
+            </div>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="m-card">
+            <div class="m-card-header">
+                <span class="m-card-title"><a href="Item4.html">Router Ruijie | RG-EW300N</a></span>
+                <span class="unit-badge unit-pcs">PIECES</span>
+            </div>
+            <div class="m-card-body">
+                <div class="m-field"><span class="m-label">Quantity</span><span class="m-value">5</span></div>
+                <div class="m-field"><span class="m-label">Unit Cost</span><span class="m-value">₱699</span></div>
+                <div class="m-field"><span class="m-label">Shipping</span><span class="m-value">₱140</span></div>
+                <div class="m-field"><span class="m-label">Total Cost</span><span class="m-value highlight">₱3,635</span></div>
+            </div>
+            <div class="m-card-footer">
+                <a target="_blank" href="https://shopee.ph/Ruijie-RG-EW300N-300Mbps-Wireless-Smart-Router-i.181501780.47206008471">🔗 Open Shopee Link</a>
+            </div>
+        </div>
+
+        <!-- Item 5 -->
+        <div class="m-card">
+            <div class="m-card-header">
+                <span class="m-card-title"><a href="Item5.html">SC-UPC - FIBER OPTIC CONNECTOR 10/SET</a></span>
+                <span class="unit-badge unit-set">SET</span>
+            </div>
+            <div class="m-card-body">
+                <div class="m-field"><span class="m-label">Quantity</span><span class="m-value">2</span></div>
+                <div class="m-field"><span class="m-label">Unit Cost</span><span class="m-value">₱102</span></div>
+                <div class="m-field"><span class="m-label">Shipping</span><span class="m-value">₱135</span></div>
+                <div class="m-field"><span class="m-label">Total Cost</span><span class="m-value highlight">₱339</span></div>
+            </div>
+            <div class="m-card-footer">
+                <a target="_blank" href="https://shopee.ph/10-PCS-SC-UPC-Fiber-Optic-Connector-Fast-Connector-Embedded-Fiber-Optic-Quick-Cold-UPC-Open-Tail-i.688606080.17110602981">🔗 Open Shopee Link</a>
+            </div>
+        </div>
+
+        <!-- Item 6 -->
+        <div class="m-card">
+            <div class="m-card-header">
+                <span class="m-card-title"><a href="Item6.html">SKYLINK CAT6 Outdoor Cable UTP 305M</a></span>
+                <span class="unit-badge unit-roll">ROLL</span>
+            </div>
+            <div class="m-card-body">
+                <div class="m-field"><span class="m-label">Quantity</span><span class="m-value">2</span></div>
+                <div class="m-field"><span class="m-label">Unit Cost</span><span class="m-value">₱1,500</span></div>
+                <div class="m-field"><span class="m-label">Shipping</span><span class="m-value">₱525</span></div>
+                <div class="m-field"><span class="m-label">Total Cost</span><span class="m-value highlight">₱3,525</span></div>
+            </div>
+            <div class="m-card-footer">
+                <a target="_blank" href="https://shopee.ph/COMLINK-CAT6-Outdoor-Cable-UTP-Ethernet-Lan-Cable-Waterproof-Cable-Sold-Per-Meter-i.78346282.23916048588">🔗 Open Shopee Link</a>
+            </div>
+        </div>
+
+        <!-- Item 7 -->
+        <div class="m-card">
+            <div class="m-card-header">
+                <span class="m-card-title"><a href="Item7.html">Connectors RJ45 CAT6A Pass Through 100PCS</a></span>
+                <span class="unit-badge unit-box">BOX</span>
+            </div>
+            <div class="m-card-body">
+                <div class="m-field"><span class="m-label">Quantity</span><span class="m-value">1</span></div>
+                <div class="m-field"><span class="m-label">Unit Cost</span><span class="m-value">₱239</span></div>
+                <div class="m-field"><span class="m-label">Shipping</span><span class="m-value">₱115</span></div>
+                <div class="m-field"><span class="m-label">Total Cost</span><span class="m-value highlight">₱354</span></div>
+            </div>
+            <div class="m-card-footer">
+                <a target="_blank" href="https://shopee.ph/100pcs-Pass-Through-RJ45-Connectors-RJ45-CAT6A-Pass-Through-Connectors-i.44402121.17411051405">🔗 Open Shopee Link</a>
+            </div>
+        </div>
+
+        <!-- Item 8 -->
+        <div class="m-card">
+            <div class="m-card-header">
+                <span class="m-card-title"><a href="Item8.html">Video Balun Clip Type (1-PAIR)</a></span>
+                <span class="unit-badge unit-set">SET</span>
+            </div>
+            <div class="m-card-body">
+                <div class="m-field"><span class="m-label">Quantity</span><span class="m-value">6</span></div>
+                <div class="m-field"><span class="m-label">Unit Cost</span><span class="m-value">₱70</span></div>
+                <div class="m-field"><span class="m-label">Shipping</span><span class="m-value">₱105</span></div>
+                <div class="m-field"><span class="m-label">Total Cost</span><span class="m-value highlight">₱525</span></div>
+            </div>
+            <div class="m-card-footer">
+                <a target="_blank" href="https://shopee.ph/Video-Balun-Clip-Type-(1-PAIR)-PASSIVE-HDCVI-AHD-HDTVI-1080P-TRANSCEIVER-SINGLE-CHANNEL-BNC-CCTV-i.78346282.9258575721">🔗 Open Shopee Link</a>
+            </div>
+        </div>
+
+        <!-- Item 9 -->
+        <div class="m-card">
+            <div class="m-card-header">
+                <span class="m-card-title"><a href="Item9.html">Allan 100pcs. Nail flat clips cable ties round</a></span>
+                <span class="unit-badge unit-set">SET</span>
+            </div>
+            <div class="m-card-body">
+                <div class="m-field"><span class="m-label">Quantity</span><span class="m-value">1</span></div>
+                <div class="m-field"><span class="m-label">Unit Cost</span><span class="m-value">₱30</span></div>
+                <div class="m-field"><span class="m-label">Shipping</span><span class="m-value">₱105</span></div>
+                <div class="m-field"><span class="m-label">Total Cost</span><span class="m-value highlight">₱135</span></div>
+            </div>
+            <div class="m-card-footer">
+                <a target="_blank" href="https://shopee.ph/Allan-100pcs.-Nail-flat-clips-cable-ties-round-steel-nail-cable-clips-10mm-i.78346282.25632238024">🔗 Open Shopee Link</a>
+            </div>
+        </div>
+
+        <!-- Item 10 -->
+        <div class="m-card">
+            <div class="m-card-header">
+                <span class="m-card-title"><a href="Item10.html">ROUND JUNCTION BOX 120*120*53MM FOR CCTV</a></span>
+                <span class="unit-badge unit-pcs">PIECES</span>
+            </div>
+            <div class="m-card-body">
+                <div class="m-field"><span class="m-label">Quantity</span><span class="m-value">10</span></div>
+                <div class="m-field"><span class="m-label">Unit Cost</span><span class="m-value">₱80</span></div>
+                <div class="m-field"><span class="m-label">Shipping</span><span class="m-value">₱105</span></div>
+                <div class="m-field"><span class="m-label">Total Cost</span><span class="m-value highlight">₱905</span></div>
+            </div>
+            <div class="m-card-footer">
+                <a target="_blank" href="https://shopee.ph/ROUND-JUNCTION-BOX-120*120*53MM-FOR-CCTV-CAMERA-i.78346282.43967899433">🔗 Open Shopee Link</a>
+            </div>
+        </div>
+
+        <!-- Item 11 -->
+        <div class="m-card">
+            <div class="m-card-header">
+                <span class="m-card-title"><a href="Item11.html">Hikvision DS-2CD1027G3-LIU 2MP ColorVu</a></span>
+                <span class="unit-badge unit-pcs">PIECES</span>
+            </div>
+            <div class="m-card-body">
+                <div class="m-field"><span class="m-label">Quantity</span><span class="m-value">1</span></div>
+                <div class="m-field"><span class="m-label">Unit Cost</span><span class="m-value">₱3,110</span></div>
+                <div class="m-field"><span class="m-label">Shipping</span><span class="m-value">₱115</span></div>
+                <div class="m-field"><span class="m-label">Total Cost</span><span class="m-value highlight">₱3,225</span></div>
+            </div>
+            <div class="m-card-footer">
+                <a target="_blank" href="https://shopee.ph/(2026)-Hikvision-DS-2CD1027G3-LIU-2MP-ColorVu-3.0-Smart-Hybrid-Light-Audio-Bullet-Network-Camera-i.213244405.8268750532">🔗 Open Shopee Link</a>
+            </div>
+        </div>
+
+        <!-- Item 12 -->
+        <div class="m-card">
+            <div class="m-card-header">
+                <span class="m-card-title"><a href="Item12.html">MMT Nylon Cable Ties 100Pcs</a></span>
+                <span class="unit-badge unit-pcs">PIECES</span>
+            </div>
+            <div class="m-card-body">
+                <div class="m-field"><span class="m-label">Quantity</span><span class="m-value">1</span></div>
+                <div class="m-field"><span class="m-label">Unit Cost</span><span class="m-value">₱70</span></div>
+                <div class="m-field"><span class="m-label">Shipping</span><span class="m-value">₱105</span></div>
+                <div class="m-field"><span class="m-label">Total Cost</span><span class="m-value highlight">₱175</span></div>
+            </div>
+            <div class="m-card-footer">
+                <a target="_blank" href="https://shopee.ph/MMT-Nylon-Cable-Ties-100Pcs-High-Quality-Cable-Ties-i.278849991.12601920001">🔗 Open Shopee Link</a>
+            </div>
+        </div>
+
+        <!-- Mobile Overall Total Box -->
+        <div class="m-card-total-box">
+            <span>Overall Total:</span>
+            <span style="color: #fb923c;">₱39,290</span>
+        </div>
+    </div>
+
+    <!-- Order Management Section -->
+    <div class="section-heading">Order Management &amp; Personnel</div>
+    
+    <!-- DESKTOP MANAGEMENT VIEW -->
+    <div class="table-responsive">
+        <table class="pro-table">
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Surname</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Ricky</strong></td>
+                    <td>Banuelos</td>
+                    <td>09511440060</td>
+                    <td>ricalgen@gmail.com</td>
+                    <td><span style="background: #e0f2fe; color: #0369a1; padding: 4px 10px; border-radius: 6px; font-weight: 700; font-size: 0.85rem;">SPTA President</span></td>
+                    <td><span style="color: var(--success-color); font-weight: 700;">✓ Installer</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- MOBILE MANAGEMENT CARD VIEW -->
+    <div class="mobile-card-list">
+        <div class="m-card" style="border-left-color: #0369a1;">
+            <div class="m-card-header">
+                <span class="m-card-title">Ricky Banuelos</span>
+                <span class="unit-badge" style="background: #e0f2fe; color: #0369a1;">SPTA President</span>
+            </div>
+            <div class="m-card-body">
+                <div class="m-field"><span class="m-label">Phone</span><span class="m-value">09511440060</span></div>
+                <div class="m-field"><span class="m-label">Email</span><span class="m-value" style="font-size: 0.82rem; word-break: break-all; color: var(--primary);">ricalgen@gmail.com</span></div>
+                <div class="m-field" style="grid-column: span 2;"><span class="m-label">Notes</span><span class="m-value" style="color: var(--success-color);">✓ Installer</span></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
