@@ -6,15 +6,16 @@
     <title>Villangit Elementary School — Official Homepage</title>
     <style>
         :root {
-            --bg-gradient: linear-gradient(135deg, #f0f4ff 0%, #fdf2f8 50%, #f0fdf4 100%);
+            --bg-gradient: linear-gradient(135deg, #f0fdf4 0%, #fefce8 50%, #f0f4ff 100%);
             --surface-color: #ffffff;
             --text-main: #1e293b;
             --text-secondary: #64748b;
             --border-color: #cbd5e1;
-            --primary: #4f46e5;
-            --primary-hover: #4338ca;
-            --accent: #f97316;
-            --accent-green: #10b981;
+            /* Tuned directly to match your logo's green and gold tones */
+            --primary: #15803d; 
+            --primary-hover: #166534;
+            --accent: #f59e0b;
+            --accent-green: #0d9488;
         }
 
         * {
@@ -32,15 +33,15 @@
             flex-direction: column;
         }
 
-        /* Header / Navbar */
+        /* Header / Navbar matched to logo palette */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 1rem 2rem;
-            background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%);
+            background: linear-gradient(135deg, #14532d 0%, #166534 100%);
             color: #ffffff;
-            box-shadow: 0 4px 20px -3px rgba(79, 70, 229, 0.35);
+            box-shadow: 0 4px 20px -3px rgba(20, 83, 45, 0.4);
             position: sticky;
             top: 0;
             z-index: 100;
@@ -53,12 +54,12 @@
         }
 
         .school-logo {
-            width: 48px;
-            height: 48px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid rgba(255, 255, 255, 0.9);
-            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+            border: 2px solid #fef08a;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
             background: #ffffff;
         }
 
@@ -70,7 +71,7 @@
 
         .school-title p {
             font-size: 0.75rem;
-            color: #e0e7ff;
+            color: #fef08a;
         }
 
         .nav-links {
@@ -142,7 +143,6 @@
             z-index: 2;
         }
 
-        /* Background blur glow for framing banners & portraits */
         .slide-bg-blur {
             position: absolute;
             inset: -20px;
@@ -158,7 +158,6 @@
             opacity: 1;
         }
 
-        /* Main Image Styling */
         .carousel-slide img {
             position: relative;
             z-index: 2;
@@ -168,13 +167,11 @@
             object-position: center 25%;
         }
 
-        /* Smart Class applied dynamically for Tarpaulins and Banners */
         .carousel-slide img.is-contained {
             object-fit: contain !important;
             background: transparent;
         }
 
-        /* Caption Overlay */
         .carousel-caption {
             position: absolute;
             bottom: 0;
@@ -194,7 +191,7 @@
             font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            color: #38bdf8;
+            color: #fde047;
             font-weight: 700;
         }
 
@@ -204,15 +201,14 @@
             text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
 
-        /* Carousel Navigation Buttons */
         .carousel-btn {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(15, 23, 42, 0.6);
+            background: rgba(20, 83, 45, 0.75);
             backdrop-filter: blur(4px);
             color: white;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.25);
             width: 48px;
             height: 48px;
             border-radius: 50%;
@@ -226,14 +222,13 @@
         }
 
         .carousel-btn:hover {
-            background: var(--primary);
+            background: var(--primary-hover);
             transform: translateY(-50%) scale(1.08);
         }
 
         .carousel-btn.prev { left: 1.25rem; }
         .carousel-btn.next { right: 1.25rem; }
 
-        /* Carousel Dots Indicator */
         .carousel-dots {
             position: absolute;
             bottom: 1rem;
@@ -253,7 +248,7 @@
         }
 
         .dot.active {
-            background: #38bdf8;
+            background: #fde047;
             transform: scale(1.3);
         }
 
@@ -281,7 +276,7 @@
 
         .card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 18px 30px -8px rgba(79, 70, 229, 0.12);
+            box-shadow: 0 18px 30px -8px rgba(21, 128, 61, 0.15);
         }
 
         .card-icon {
@@ -326,22 +321,22 @@
 
         /* Footer */
         footer {
-            background: #0f172a;
-            color: #94a3b8;
+            background: #14532d;
+            color: #cbd5e1;
             text-align: center;
             padding: 2rem 1.5rem;
             font-size: 0.875rem;
             margin-top: auto;
-            border-top: 1px solid #1e293b;
+            border-top: 1px solid #166534;
         }
 
         footer p {
-            color: #cbd5e1;
+            color: #fef08a;
             margin-bottom: 0.3rem;
         }
 
         footer span {
-            color: #64748b;
+            color: #a7f3d0;
             font-size: 0.8rem;
         }
 
@@ -364,7 +359,7 @@
             </div>
         </div>
         <div class="nav-links">
-            <a href="viewer.html" class="nav-btn" style="background: var(--accent); border-color: rgba(255,255,255,0.4);">🖼️ Gallery Viewer</a>
+            <a href="viewer.html" class="nav-btn" style="background: var(--accent); border-color: rgba(255,255,255,0.4); color: #1e293b; font-weight: 600;">🖼️ Gallery Viewer</a>
         </div>
     </header>
 
@@ -449,21 +444,16 @@
                     const captionText = generateSmartCaption(imgFile);
                     const imageFullPath = imgFolder + imgFile;
 
-                    // Blurred ambient background layer
                     const bgBlur = document.createElement('div');
                     bgBlur.className = 'slide-bg-blur';
                     bgBlur.style.backgroundImage = `url('${imageFullPath}')`;
 
-                    // Main image element
                     const imgElement = document.createElement('img');
                     imgElement.src = imageFullPath;
                     imgElement.alt = captionText;
 
-                    // SMART DETECTOR: Check if image is a tarpaulin / wide banner OR vertical portrait
                     imgElement.onload = function() {
                         const aspectRatio = this.naturalWidth / this.naturalHeight;
-                        
-                        // Lower threshold (1.25) so wide tarpaulins display 100% in full without edge clipping
                         if (aspectRatio < 1.0 || aspectRatio > 1.25) {
                             this.classList.add('is-contained');
                             slideDiv.classList.add('has-blur');
@@ -474,7 +464,6 @@
                         this.src = 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=1200&q=80';
                     };
 
-                    // Caption overlay
                     const captionDiv = document.createElement('div');
                     captionDiv.className = 'carousel-caption';
                     captionDiv.innerHTML = `
@@ -487,7 +476,6 @@
                     slideDiv.appendChild(captionDiv);
                     carouselWrapper.insertBefore(slideDiv, document.querySelector('.carousel-btn.prev'));
 
-                    // Create navigation dot
                     const dot = document.createElement('div');
                     dot.className = `dot ${index === 0 ? 'active' : ''}`;
                     dot.onclick = () => goToSlide(index);
@@ -502,7 +490,6 @@
                 carouselWrapper.addEventListener('mouseenter', stopAutoPlay);
                 carouselWrapper.addEventListener('mouseleave', startAutoPlay);
 
-                // Touch swipe support for mobile / tablets
                 let touchStartX = 0;
                 carouselWrapper.addEventListener('touchstart', e => {
                     touchStartX = e.changedTouches[0].screenX;
