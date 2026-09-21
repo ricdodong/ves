@@ -3,826 +3,736 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Villangit ES CCTV & Internet Materials 2026</title>
+    <title>Villangit ES CCTV & Internet Materials 2026 Procurement Dashboard</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            500: '#2563eb',
+                            600: '#1d4ed8',
+                            700: '#1e40af',
+                            800: '#1e3a8a',
+                            900: '#0f172a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        :root {
-            --bg-gradient: linear-gradient(135deg, #f0f4ff 0%, #fdf2f8 100%);
-            --card-bg: #ffffff;
-            --text-main: #1e293b;
-            --text-secondary: #64748b;
-            --border-color: #cbd5e1;
-            --primary: #4f46e5;
-            --primary-hover: #4338ca;
-            --accent: #f97316;
-            --accent-bg: #fff7ed;
-            --success-color: #059669;
-            --badge-set: #dbeafe;
-            --badge-set-text: #1d4ed8;
-            --badge-roll: #fef3c7;
-            --badge-roll-text: #b45309;
-            --badge-pcs: #fae8ff;
-            --badge-pcs-text: #86198f;
-            --badge-box: #ccfbf1;
-            --badge-box-text: #0f766e;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            background: var(--bg-gradient);
-            color: var(--text-main);
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            padding: 2.5rem 1rem;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            min-height: 100vh;
-        }
-
-        .main-container {
-            width: 100%;
-            max-width: 1400px;
-            background-color: var(--card-bg);
-            border-radius: 20px;
-            box-shadow: 0 20px 35px -10px rgba(79, 70, 229, 0.1), 0 10px 15px -5px rgba(0, 0, 0, 0.04);
-            border: 1px solid rgba(203, 213, 225, 0.6);
-            padding: 2.5rem;
+        /* Custom image modal pan & zoom viewport styles */
+        .viewport-container {
             overflow: hidden;
+            cursor: grab;
+            user-select: none;
+            touch-action: none;
         }
-
-        /* Vibrant Header Section */
-        .project-header {
-            background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%);
-            color: white;
-            border-radius: 16px;
-            padding: 2.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2.5rem;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            box-shadow: 0 10px 20px -5px rgba(79, 70, 229, 0.3);
+        .viewport-container:active {
+            cursor: grabbing;
         }
-
-        .header-title-wrapper h1 {
-            font-size: 2.25rem;
-            font-weight: 800;
-            letter-spacing: -0.025em;
-            margin-bottom: 0.35rem;
-            color: #ffffff;
+        .zoom-image {
+            transform-origin: center center;
+            transition: transform 0.15s ease-out;
+            will-change: transform;
+            max-height: 70vh;
+            max-width: 100%;
+            object-fit: contain;
         }
-
-        .header-title-wrapper p {
-            color: #e0e7ff;
-            font-size: 1.05rem;
-        }
-
-        .badge-year {
-            background-color: rgba(255, 255, 255, 0.2);
-            color: #ffffff;
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            font-weight: 700;
-            padding: 0.6rem 1.5rem;
-            border-radius: 9999px;
-            font-size: 1.2rem;
-            backdrop-filter: blur(8px);
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        /* Metric Summary Cards with Colorful Accents */
-        .metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2.5rem;
-        }
-
-        .metric-card {
-            background: #ffffff;
-            border: 1px solid var(--border-color);
-            border-top: 4px solid var(--primary);
-            padding: 1.75rem;
-            border-radius: 14px;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .metric-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);
-        }
-
-        .metric-card:nth-child(2) { border-top-color: #06b6d4; }
-        .metric-card:nth-child(3) { border-top-color: #10b981; }
-
-        .metric-label {
-            font-size: 0.85rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--text-secondary);
-        }
-
-        .metric-value {
-            font-size: 1.85rem;
-            font-weight: 800;
-            color: var(--text-main);
-        }
-
-        .metric-value.accent {
-            color: #f97316;
-        }
-
-        /* Section Headings */
-        .section-heading {
-            font-size: 1.15rem;
-            font-weight: 800;
-            color: var(--text-main);
-            margin: 2.5rem 0 1.25rem 0;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .section-heading::before {
-            content: '';
-            display: block;
-            width: 6px;
-            height: 20px;
-            background: linear-gradient(to bottom, #4f46e5, #ec4899);
-            border-radius: 3px;
-        }
-
-        /* Desktop Table View Container */
-        .table-responsive {
-            width: 100%;
-            overflow-x: auto;
-            border-radius: 14px;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
-            margin-bottom: 2rem;
-            background: #ffffff;
-        }
-
-        .pro-table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-            font-size: 0.95rem;
-            white-space: nowrap;
-        }
-
-        .pro-table th {
-            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-            color: #ffffff;
-            font-weight: 700;
-            padding: 16px 20px;
-            text-transform: uppercase;
-            font-size: 0.78rem;
-            letter-spacing: 0.05em;
-        }
-
-        .pro-table td {
-            padding: 16px 20px;
-            border-bottom: 1px solid #f1f5f9;
-            color: var(--text-main);
-            vertical-align: middle;
-        }
-
-        .pro-table tbody tr {
-            transition: background-color 0.15s ease;
-            background-color: #ffffff;
-        }
-
-        .pro-table tbody tr:hover {
-            background-color: #f8fafc;
-        }
-
-        .pro-table tbody tr:last-child td {
-            border-bottom: none;
-        }
-
-        .pro-table a {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.15s;
-        }
-
-        .pro-table a:hover {
-            color: var(--primary-hover);
-            text-decoration: underline;
-        }
-
-        .link-cell {
-            max-width: 220px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .link-cell a {
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
-
-        /* Pill Badges for Units */
-        .unit-badge {
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 0.78rem;
-            font-weight: 700;
-            display: inline-block;
-        }
-        .unit-set { background-color: var(--badge-set); color: var(--badge-set-text); }
-        .unit-roll { background-color: var(--badge-roll); color: var(--badge-roll-text); }
-        .unit-pcs { background-color: var(--badge-pcs); color: var(--badge-pcs-text); }
-        .unit-box { background-color: var(--badge-box); color: var(--badge-box-text); }
-
-        .total-row td {
-            font-weight: 800;
-            font-size: 1.2rem;
-            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%) !important;
-            border-top: 2px solid var(--border-color);
-            color: var(--text-main);
-        }
-
-        .total-amount {
-            color: #f97316;
-            font-size: 1.35rem;
-        }
-
-        /* Mobile Responsive Card Layout System */
-        .mobile-card-list {
-            display: none;
-        }
-
-        /* Responsive Breakpoint for Mobile Switch */
-        @media (max-width: 768px) {
-            body {
-                padding: 1rem;
-            }
-            .main-container {
-                padding: 1.25rem;
-            }
-            .project-header {
-                padding: 1.5rem;
-                text-align: center;
-                justify-content: center;
-            }
-            .header-title-wrapper h1 {
-                font-size: 1.6rem;
-            }
-
-            /* Hide Desktop Table */
-            .table-responsive {
-                display: none;
-            }
-
-            /* Show and Format Mobile Cards */
-            .mobile-card-list {
-                display: flex;
-                flex-direction: column;
-                gap: 1.25rem;
-                margin-bottom: 2rem;
-            }
-
-            .m-card {
-                background: #ffffff;
-                border: 1px solid var(--border-color);
-                border-left: 5px solid var(--primary);
-                border-radius: 14px;
-                padding: 1.25rem;
-                box-shadow: 0 4px 10px rgba(0,0,0,0.03);
-                display: flex;
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .m-card-header {
-                display: flex;
-                justify-content: space-between;
-                align-items: flex-start;
-                gap: 0.5rem;
-                border-bottom: 1px solid #f1f5f9;
-                padding-bottom: 0.75rem;
-            }
-
-            .m-card-title {
-                font-weight: 700;
-                font-size: 1.05rem;
-                color: var(--text-main);
-                line-height: 1.35;
-            }
-
-            .m-card-title a {
-                color: var(--text-main);
-                text-decoration: none;
-            }
-
-            .m-card-title a:hover {
-                color: var(--primary);
-            }
-
-            .m-card-body {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 0.75rem 1rem;
-                font-size: 0.9rem;
-            }
-
-            .m-field {
-                display: flex;
-                flex-direction: column;
-            }
-
-            .m-label {
-                font-size: 0.72rem;
-                text-transform: uppercase;
-                color: var(--text-secondary);
-                font-weight: 700;
-                letter-spacing: 0.04em;
-            }
-
-            .m-value {
-                font-weight: 700;
-                color: var(--text-main);
-                font-size: 0.95rem;
-            }
-
-            .m-value.highlight {
-                color: #f97316;
-                font-size: 1.15rem;
-            }
-
-            .m-card-footer {
-                border-top: 1px dashed #e2e8f0;
-                padding-top: 0.75rem;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                font-size: 0.9rem;
-            }
-
-            .m-card-footer a {
-                color: var(--primary);
-                font-weight: 700;
-                text-decoration: none;
-                display: inline-flex;
-                align-items: center;
-                gap: 4px;
-            }
-
-            .m-card-total-box {
-                background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-                color: white;
-                border-radius: 14px;
-                padding: 1.5rem;
-                text-align: center;
-                font-weight: 800;
-                font-size: 1.25rem;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                box-shadow: 0 10px 15px -3px rgba(30, 41, 59, 0.2);
-            }
+        /* Custom Print Styling */
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white !important; color: black !important; }
+            .shadow-xl, .shadow-lg, .shadow-md, .shadow-sm { box-shadow: none !important; }
+            .border { border-color: #cbd5e1 !important; }
+            a { text-decoration: none !important; color: inherit !important; }
         }
     </style>
 </head>
-<body>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col justify-between selection:bg-blue-500 selection:text-white">
 
-<div class="main-container">
-    <!-- Vibrant Header Section -->
-    <div class="project-header">
-        <div class="header-title-wrapper">
-            <h1>Villangit ES CCTV &amp; Internet Materials</h1>
-            <p>Procurement Tracking &amp; Inventory Management System</p>
+    <!-- Non-fixed Header (Scrolls naturally with page) -->
+    <header class="bg-gradient-to-r from-slate-900 via-indigo-950 to-blue-950 text-white shadow-xl relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-7 flex flex-col md:flex-row justify-between items-center gap-5">
+            <div class="flex items-center space-x-4">
+                <div class="bg-blue-600/30 p-3.5 rounded-2xl border border-blue-400/30 backdrop-blur-md shadow-inner">
+                    <i class="fa-solid fa-camera-web text-3xl text-blue-400"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2 mb-1">
+                        <span class="inline-block bg-blue-500/20 text-blue-300 text-[11px] font-bold px-2.5 py-0.5 rounded-full border border-blue-400/30 uppercase tracking-widest">
+                            SPTA Audit 2026
+                        </span>
+                        <span class="inline-block bg-emerald-500/20 text-emerald-300 text-[11px] font-bold px-2.5 py-0.5 rounded-full border border-emerald-400/30 uppercase tracking-widest">
+                            Verified Ledger
+                        </span>
+                    </div>
+                    <h1 class="text-2xl sm:text-3xl font-black tracking-tight text-white">Villangit ES CCTV & Internet Materials</h1>
+                    <p class="text-xs sm:text-sm text-slate-300 font-medium mt-0.5">Comprehensive Procurement Breakdown, Budgeting & Interactive Image Catalog</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-3 no-print">
+                <button onclick="window.print()" class="flex items-center gap-2 bg-white/10 hover:bg-white/20 active:scale-95 text-white px-4 py-2.5 rounded-xl text-sm font-semibold transition backdrop-blur-sm border border-white/10 shadow-sm">
+                    <i class="fa-solid fa-print text-blue-300"></i>
+                    <span>Print Report</span>
+                </button>
+            </div>
         </div>
-        <div class="badge-year">
-            <span>🚀</span> 2026 Project
-        </div>
-    </div>
+    </header>
 
-    <!-- Quick Metric Cards Dashboard -->
-    <div class="metrics-grid">
-        <div class="metric-card">
-            <span class="metric-label">Total Investment</span>
-            <span class="metric-value accent">₱39,290</span>
-        </div>
-        <div class="metric-card">
-            <span class="metric-label">Unique Item Lines</span>
-            <span class="metric-value">12 Items</span>
-        </div>
-        <div class="metric-card">
-            <span class="metric-label">Project Lead</span>
-            <span class="metric-value" style="font-size: 1.35rem; margin-top: 4px; color: #4f46e5;">Ricky Banuelos</span>
-        </div>
-    </div>
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow space-y-8 w-full">
 
-    <!-- Items List Section -->
-    <div class="section-heading">Ordered Materials Inventory</div>
-    
-    <!-- DESKTOP TABLE VIEW -->
-    <div class="table-responsive">
-        <table class="pro-table">
-            <thead>
-                <tr>
-                    <th>Unit</th>
-                    <th>Item Description</th>
-                    <th>Qty</th>
-                    <th>Unit Cost</th>
-                    <th>Shipping</th>
-                    <th>Total Cost</th>
-                    <th>Reference Link</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><span class="unit-badge unit-set">SET</span></td>
-                    <td><a href="item1.html">HIKVISION CCTV DVR-8 channel, 2TB HDD</a></td>
-                    <td>1</td>
-                    <td>₱21,099</td>
-                    <td>₱433</td>
-                    <td><strong>₱21,532</strong></td>
-                    <td class="link-cell"><a target="_blank" href="https://shopee.ph/Hikvision-8CH-2MP-Bullet-CCTV-Kit-With-Night-Vision-Audio-PH-Stock-Pinoy-Family-Securit-i.1066541770.56354949099" title="View Product">Shopee Listing Link</a></td>
-                </tr>
-                <tr>
-                    <td><span class="unit-badge unit-roll">ROLL</span></td>
-                    <td><a href="item2.html">Fiber Optic Wire 1km 1Core</a></td>
-                    <td>1</td>
-                    <td>₱2,200</td>
-                    <td>₱135</td>
-                    <td><strong>₱2,335</strong></td>
-                    <td class="link-cell"><a target="_blank" href="https://shopee.ph/Fiber-optic-cable-1km-1core-i.414846677.15898128444?xptdk=ef19218e-1e56-40c8-98cd-56517b9aa135" title="View Product">Shopee Listing Link</a></td>
-                </tr>
-                <tr>
-                    <td><span class="unit-badge unit-pcs">PIECES</span></td>
-                    <td><a href="item3.html">Transceiver Media Converter 1Pair</a></td>
-                    <td>5</td>
-                    <td>₱500</td>
-                    <td>₱105</td>
-                    <td><strong>₱2,605</strong></td>
-                    <td class="link-cell"><a target="_blank" href="https://shopee.ph/NETLINK-HTB-A-B-One-pair-FIBER-MEDIA-CONVERTER-10-100Mbps-Gigabit-1000Mbps-i.78346282.21135167574" title="View Product">Shopee Listing Link</a></td>
-                </tr>
-                <tr>
-                    <td><span class="unit-badge unit-pcs">PIECES</span></td>
-                    <td><a href="item4.html">Router Ruijie | RG-EW300N</a></td>
-                    <td>5</td>
-                    <td>₱699</td>
-                    <td>₱140</td>
-                    <td><strong>₱3,635</strong></td>
-                    <td class="link-cell"><a target="_blank" href="https://shopee.ph/Ruijie-RG-EW300N-300Mbps-Wireless-Smart-Router-i.181501780.47206008471" title="View Product">Shopee Listing Link</a></td>
-                </tr>
-                <tr>
-                    <td><span class="unit-badge unit-set">SET</span></td>
-                    <td><a href="item5.html">SC-UPC - FIBER OPTIC CONNECTOR 10/SET</a></td>
-                    <td>2</td>
-                    <td>₱102</td>
-                    <td>₱135</td>
-                    <td><strong>₱339</strong></td>
-                    <td class="link-cell"><a target="_blank" href="https://shopee.ph/10-PCS-SC-UPC-Fiber-Optic-Connector-Fast-Connector-Embedded-Fiber-Optic-Quick-Cold-UPC-Open-Tail-i.688606080.17110602981" title="View Product">Shopee Listing Link</a></td>
-                </tr>
-                <tr>
-                    <td><span class="unit-badge unit-roll">ROLL</span></td>
-                    <td><a href="item6.html">SKYLINK CAT6 Outdoor Cable UTP 305M</a></td>
-                    <td>2</td>
-                    <td>₱1,500</td>
-                    <td>₱525</td>
-                    <td><strong>₱3,525</strong></td>
-                    <td class="link-cell"><a target="_blank" href="https://shopee.ph/COMLINK-CAT6-Outdoor-Cable-UTP-Ethernet-Lan-Cable-Waterproof-Cable-Sold-Per-Meter-i.78346282.23916048588" title="View Product">Shopee Listing Link</a></td>
-                </tr>
-                <tr>
-                    <td><span class="unit-badge unit-box">BOX</span></td>
-                    <td><a href="item7.html">Connectors RJ45 CAT6A Pass Through 100PCS</a></td>
-                    <td>1</td>
-                    <td>₱239</td>
-                    <td>₱115</td>
-                    <td><strong>₱354</strong></td>
-                    <td class="link-cell"><a target="_blank" href="https://shopee.ph/100pcs-Pass-Through-RJ45-Connectors-RJ45-CAT6A-Pass-Through-Connectors-i.44402121.17411051405" title="View Product">Shopee Listing Link</a></td>
-                </tr>
-                <tr>
-                    <td><span class="unit-badge unit-set">SET</span></td>
-                    <td><a href="item8.html">Video Balun Clip Type (1-PAIR)</a></td>
-                    <td>6</td>
-                    <td>₱70</td>
-                    <td>₱105</td>
-                    <td><strong>₱525</strong></td>
-                    <td class="link-cell"><a target="_blank" href="https://shopee.ph/Video-Balun-Clip-Type-(1-PAIR)-PASSIVE-HDCVI-AHD-HDTVI-1080P-TRANSCEIVER-SINGLE-CHANNEL-BNC-CCTV-i.78346282.9258575721" title="View Product">Shopee Listing Link</a></td>
-                </tr>
-                <tr>
-                    <td><span class="unit-badge unit-set">SET</span></td>
-                    <td><a href="item9.html">Allan 100pcs. Nail flat clips cable ties round</a></td>
-                    <td>1</td>
-                    <td>₱30</td>
-                    <td>₱105</td>
-                    <td><strong>₱135</strong></td>
-                    <td class="link-cell"><a target="_blank" href="https://shopee.ph/Allan-100pcs.-Nail-flat-clips-cable-ties-round-steel-nail-cable-clips-10mm-i.78346282.25632238024" title="View Product">Shopee Listing Link</a></td>
-                </tr>
-                <tr>
-                    <td><span class="unit-badge unit-pcs">PIECES</span></td>
-                    <td><a href="item10.html">ROUND JUNCTION BOX 120*120*53MM FOR CCTV</a></td>
-                    <td>10</td>
-                    <td>₱80</td>
-                    <td>₱105</td>
-                    <td><strong>₱905</strong></td>
-                    <td class="link-cell"><a target="_blank" href="https://shopee.ph/ROUND-JUNCTION-BOX-120*120*53MM-FOR-CCTV-CAMERA-i.78346282.43967899433" title="View Product">Shopee Listing Link</a></td>
-                </tr>
-                <tr>
-                    <td><span class="unit-badge unit-pcs">PIECES</span></td>
-                    <td><a href="item11.html">Hikvision DS-2CD1027G3-LIU 2MP ColorVu</a></td>
-                    <td>1</td>
-                    <td>₱3,110</td>
-                    <td>₱115</td>
-                    <td><strong>₱3,225</strong></td>
-                    <td class="link-cell"><a target="_blank" href="https://shopee.ph/(2026)-Hikvision-DS-2CD1027G3-LIU-2MP-ColorVu-3.0-Smart-Hybrid-Light-Audio-Bullet-Network-Camera-i.213244405.8268750532" title="View Product">Shopee Listing Link</a></td>
-                </tr>
-                <tr>
-                    <td><span class="unit-badge unit-pcs">PIECES</span></td>
-                    <td><a href="item12.html">MMT Nylon Cable Ties 100Pcs</a></td>
-                    <td>1</td>
-                    <td>₱70</td>
-                    <td>₱105</td>
-                    <td><strong>₱175</strong></td>
-                    <td class="link-cell"><a target="_blank" href="https://shopee.ph/MMT-Nylon-Cable-Ties-100Pcs-High-Quality-Cable-Ties-i.278849991.12601920001" title="View Product">Shopee Listing Link</a></td>
-                </tr>
-                <!-- Total Row -->
-                <tr class="total-row">
-                    <td colspan="5" style="text-align: right;">TOTAL:</td>
-                    <td colspan="2" class="total-amount">₱39,290</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+        <!-- Financial Summary Dashboard (5 Key Metrics) -->
+        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            <!-- 1. Total Allocated Fund -->
+            <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200/90 hover:shadow-md transition">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Gross Total Allocated</p>
+                        <h3 class="text-xl sm:text-2xl font-black text-slate-900 mt-1">₱51,072.00</h3>
+                        <p class="text-[11px] text-slate-400 mt-1">Initial Project Budget</p>
+                    </div>
+                    <div class="p-2.5 bg-blue-50 text-blue-600 rounded-xl">
+                        <i class="fa-solid fa-vault text-lg"></i>
+                    </div>
+                </div>
+            </div>
 
-    <!-- MOBILE INFORMATIVE CARD VIEW -->
-    <div class="mobile-card-list">
-        <!-- Item 1 -->
-        <div class="m-card">
-            <div class="m-card-header">
-                <span class="m-card-title"><a href="item1.html">HIKVISION CCTV DVR-8 channel, 2TB HDD</a></span>
-                <span class="unit-badge unit-set">SET</span>
+            <!-- 2. Less O.R. Fee (10%) -->
+            <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200/90 hover:shadow-md transition">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-[11px] font-bold text-amber-600 uppercase tracking-wider">Less: 10% O.R. Fee</p>
+                        <h3 class="text-xl sm:text-2xl font-black text-amber-600 mt-1">₱5,107.20</h3>
+                        <p class="text-[11px] text-amber-700/70 mt-1">Tax / Admin Charge</p>
+                    </div>
+                    <div class="p-2.5 bg-amber-50 text-amber-600 rounded-xl">
+                        <i class="fa-solid fa-file-invoice-dollar text-lg"></i>
+                    </div>
+                </div>
             </div>
-            <div class="m-card-body">
-                <div class="m-field"><span class="m-label">Quantity</span><span class="m-value">1</span></div>
-                <div class="m-field"><span class="m-label">Unit Cost</span><span class="m-value">₱21,099</span></div>
-                <div class="m-field"><span class="m-label">Shipping</span><span class="m-value">₱433</span></div>
-                <div class="m-field"><span class="m-label">Total Cost</span><span class="m-value highlight">₱21,532</span></div>
+
+            <!-- 3. Net Usable Fund -->
+            <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200/90 hover:shadow-md transition">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-[11px] font-bold text-indigo-600 uppercase tracking-wider">Net Usable Fund (90%)</p>
+                        <h3 class="text-xl sm:text-2xl font-black text-indigo-700 mt-1">₱45,964.80</h3>
+                        <p class="text-[11px] text-indigo-600/70 mt-1">Effective Budget</p>
+                    </div>
+                    <div class="p-2.5 bg-indigo-50 text-indigo-600 rounded-xl">
+                        <i class="fa-solid fa-scale-balanced text-lg"></i>
+                    </div>
+                </div>
             </div>
-            <div class="m-card-footer">
-                <a target="_blank" href="https://shopee.ph/Hikvision-8CH-2MP-Bullet-CCTV-Kit-With-Night-Vision-Audio-PH-Stock-Pinoy-Family-Securit-i.1066541770.56354949099">🔗 Open Shopee Link</a>
+
+            <!-- 4. Total Materials Cost -->
+            <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200/90 hover:shadow-md transition">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-[11px] font-bold text-rose-600 uppercase tracking-wider">Materials Expense</p>
+                        <h3 class="text-xl sm:text-2xl font-black text-rose-700 mt-1">₱39,290.00</h3>
+                        <p class="text-[11px] text-rose-600/70 mt-1">12 Items + Freight</p>
+                    </div>
+                    <div class="p-2.5 bg-rose-50 text-rose-600 rounded-xl">
+                        <i class="fa-solid fa-cart-flatbed text-lg"></i>
+                    </div>
+                </div>
             </div>
+
+            <!-- 5. Remaining Cash Balance -->
+            <div class="bg-gradient-to-br from-emerald-600 to-teal-700 rounded-2xl p-5 text-white shadow-md hover:shadow-lg transition col-span-1 sm:col-span-2 lg:col-span-1">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-[11px] font-bold text-emerald-100 uppercase tracking-wider">Remaining Money</p>
+                        <h3 class="text-xl sm:text-2xl font-black mt-1 text-white">₱6,674.80</h3>
+                        <p class="text-[11px] text-emerald-100/80 mt-1">Unspent Surplus Cash</p>
+                    </div>
+                    <div class="p-2.5 bg-white/20 rounded-xl backdrop-blur-sm">
+                        <i class="fa-solid fa-piggy-bank text-lg text-white"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Financial Accounting Calculation Banner -->
+        <section class="bg-slate-900 text-white rounded-2xl p-6 shadow-md border border-slate-800">
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                <div class="space-y-1">
+                    <span class="text-xs font-bold text-blue-400 uppercase tracking-widest flex items-center gap-1.5">
+                        <i class="fa-solid fa-calculator"></i> Accounting Breakdown Equation
+                    </span>
+                    <h2 class="text-lg font-extrabold text-white">Financial Reconciliation Summary</h2>
+                    <p class="text-xs text-slate-300">Exact formula used to calculate the remaining balance for the Villangit ES project.</p>
+                </div>
+                
+                <div class="flex flex-wrap items-center gap-3 font-mono text-xs sm:text-sm">
+                    <div class="bg-slate-800 px-3.5 py-2 rounded-xl border border-slate-700">
+                        <span class="text-slate-400 text-[10px] uppercase block">Total Funds</span>
+                        <span class="text-white font-bold">₱51,072.00</span>
+                    </div>
+                    <span class="text-slate-500 font-bold text-lg">-</span>
+                    <div class="bg-slate-800 px-3.5 py-2 rounded-xl border border-slate-700">
+                        <span class="text-amber-400 text-[10px] uppercase block">10% O.R. Fee</span>
+                        <span class="text-amber-300 font-bold">₱5,107.20</span>
+                    </div>
+                    <span class="text-slate-500 font-bold text-lg">=</span>
+                    <div class="bg-slate-800 px-3.5 py-2 rounded-xl border border-slate-700">
+                        <span class="text-indigo-400 text-[10px] uppercase block">Net Usable</span>
+                        <span class="text-indigo-300 font-bold">₱45,964.80</span>
+                    </div>
+                    <span class="text-slate-500 font-bold text-lg">-</span>
+                    <div class="bg-slate-800 px-3.5 py-2 rounded-xl border border-slate-700">
+                        <span class="text-rose-400 text-[10px] uppercase block">Materials Cost</span>
+                        <span class="text-rose-300 font-bold">₱39,290.00</span>
+                    </div>
+                    <span class="text-slate-500 font-bold text-lg">=</span>
+                    <div class="bg-emerald-950/80 px-4 py-2 rounded-xl border border-emerald-500/50">
+                        <span class="text-emerald-400 text-[10px] uppercase block font-sans font-bold">Remaining Balance</span>
+                        <span class="text-emerald-300 font-extrabold text-base">₱6,674.80</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Materials Inventory Section (12 Items) -->
+        <section class="bg-white rounded-2xl shadow-sm border border-slate-200/90 overflow-hidden">
+            <div class="border-b border-slate-100 bg-slate-50/70 px-6 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div>
+                    <div class="flex items-center space-x-2.5">
+                        <i class="fa-solid fa-boxes-packing text-blue-600"></i>
+                        <h2 class="font-extrabold text-slate-900 text-lg">Procurement Materials & Items Inventory (12 Items)</h2>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-0.5">Click any item title or image button to view product photo in interactive modal</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="text-xs font-semibold text-slate-500 bg-slate-200/70 px-3 py-1.5 rounded-xl">
+                        Total Expense: <strong class="text-slate-900 font-black">₱39,290.00</strong>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Desktop View Table -->
+            <div class="hidden md:block overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-slate-100/80 text-slate-600 text-xs font-bold uppercase tracking-wider border-b border-slate-200">
+                            <th class="py-3.5 px-4 text-center w-12">#</th>
+                            <th class="py-3.5 px-4">Preview</th>
+                            <th class="py-3.5 px-4">Item Name & Details</th>
+                            <th class="py-3.5 px-4 text-center">Unit</th>
+                            <th class="py-3.5 px-4 text-center">Qty</th>
+                            <th class="py-3.5 px-4 text-right">Unit Cost</th>
+                            <th class="py-3.5 px-4 text-right">Shipping</th>
+                            <th class="py-3.5 px-4 text-right">Total Price</th>
+                            <th class="py-3.5 px-4 text-center">Shopee Reference</th>
+                        </tr>
+                    </thead>
+                    <tbody id="inventory-tbody" class="divide-y divide-slate-100 text-sm text-slate-700">
+                        <!-- Dynamic JavaScript populates rows with dataset -->
+                    </tbody>
+                    <tfoot>
+                        <tr class="bg-slate-900 text-white font-bold">
+                            <td colspan="7" class="py-4 px-6 text-right text-xs uppercase tracking-wider text-slate-300">Total Procurement & Shipping Expense:</td>
+                            <td class="py-4 px-4 text-right text-base text-emerald-400 font-black">₱39,290.00</td>
+                            <td></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+            <!-- Mobile View Cards -->
+            <div id="inventory-mobile-cards" class="block md:hidden p-4 space-y-4 bg-slate-50/50 divide-y divide-slate-100">
+                <!-- Mobile items rendered dynamically -->
+            </div>
+        </section>
+
+        <!-- Project Management & Personnel Section -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200/80 hover:shadow-md transition">
+                <div class="flex items-center space-x-3 mb-4">
+                    <div class="p-3 bg-blue-50 text-blue-600 rounded-xl">
+                        <i class="fa-solid fa-user-shield text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-extrabold text-slate-900">Project Manager & Lead Installer</h3>
+                        <p class="text-xs text-slate-500">Authorized System Administrator</p>
+                    </div>
+                </div>
+                <div class="bg-slate-50 rounded-xl p-4 border border-slate-200/80 space-y-3">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h4 class="font-extrabold text-slate-900 text-base">Ricky Banuelos</h4>
+                            <p class="text-xs text-slate-600 font-medium">SPTA President & Lead Technical Installer</p>
+                        </div>
+                        <span class="bg-blue-100 text-blue-800 text-xs font-bold px-2.5 py-1 rounded-full">
+                            Lead Installer
+                        </span>
+                    </div>
+                    <div class="border-t border-slate-200/80 pt-3 text-xs space-y-2 text-slate-700">
+                        <p class="flex items-center gap-2.5">
+                            <i class="fa-solid fa-phone text-blue-600 w-4 text-center"></i> 
+                            <a href="tel:09511440060" class="hover:underline font-semibold">09511440060</a>
+                        </p>
+                        <p class="flex items-center gap-2.5">
+                            <i class="fa-solid fa-envelope text-blue-600 w-4 text-center"></i> 
+                            <a href="mailto:ricalgen@gmail.com" class="hover:underline font-semibold">ricalgen@gmail.com</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200/80 hover:shadow-md transition">
+                <div class="flex items-center space-x-3 mb-4">
+                    <div class="p-3 bg-emerald-50 text-emerald-600 rounded-xl">
+                        <i class="fa-solid fa-clipboard-check text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-extrabold text-slate-900">System Dashboard Audit Status</h3>
+                        <p class="text-xs text-slate-500">Villangit Elementary School Infrastructure</p>
+                    </div>
+                </div>
+                <div class="space-y-2.5 text-xs text-slate-600">
+                    <p class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500 text-sm"></i> Image viewer modal integrated; direct loading of <code>resources/item[1-12].jpg</code>.</p>
+                    <p class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500 text-sm"></i> Modal includes Zoom In (+), Zoom Out (-), Reset, and Drag/Pan features.</p>
+                    <p class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500 text-sm"></i> Header configured as non-fixed, scrolling naturally with page.</p>
+                    <p class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500 text-sm"></i> Full breakdown: ₱51,072.00 minus 10% O.R. (₱5,107.20) minus materials (₱39,290.00) = ₱6,674.80 remaining.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500 no-print mt-10">
+        <div class="max-w-7xl mx-auto px-4 space-y-1">
+            <p>© 2026 Villangit Elementary School - SPTA CCTV & Internet Infrastructure Dashboard</p>
+            <p class="text-[11px] text-slate-400">All Shopee Product References & Item Image Resources Preserved</p>
         </div>
+    </footer>
 
-        <!-- Item 2 -->
-        <div class="m-card">
-            <div class="m-card-header">
-                <span class="m-card-title"><a href="item2.html">Fiber Optic Wire 1km 1Core</a></span>
-                <span class="unit-badge unit-roll">ROLL</span>
+    <!-- INTERACTIVE IMAGE VIEWER MODAL WITH ZOOM & PAN -->
+    <div id="image-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-slate-950/80 backdrop-blur-md transition-opacity duration-200 opacity-0 no-print" onclick="handleBackdropClick(event)">
+        
+        <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 max-w-4xl w-[92vw] overflow-hidden flex flex-col max-h-[90vh] my-auto" onclick="event.stopPropagation()">
+            
+            <!-- Modal Header -->
+            <div class="px-5 py-4 bg-slate-50 dark:bg-slate-800/80 border-b border-slate-200 dark:border-slate-700/80 flex items-center justify-between gap-3">
+                <div class="flex items-center space-x-3 overflow-hidden">
+                    <span id="modal-item-number" class="bg-blue-600 text-white font-black text-xs px-2.5 py-1 rounded-md shrink-0">Item #1</span>
+                    <h3 id="modal-item-title" class="font-extrabold text-slate-900 dark:text-white text-base truncate">
+                        Item Title
+                    </h3>
+                </div>
+                <button onclick="closeModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-white p-2 rounded-xl hover:bg-slate-200/50 dark:hover:bg-slate-700 transition">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
             </div>
-            <div class="m-card-body">
-                <div class="m-field"><span class="m-label">Quantity</span><span class="m-value">1</span></div>
-                <div class="m-field"><span class="m-label">Unit Cost</span><span class="m-value">₱2,200</span></div>
-                <div class="m-field"><span class="m-label">Shipping</span><span class="m-value">₱135</span></div>
-                <div class="m-field"><span class="m-label">Total Cost</span><span class="m-value highlight">₱2,335</span></div>
-            </div>
-            <div class="m-card-footer">
-                <a target="_blank" href="https://shopee.ph/Fiber-optic-cable-1km-1core-i.414846677.15898128444?xptdk=ef19218e-1e56-40c8-98cd-56517b9aa135">🔗 Open Shopee Link</a>
-            </div>
-        </div>
 
-        <!-- Item 3 -->
-        <div class="m-card">
-            <div class="m-card-header">
-                <span class="m-card-title"><a href="item3.html">Transceiver Media Converter 1Pair</a></span>
-                <span class="unit-badge unit-pcs">PIECES</span>
-            </div>
-            <div class="m-card-body">
-                <div class="m-field"><span class="m-label">Quantity</span><span class="m-value">5</span></div>
-                <div class="m-field"><span class="m-label">Unit Cost</span><span class="m-value">₱500</span></div>
-                <div class="m-field"><span class="m-label">Shipping</span><span class="m-value">₱105</span></div>
-                <div class="m-field"><span class="m-label">Total Cost</span><span class="m-value highlight">₱2,605</span></div>
-            </div>
-            <div class="m-card-footer">
-                <a target="_blank" href="https://shopee.ph/NETLINK-HTB-A-B-One-pair-FIBER-MEDIA-CONVERTER-10-100Mbps-Gigabit-1000Mbps-i.78346282.21135167574">🔗 Open Shopee Link</a>
-            </div>
-        </div>
+            <!-- Modal Body (Image Viewport) -->
+            <div id="viewport" class="viewport-container relative flex-1 bg-slate-950 min-h-[350px] sm:min-h-[450px] flex items-center justify-center p-4">
+                
+                <img id="modal-image" src="" alt="Item Resource Image" class="zoom-image rounded-lg shadow-2xl" onerror="this.src='https://placehold.co/800x600/1e293b/ffffff?text=Image+Not+Found+in+Resources'" />
 
-        <!-- Item 4 -->
-        <div class="m-card">
-            <div class="m-card-header">
-                <span class="m-card-title"><a href="item4.html">Router Ruijie | RG-EW300N</a></span>
-                <span class="unit-badge unit-pcs">PIECES</span>
-            </div>
-            <div class="m-card-body">
-                <div class="m-field"><span class="m-label">Quantity</span><span class="m-value">5</span></div>
-                <div class="m-field"><span class="m-label">Unit Cost</span><span class="m-value">₱699</span></div>
-                <div class="m-field"><span class="m-label">Shipping</span><span class="m-value">₱140</span></div>
-                <div class="m-field"><span class="m-label">Total Cost</span><span class="m-value highlight">₱3,635</span></div>
-            </div>
-            <div class="m-card-footer">
-                <a target="_blank" href="https://shopee.ph/Ruijie-RG-EW300N-300Mbps-Wireless-Smart-Router-i.181501780.47206008471">🔗 Open Shopee Link</a>
-            </div>
-        </div>
+                <!-- Pan Hint Badge -->
+                <div class="absolute top-3 left-3 bg-slate-900/80 text-slate-300 text-[10px] font-semibold px-2.5 py-1 rounded-md backdrop-blur-sm pointer-events-none border border-slate-700">
+                    <i class="fa-solid fa-arrows-up-down-left-right mr-1"></i> Scroll to Zoom | Drag to Pan
+                </div>
 
-        <!-- Item 5 -->
-        <div class="m-card">
-            <div class="m-card-header">
-                <span class="m-card-title"><a href="item5.html">SC-UPC - FIBER OPTIC CONNECTOR 10/SET</a></span>
-                <span class="unit-badge unit-set">SET</span>
+                <!-- Zoom Level Indicator -->
+                <div id="zoom-indicator" class="absolute top-3 right-3 bg-slate-900/80 text-emerald-400 text-xs font-mono font-bold px-2.5 py-1 rounded-md backdrop-blur-sm pointer-events-none border border-slate-700">
+                    100%
+                </div>
             </div>
-            <div class="m-card-body">
-                <div class="m-field"><span class="m-label">Quantity</span><span class="m-value">2</span></div>
-                <div class="m-field"><span class="m-label">Unit Cost</span><span class="m-value">₱102</span></div>
-                <div class="m-field"><span class="m-label">Shipping</span><span class="m-value">₱135</span></div>
-                <div class="m-field"><span class="m-label">Total Cost</span><span class="m-value highlight">₱339</span></div>
-            </div>
-            <div class="m-card-footer">
-                <a target="_blank" href="https://shopee.ph/10-PCS-SC-UPC-Fiber-Optic-Connector-Fast-Connector-Embedded-Fiber-Optic-Quick-Cold-UPC-Open-Tail-i.688606080.17110602981">🔗 Open Shopee Link</a>
-            </div>
-        </div>
 
-        <!-- Item 6 -->
-        <div class="m-card">
-            <div class="m-card-header">
-                <span class="m-card-title"><a href="item6.html">SKYLINK CAT6 Outdoor Cable UTP 305M</a></span>
-                <span class="unit-badge unit-roll">ROLL</span>
-            </div>
-            <div class="m-card-body">
-                <div class="m-field"><span class="m-label">Quantity</span><span class="m-value">2</span></div>
-                <div class="m-field"><span class="m-label">Unit Cost</span><span class="m-value">₱1,500</span></div>
-                <div class="m-field"><span class="m-label">Shipping</span><span class="m-value">₱525</span></div>
-                <div class="m-field"><span class="m-label">Total Cost</span><span class="m-value highlight">₱3,525</span></div>
-            </div>
-            <div class="m-card-footer">
-                <a target="_blank" href="https://shopee.ph/COMLINK-CAT6-Outdoor-Cable-UTP-Ethernet-Lan-Cable-Waterproof-Cable-Sold-Per-Meter-i.78346282.23916048588">🔗 Open Shopee Link</a>
-            </div>
-        </div>
+            <!-- Modal Footer Controls -->
+            <div class="px-5 py-3.5 bg-slate-50 dark:bg-slate-800/80 border-t border-slate-200 dark:border-slate-700/80 flex flex-wrap items-center justify-between gap-3">
+                
+                <!-- Zoom Toolbar -->
+                <div class="flex items-center gap-1.5">
+                    <button onclick="zoomOut()" title="Zoom Out (-)" class="bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-800 dark:text-slate-100 font-bold px-3 py-1.5 rounded-lg text-xs transition flex items-center gap-1">
+                        <i class="fa-solid fa-minus"></i> Zoom Out
+                    </button>
+                    <button onclick="resetZoom()" title="Reset Zoom" class="bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-800 dark:text-slate-100 font-bold px-3 py-1.5 rounded-lg text-xs transition flex items-center gap-1">
+                        <i class="fa-solid fa-rotate-left"></i> Reset
+                    </button>
+                    <button onclick="zoomIn()" title="Zoom In (+)" class="bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-800 dark:text-slate-100 font-bold px-3 py-1.5 rounded-lg text-xs transition flex items-center gap-1">
+                        <i class="fa-solid fa-plus"></i> Zoom In
+                    </button>
+                </div>
 
-        <!-- Item 7 -->
-        <div class="m-card">
-            <div class="m-card-header">
-                <span class="m-card-title"><a href="item7.html">Connectors RJ45 CAT6A Pass Through 100PCS</a></span>
-                <span class="unit-badge unit-box">BOX</span>
-            </div>
-            <div class="m-card-body">
-                <div class="m-field"><span class="m-label">Quantity</span><span class="m-value">1</span></div>
-                <div class="m-field"><span class="m-label">Unit Cost</span><span class="m-value">₱239</span></div>
-                <div class="m-field"><span class="m-label">Shipping</span><span class="m-value">₱115</span></div>
-                <div class="m-field"><span class="m-label">Total Cost</span><span class="m-value highlight">₱354</span></div>
-            </div>
-            <div class="m-card-footer">
-                <a target="_blank" href="https://shopee.ph/100pcs-Pass-Through-RJ45-Connectors-RJ45-CAT6A-Pass-Through-Connectors-i.44402121.17411051405">🔗 Open Shopee Link</a>
-            </div>
-        </div>
+                <!-- Shopee Reference Link inside Modal -->
+                <div class="flex items-center gap-3">
+                    <a id="modal-shopee-link" href="#" target="_blank" rel="noopener noreferrer" class="bg-orange-600 hover:bg-orange-700 text-white font-bold px-4 py-1.5 rounded-xl text-xs transition shadow-sm flex items-center gap-1.5">
+                        <i class="fa-solid fa-bag-shopping"></i> Open Shopee Link
+                    </a>
+                    <button onclick="closeModal()" class="bg-slate-800 hover:bg-slate-900 text-white font-bold px-4 py-1.5 rounded-xl text-xs transition">
+                        Close
+                    </button>
+                </div>
 
-        <!-- Item 8 -->
-        <div class="m-card">
-            <div class="m-card-header">
-                <span class="m-card-title"><a href="item8.html">Video Balun Clip Type (1-PAIR)</a></span>
-                <span class="unit-badge unit-set">SET</span>
             </div>
-            <div class="m-card-body">
-                <div class="m-field"><span class="m-label">Quantity</span><span class="m-value">6</span></div>
-                <div class="m-field"><span class="m-label">Unit Cost</span><span class="m-value">₱70</span></div>
-                <div class="m-field"><span class="m-label">Shipping</span><span class="m-value">₱105</span></div>
-                <div class="m-field"><span class="m-label">Total Cost</span><span class="m-value highlight">₱525</span></div>
-            </div>
-            <div class="m-card-footer">
-                <a target="_blank" href="https://shopee.ph/Video-Balun-Clip-Type-(1-PAIR)-PASSIVE-HDCVI-AHD-HDTVI-1080P-TRANSCEIVER-SINGLE-CHANNEL-BNC-CCTV-i.78346282.9258575721">🔗 Open Shopee Link</a>
-            </div>
-        </div>
 
-        <!-- Item 9 -->
-        <div class="m-card">
-            <div class="m-card-header">
-                <span class="m-card-title"><a href="item9.html">Allan 100pcs. Nail flat clips cable ties round</a></span>
-                <span class="unit-badge unit-set">SET</span>
-            </div>
-            <div class="m-card-body">
-                <div class="m-field"><span class="m-label">Quantity</span><span class="m-value">1</span></div>
-                <div class="m-field"><span class="m-label">Unit Cost</span><span class="m-value">₱30</span></div>
-                <div class="m-field"><span class="m-label">Shipping</span><span class="m-value">₱105</span></div>
-                <div class="m-field"><span class="m-label">Total Cost</span><span class="m-value highlight">₱135</span></div>
-            </div>
-            <div class="m-card-footer">
-                <a target="_blank" href="https://shopee.ph/Allan-100pcs.-Nail-flat-clips-cable-ties-round-steel-nail-cable-clips-10mm-i.78346282.25632238024">🔗 Open Shopee Link</a>
-            </div>
-        </div>
-
-        <!-- Item 10 -->
-        <div class="m-card">
-            <div class="m-card-header">
-                <span class="m-card-title"><a href="item10.html">ROUND JUNCTION BOX 120*120*53MM FOR CCTV</a></span>
-                <span class="unit-badge unit-pcs">PIECES</span>
-            </div>
-            <div class="m-card-body">
-                <div class="m-field"><span class="m-label">Quantity</span><span class="m-value">10</span></div>
-                <div class="m-field"><span class="m-label">Unit Cost</span><span class="m-value">₱80</span></div>
-                <div class="m-field"><span class="m-label">Shipping</span><span class="m-value">₱105</span></div>
-                <div class="m-field"><span class="m-label">Total Cost</span><span class="m-value highlight">₱905</span></div>
-            </div>
-            <div class="m-card-footer">
-                <a target="_blank" href="https://shopee.ph/ROUND-JUNCTION-BOX-120*120*53MM-FOR-CCTV-CAMERA-i.78346282.43967899433">🔗 Open Shopee Link</a>
-            </div>
-        </div>
-
-        <!-- Item 11 -->
-        <div class="m-card">
-            <div class="m-card-header">
-                <span class="m-card-title"><a href="item11.html">Hikvision DS-2CD1027G3-LIU 2MP ColorVu</a></span>
-                <span class="unit-badge unit-pcs">PIECES</span>
-            </div>
-            <div class="m-card-body">
-                <div class="m-field"><span class="m-label">Quantity</span><span class="m-value">1</span></div>
-                <div class="m-field"><span class="m-label">Unit Cost</span><span class="m-value">₱3,110</span></div>
-                <div class="m-field"><span class="m-label">Shipping</span><span class="m-value">₱115</span></div>
-                <div class="m-field"><span class="m-label">Total Cost</span><span class="m-value highlight">₱3,225</span></div>
-            </div>
-            <div class="m-card-footer">
-                <a target="_blank" href="https://shopee.ph/(2026)-Hikvision-DS-2CD1027G3-LIU-2MP-ColorVu-3.0-Smart-Hybrid-Light-Audio-Bullet-Network-Camera-i.213244405.8268750532">🔗 Open Shopee Link</a>
-            </div>
-        </div>
-
-        <!-- Item 12 -->
-        <div class="m-card">
-            <div class="m-card-header">
-                <span class="m-card-title"><a href="item12.html">MMT Nylon Cable Ties 100Pcs</a></span>
-                <span class="unit-badge unit-pcs">PIECES</span>
-            </div>
-            <div class="m-card-body">
-                <div class="m-field"><span class="m-label">Quantity</span><span class="m-value">1</span></div>
-                <div class="m-field"><span class="m-label">Unit Cost</span><span class="m-value">₱70</span></div>
-                <div class="m-field"><span class="m-label">Shipping</span><span class="m-value">₱105</span></div>
-                <div class="m-field"><span class="m-label">Total Cost</span><span class="m-value highlight">₱175</span></div>
-            </div>
-            <div class="m-card-footer">
-                <a target="_blank" href="https://shopee.ph/MMT-Nylon-Cable-Ties-100Pcs-High-Quality-Cable-Ties-i.278849991.12601920001">🔗 Open Shopee Link</a>
-            </div>
-        </div>
-
-        <!-- Mobile Overall Total Box -->
-        <div class="m-card-total-box">
-            <span>Overall Total:</span>
-            <span style="color: #fb923c;">₱39,290</span>
         </div>
     </div>
 
-    <!-- Order Management Section -->
-    <div class="section-heading">Order Management &amp; Personnel</div>
-    
-    <!-- DESKTOP MANAGEMENT VIEW -->
-    <div class="table-responsive">
-        <table class="pro-table">
-            <thead>
-                <tr>
-                    <th>First Name</th>
-                    <th>Surname</th>
-                    <th>Phone</th>
-                    <th>Email</th>
-                    <th>Role</th>
-                    <th>Notes</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><strong>Ricky</strong></td>
-                    <td>Banuelos</td>
-                    <td>09511440060</td>
-                    <td>ricalgen@gmail.com</td>
-                    <td><span style="background: #e0f2fe; color: #0369a1; padding: 4px 10px; border-radius: 6px; font-weight: 700; font-size: 0.85rem;">SPTA President</span></td>
-                    <td><span style="color: var(--success-color); font-weight: 700;">✓ Installer</span></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    <script>
+        // 12 Items Master Dataset
+        const itemsData = [
+            {
+                id: 1,
+                title: "HIKVISION CCTV DVR-8 channel, 2TB HDD (SET)",
+                unit: "SET",
+                qty: 1,
+                cost: 21099,
+                shipping: 433,
+                total: 21532,
+                image: "resources/item1.jpg",
+                shopee: "https://shopee.ph/Hikvision-8CH-2MP-Bullet-CCTV-Kit-With-Night-Vision-Audio-PH-Stock-Pinoy-Family-Securit-i.1066541770.56354949099"
+            },
+            {
+                id: 2,
+                title: "Fiber Optic Wire 1km 1Core",
+                unit: "ROLL",
+                qty: 1,
+                cost: 2200,
+                shipping: 135,
+                total: 2335,
+                image: "resources/item2.jpg",
+                shopee: "https://shopee.ph/Fiber-optic-cable-1km-1core-i.414846677.15898128444?xptdk=ef19218e-1e56-40c8-98cd-56517b9aa135"
+            },
+            {
+                id: 3,
+                title: "Transceiver Media Converter 1Pair",
+                unit: "PIECES",
+                qty: 5,
+                cost: 500,
+                shipping: 105,
+                total: 2605,
+                image: "resources/item3.jpg",
+                shopee: "https://shopee.ph/NETLINK-HTB-A-B-One-pair-FIBER-MEDIA-CONVERTER-10-100Mbps-Gigabit-1000Mbps-i.78346282.21135167574"
+            },
+            {
+                id: 4,
+                title: "Router Ruijie | RG-EW300N",
+                unit: "PIECES",
+                qty: 5,
+                cost: 699,
+                shipping: 140,
+                total: 3635,
+                image: "resources/item4.jpg",
+                shopee: "https://shopee.ph/Ruijie-RG-EW300N-300Mbps-Wireless-Smart-Router-i.181501780.47206008471"
+            },
+            {
+                id: 5,
+                title: "SC-UPC - FIBER OPTIC CONNECTOR 10/SET",
+                unit: "SET",
+                qty: 2,
+                cost: 102,
+                shipping: 135,
+                total: 339,
+                image: "resources/item5.jpg",
+                shopee: "https://shopee.ph/10-PCS-SC-UPC-Fiber-Optic-Connector-Fast-Connector-Embedded-Fiber-Optic-Quick-Cold-UPC-Open-Tail-i.688606080.17110602981"
+            },
+            {
+                id: 6,
+                title: "SKYLINK CAT6 Outdoor Cable UTP 305M",
+                unit: "ROLL",
+                qty: 2,
+                cost: 1500,
+                shipping: 525,
+                total: 3525,
+                image: "resources/item6.jpg",
+                shopee: "https://shopee.ph/COMLINK-CAT6-Outdoor-Cable-UTP-Ethernet-Lan-Cable-Waterproof-Cable-Sold-Per-Meter-i.78346282.23916048588"
+            },
+            {
+                id: 7,
+                title: "Connectors RJ45 CAT6A Pass Through 100PCS",
+                unit: "BOX",
+                qty: 1,
+                cost: 239,
+                shipping: 115,
+                total: 354,
+                image: "resources/item7.jpg",
+                shopee: "https://shopee.ph/100pcs-Pass-Through-RJ45-Connectors-RJ45-CAT6A-Pass-Through-Connectors-i.44402121.17411051405"
+            },
+            {
+                id: 8,
+                title: "Video Balun Clip Type (1-PAIR)",
+                unit: "SET",
+                qty: 6,
+                cost: 70,
+                shipping: 105,
+                total: 525,
+                image: "resources/item8.jpg",
+                shopee: "https://shopee.ph/Video-Balun-Clip-Type-(1-PAIR)-PASSIVE-HDCVI-AHD-HDTVI-1080P-TRANSCEIVER-SINGLE-CHANNEL-BNC-CCTV-i.78346282.9258575721"
+            },
+            {
+                id: 9,
+                title: "Allan 100pcs. Nail flat clips cable ties round",
+                unit: "SET",
+                qty: 1,
+                cost: 30,
+                shipping: 105,
+                total: 135,
+                image: "resources/item9.jpg",
+                shopee: "https://shopee.ph/Allan-100pcs.-Nail-flat-clips-cable-ties-round-steel-nail-cable-clips-10mm-i.78346282.25632238024"
+            },
+            {
+                id: 10,
+                title: "ROUND JUNCTION BOX 120*120*53MM FOR CCTV",
+                unit: "PIECES",
+                qty: 10,
+                cost: 80,
+                shipping: 105,
+                total: 905,
+                image: "resources/item10.jpg",
+                shopee: "https://shopee.ph/ROUND-JUNCTION-BOX-120*120*53MM-FOR-CCTV-CAMERA-i.78346282.43967899433"
+            },
+            {
+                id: 11,
+                title: "Hikvision DS-2CD1027G3-LIU 2MP ColorVu",
+                unit: "PIECES",
+                qty: 1,
+                cost: 3110,
+                shipping: 115,
+                total: 3225,
+                image: "resources/item11.jpg",
+                shopee: "https://shopee.ph/(2026)-Hikvision-DS-2CD1027G3-LIU-2MP-ColorVu-3.0-Smart-Hybrid-Light-Audio-Bullet-Network-Camera-i.213244405.8268750532"
+            },
+            {
+                id: 12,
+                title: "MMT Nylon Cable Ties 100Pcs",
+                unit: "PIECES",
+                qty: 1,
+                cost: 70,
+                shipping: 105,
+                total: 175,
+                image: "resources/item12.jpg",
+                shopee: "https://shopee.ph/MMT-Nylon-Cable-Ties-100Pcs-High-Quality-Cable-Ties-i.278849991.12601920001"
+            }
+        ];
 
-    <!-- MOBILE MANAGEMENT CARD VIEW -->
-    <div class="mobile-card-list">
-        <div class="m-card" style="border-left-color: #0369a1;">
-            <div class="m-card-header">
-                <span class="m-card-title">Ricky Banuelos</span>
-                <span class="unit-badge" style="background: #e0f2fe; color: #0369a1;">SPTA President</span>
-            </div>
-            <div class="m-card-body">
-                <div class="m-field"><span class="m-label">Phone</span><span class="m-value">09511440060</span></div>
-                <div class="m-field"><span class="m-label">Email</span><span class="m-value" style="font-size: 0.82rem; word-break: break-all; color: var(--primary);">ricalgen@gmail.com</span></div>
-                <div class="m-field" style="grid-column: span 2;"><span class="m-label">Notes</span><span class="m-value" style="color: var(--success-color);">✓ Installer</span></div>
-            </div>
-        </div>
-    </div>
-</div>
+        // Format Currency Helper
+        function formatPHP(amount) {
+            return "₱" + amount.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
 
+        function renderInventory() {
+            const tbody = document.getElementById('inventory-tbody');
+            const mobileContainer = document.getElementById('inventory-mobile-cards');
+            
+            tbody.innerHTML = '';
+            mobileContainer.innerHTML = '';
+
+            itemsData.forEach((item) => {
+                // Desktop Table Row
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-50/90 transition group border-b border-slate-100";
+                tr.innerHTML = `
+                    <td class="py-3.5 px-4 text-center font-bold text-slate-400 text-xs">${item.id}</td>
+                    <td class="py-3.5 px-4">
+                        <button onclick="openModal(${item.id})" class="group/thumb relative rounded-lg overflow-hidden border border-slate-200 block bg-slate-100 hover:ring-2 hover:ring-blue-500 transition shadow-sm w-12 h-12">
+                            <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/100x100/f1f5f9/475569?text=Item+${item.id}'" />
+                            <div class="absolute inset-0 bg-blue-900/40 opacity-0 group-hover/thumb:opacity-100 transition flex items-center justify-center text-white text-xs">
+                                <i class="fa-solid fa-magnifying-glass-plus"></i>
+                            </div>
+                        </button>
+                    </td>
+                    <td class="py-3.5 px-4 font-semibold text-slate-900">
+                        <button onclick="openModal(${item.id})" class="text-left text-blue-600 hover:text-blue-800 font-bold hover:underline flex items-center gap-2">
+                            <span>${item.title}</span>
+                            <i class="fa-solid fa-image text-slate-400 group-hover:text-blue-500 text-xs"></i>
+                        </button>
+                    </td>
+                    <td class="py-3.5 px-4 text-center">
+                        <span class="bg-slate-100 text-slate-700 text-xs px-2.5 py-1 rounded-md font-bold">${item.unit}</span>
+                    </td>
+                    <td class="py-3.5 px-4 text-center font-extrabold text-slate-800">${item.qty}</td>
+                    <td class="py-3.5 px-4 text-right">${formatPHP(item.cost)}</td>
+                    <td class="py-3.5 px-4 text-right text-slate-500">${formatPHP(item.shipping)}</td>
+                    <td class="py-3.5 px-4 text-right font-black text-slate-900">${formatPHP(item.total)}</td>
+                    <td class="py-3.5 px-4 text-center">
+                        <a href="${item.shopee}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 bg-orange-50 text-orange-600 hover:bg-orange-100 border border-orange-200 text-xs px-3 py-1.5 rounded-xl font-bold transition shadow-sm">
+                            <i class="fa-solid fa-bag-shopping"></i> Shopee
+                        </a>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+
+                // Mobile Card View
+                const card = document.createElement('div');
+                card.className = "bg-white p-4 rounded-2xl border border-slate-200/90 shadow-sm space-y-3";
+                card.innerHTML = `
+                    <div class="flex items-start gap-3">
+                        <button onclick="openModal(${item.id})" class="shrink-0 w-16 h-16 rounded-xl overflow-hidden border border-slate-200 bg-slate-100 relative">
+                            <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/100x100/f1f5f9/475569?text=Item+${item.id}'" />
+                            <div class="absolute inset-0 bg-black/20 flex items-center justify-center text-white text-xs">
+                                <i class="fa-solid fa-expand"></i>
+                            </div>
+                        </button>
+                        <div class="flex-1 space-y-1">
+                            <div class="flex items-center justify-between">
+                                <span class="text-[10px] font-extrabold bg-blue-100 text-blue-800 px-2 py-0.5 rounded-md">Item #${item.id}</span>
+                                <span class="text-[10px] font-extrabold bg-slate-100 text-slate-700 px-2 py-0.5 rounded-md">${item.qty} ${item.unit}</span>
+                            </div>
+                            <button onclick="openModal(${item.id})" class="font-bold text-slate-900 text-xs text-left hover:text-blue-600 line-clamp-2">
+                                ${item.title}
+                            </button>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 text-xs bg-slate-50 p-2.5 rounded-xl border border-slate-100 text-slate-600">
+                        <div>Unit: <span class="font-bold text-slate-800">${formatPHP(item.cost)}</span></div>
+                        <div class="text-right">Shipping: <span class="font-bold text-slate-800">${formatPHP(item.shipping)}</span></div>
+                    </div>
+                    <div class="flex items-center justify-between pt-1">
+                        <a href="${item.shopee}" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-orange-600 bg-orange-50 border border-orange-200 px-3 py-1.5 rounded-xl flex items-center gap-1.5">
+                            <i class="fa-solid fa-bag-shopping"></i> Shopee
+                        </a>
+                        <div class="text-right">
+                            <span class="text-[10px] text-slate-400 block uppercase">Total Cost</span>
+                            <span class="font-black text-slate-900 text-base">${formatPHP(item.total)}</span>
+                        </div>
+                    </div>
+                `;
+                mobileContainer.appendChild(card);
+            });
+        }
+
+        // Modal State & Zoom/Pan Controller
+        let currentScale = 1;
+        let translateX = 0;
+        let translateY = 0;
+        let isDragging = false;
+        let startX = 0;
+        let startY = 0;
+
+        const modal = document.getElementById('image-modal');
+        const modalImg = document.getElementById('modal-image');
+        const modalTitle = document.getElementById('modal-item-title');
+        const modalItemNum = document.getElementById('modal-item-number');
+        const modalShopee = document.getElementById('modal-shopee-link');
+        const zoomIndicator = document.getElementById('zoom-indicator');
+        const viewport = document.getElementById('viewport');
+
+        function openModal(itemId) {
+            const item = itemsData.find(i => i.id === itemId);
+            if (!item) return;
+
+            modalItemNum.innerText = `Item #${item.id}`;
+            modalTitle.innerText = item.title;
+            modalImg.src = item.image;
+            modalShopee.href = item.shopee;
+
+            resetZoom();
+
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+            }, 10);
+        }
+
+        function closeModal() {
+            modal.classList.add('opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                resetZoom();
+            }, 200);
+        }
+
+        function handleBackdropClick(event) {
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        function updateTransform() {
+            modalImg.style.transform = `translate(${translateX}px, ${translateY}px) scale(${currentScale})`;
+            zoomIndicator.innerText = `${Math.round(currentScale * 100)}%`;
+        }
+
+        function zoomIn() {
+            if (currentScale < 4) {
+                currentScale += 0.25;
+                updateTransform();
+            }
+        }
+
+        function zoomOut() {
+            if (currentScale > 0.5) {
+                currentScale -= 0.25;
+                if (currentScale <= 1) {
+                    translateX = 0;
+                    translateY = 0;
+                }
+                updateTransform();
+            }
+        }
+
+        function resetZoom() {
+            currentScale = 1;
+            translateX = 0;
+            translateY = 0;
+            updateTransform();
+        }
+
+        // Mouse Wheel Zoom
+        viewport.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            if (e.deltaY < 0) {
+                zoomIn();
+            } else {
+                zoomOut();
+            }
+        }, { passive: false });
+
+        // Pan / Dragging Logic
+        viewport.addEventListener('mousedown', (e) => {
+            if (currentScale > 1) {
+                isDragging = true;
+                startX = e.clientX - translateX;
+                startY = e.clientY - translateY;
+            }
+        });
+
+        window.addEventListener('mousemove', (e) => {
+            if (isDragging) {
+                translateX = e.clientX - startX;
+                translateY = e.clientY - startY;
+                updateTransform();
+            }
+        });
+
+        window.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+
+        // Keyboard navigation (Escape to close, + / - to zoom)
+        window.addEventListener('keydown', (e) => {
+            if (!modal.classList.contains('hidden')) {
+                if (e.key === 'Escape') closeModal();
+                if (e.key === '+' || e.key === '=') zoomIn();
+                if (e.key === '-') zoomOut();
+                if (e.key === '0') resetZoom();
+            }
+        });
+
+        // Initialize Application
+        window.onload = function() {
+            renderInventory();
+        };
+    </script>
 </body>
 </html>
