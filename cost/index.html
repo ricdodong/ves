@@ -216,7 +216,7 @@
                         <i class="fa-solid fa-boxes-packing text-blue-600"></i>
                         <h2 class="font-extrabold text-slate-900 text-lg">Procurement Materials & Items Inventory (12 Items)</h2>
                     </div>
-                    <p class="text-xs text-slate-500 mt-0.5">Click any item title or image button to view product photo in interactive modal</p>
+                    <p class="text-xs text-slate-500 mt-0.5">Click any item title or thumbnail to view product image in interactive modal</p>
                 </div>
                 <div class="flex items-center gap-2">
                     <span class="text-xs font-semibold text-slate-500 bg-slate-200/70 px-3 py-1.5 rounded-xl">
@@ -306,10 +306,10 @@
                     </div>
                 </div>
                 <div class="space-y-2.5 text-xs text-slate-600">
-                    <p class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500 text-sm"></i> Image viewer modal integrated; direct loading of <code>resources/item[1-12].jpg</code>.</p>
-                    <p class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500 text-sm"></i> Modal includes Zoom In (+), Zoom Out (-), Reset, and Drag/Pan features.</p>
-                    <p class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500 text-sm"></i> Header configured as non-fixed, scrolling naturally with page.</p>
-                    <p class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500 text-sm"></i> Full breakdown: ₱51,072.00 minus 10% O.R. (₱5,107.20) minus materials (₱39,290.00) = ₱6,674.80 remaining.</p>
+                    <p class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500 text-sm"></i> Item resources updated to <code>resources/item[1-12].jfif</code> image format.</p>
+                    <p class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500 text-sm"></i> SVG Data-URI fallbacks active (eliminating ERR_BLOCKED_BY_CLIENT network blocks).</p>
+                    <p class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500 text-sm"></i> Full Image Modal Viewport active with Zoom (+/-), Drag/Pan, and Reset.</p>
+                    <p class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500 text-sm"></i> Total Allocated ₱51,072.00 - 10% O.R. (₱5,107.20) - Materials (₱39,290.00) = ₱6,674.80.</p>
                 </div>
             </div>
         </section>
@@ -319,7 +319,7 @@
     <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500 no-print mt-10">
         <div class="max-w-7xl mx-auto px-4 space-y-1">
             <p>© 2026 Villangit Elementary School - SPTA CCTV & Internet Infrastructure Dashboard</p>
-            <p class="text-[11px] text-slate-400">All Shopee Product References & Item Image Resources Preserved</p>
+            <p class="text-[11px] text-slate-400">All Shopee Product References & JFIM Image Resources Preserved</p>
         </div>
     </footer>
 
@@ -344,7 +344,7 @@
             <!-- Modal Body (Image Viewport) -->
             <div id="viewport" class="viewport-container relative flex-1 bg-slate-950 min-h-[350px] sm:min-h-[450px] flex items-center justify-center p-4">
                 
-                <img id="modal-image" src="" alt="Item Resource Image" class="zoom-image rounded-lg shadow-2xl" onerror="this.src='https://placehold.co/800x600/1e293b/ffffff?text=Image+Not+Found+in+Resources'" />
+                <img id="modal-image" src="" alt="Item Resource Image" class="zoom-image rounded-lg shadow-2xl" onerror="handleImageError(this, 'Modal Image')" />
 
                 <!-- Pan Hint Badge -->
                 <div class="absolute top-3 left-3 bg-slate-900/80 text-slate-300 text-[10px] font-semibold px-2.5 py-1 rounded-md backdrop-blur-sm pointer-events-none border border-slate-700">
@@ -389,7 +389,19 @@
     </div>
 
     <script>
-        // 12 Items Master Dataset
+        // Inline Data URI SVG Fallback Generator (Avoids ERR_BLOCKED_BY_CLIENT & Network Blocks)
+        function createSvgFallbackDataUri(text) {
+            const encodedText = encodeURIComponent(text || 'Image File Pending');
+            const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300"><rect width="400" height="300" fill="#0f172a"/><g fill="none" stroke="#334155" stroke-width="2"><rect x="30" y="30" width="340" height="240" rx="12"/><circle cx="200" cy="130" r="40"/><path d="M120 220 l60-60 l40 40 l60-60 l40 40"/></g><text x="200" y="225" font-family="sans-serif" font-size="14" font-weight="bold" fill="#94a3b8" text-anchor="middle">${encodedText}</text></svg>`;
+            return 'data:image/svg+xml;charset=utf-8,' + svg;
+        }
+
+        function handleImageError(imgElem, label) {
+            imgElem.onerror = null; // Prevent infinite loop
+            imgElem.src = createSvgFallbackDataUri(label);
+        }
+
+        // 12 Items Master Dataset (Updated with .jfif extensions)
         const itemsData = [
             {
                 id: 1,
@@ -476,7 +488,7 @@
                 cost: 70,
                 shipping: 105,
                 total: 525,
-                image: "resources/item8.jpg",
+                image: "resources/item8.jfif",
                 shopee: "https://shopee.ph/Video-Balun-Clip-Type-(1-PAIR)-PASSIVE-HDCVI-AHD-HDTVI-1080P-TRANSCEIVER-SINGLE-CHANNEL-BNC-CCTV-i.78346282.9258575721"
             },
             {
@@ -487,7 +499,7 @@
                 cost: 30,
                 shipping: 105,
                 total: 135,
-                image: "resources/item9.jpg",
+                image: "resources/item9.jfif",
                 shopee: "https://shopee.ph/Allan-100pcs.-Nail-flat-clips-cable-ties-round-steel-nail-cable-clips-10mm-i.78346282.25632238024"
             },
             {
@@ -498,7 +510,7 @@
                 cost: 80,
                 shipping: 105,
                 total: 905,
-                image: "resources/item10.jpg",
+                image: "resources/item10.jfif",
                 shopee: "https://shopee.ph/ROUND-JUNCTION-BOX-120*120*53MM-FOR-CCTV-CAMERA-i.78346282.43967899433"
             },
             {
@@ -509,7 +521,7 @@
                 cost: 3110,
                 shipping: 115,
                 total: 3225,
-                image: "resources/item11.jpg",
+                image: "resources/item11.jfif",
                 shopee: "https://shopee.ph/(2026)-Hikvision-DS-2CD1027G3-LIU-2MP-ColorVu-3.0-Smart-Hybrid-Light-Audio-Bullet-Network-Camera-i.213244405.8268750532"
             },
             {
@@ -520,7 +532,7 @@
                 cost: 70,
                 shipping: 105,
                 total: 175,
-                image: "resources/item12.jpg",
+                image: "resources/item12.jfif",
                 shopee: "https://shopee.ph/MMT-Nylon-Cable-Ties-100Pcs-High-Quality-Cable-Ties-i.278849991.12601920001"
             }
         ];
@@ -538,6 +550,8 @@
             mobileContainer.innerHTML = '';
 
             itemsData.forEach((item) => {
+                const fallbackUri = createSvgFallbackDataUri(`resources/item${item.id}.jfif`);
+
                 // Desktop Table Row
                 const tr = document.createElement('tr');
                 tr.className = "hover:bg-slate-50/90 transition group border-b border-slate-100";
@@ -545,7 +559,7 @@
                     <td class="py-3.5 px-4 text-center font-bold text-slate-400 text-xs">${item.id}</td>
                     <td class="py-3.5 px-4">
                         <button onclick="openModal(${item.id})" class="group/thumb relative rounded-lg overflow-hidden border border-slate-200 block bg-slate-100 hover:ring-2 hover:ring-blue-500 transition shadow-sm w-12 h-12">
-                            <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/100x100/f1f5f9/475569?text=Item+${item.id}'" />
+                            <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='${fallbackUri}';" />
                             <div class="absolute inset-0 bg-blue-900/40 opacity-0 group-hover/thumb:opacity-100 transition flex items-center justify-center text-white text-xs">
                                 <i class="fa-solid fa-magnifying-glass-plus"></i>
                             </div>
@@ -578,7 +592,7 @@
                 card.innerHTML = `
                     <div class="flex items-start gap-3">
                         <button onclick="openModal(${item.id})" class="shrink-0 w-16 h-16 rounded-xl overflow-hidden border border-slate-200 bg-slate-100 relative">
-                            <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/100x100/f1f5f9/475569?text=Item+${item.id}'" />
+                            <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='${fallbackUri}';" />
                             <div class="absolute inset-0 bg-black/20 flex items-center justify-center text-white text-xs">
                                 <i class="fa-solid fa-expand"></i>
                             </div>
@@ -633,6 +647,10 @@
 
             modalItemNum.innerText = `Item #${item.id}`;
             modalTitle.innerText = item.title;
+            
+            modalImg.onerror = function() {
+                handleImageError(this, `resources/item${item.id}.jfif`);
+            };
             modalImg.src = item.image;
             modalShopee.href = item.shopee;
 
