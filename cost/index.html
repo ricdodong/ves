@@ -4,36 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Villangit ES CCTV & Internet Materials 2026 Procurement Dashboard</title>
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
-                    },
-                    colors: {
-                        brand: {
-                            50: '#f0f7ff',
-                            100: '#e0effe',
-                            500: '#2563eb',
-                            600: '#1d4ed8',
-                            700: '#1e40af',
-                            800: '#1e3a8a',
-                            900: '#0f172a',
-                        }
                     }
                 }
             }
         }
     </script>
     <style>
-        /* Custom image modal pan & zoom viewport styles */
         .viewport-container {
             overflow: hidden;
             cursor: grab;
@@ -47,47 +32,46 @@
             transform-origin: center center;
             transition: transform 0.15s ease-out;
             will-change: transform;
-            max-height: 70vh;
+            max-height: 75vh;
             max-width: 100%;
             object-fit: contain;
         }
-        /* Custom Print Styling */
         @media print {
             .no-print { display: none !important; }
             body { background: white !important; color: black !important; }
             .shadow-xl, .shadow-lg, .shadow-md, .shadow-sm { box-shadow: none !important; }
-            .border { border-color: #cbd5e1 !important; }
+            .border { border-color: #000 !important; }
             a { text-decoration: none !important; color: inherit !important; }
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col justify-between selection:bg-blue-500 selection:text-white">
+<body class="bg-slate-100 text-slate-900 font-sans antialiased min-h-screen flex flex-col justify-between selection:bg-blue-600 selection:text-white text-base">
 
     <!-- Non-fixed Header (Scrolls naturally with page) -->
-    <header class="bg-gradient-to-r from-slate-900 via-indigo-950 to-blue-950 text-white shadow-xl relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-7 flex flex-col md:flex-row justify-between items-center gap-5">
-            <div class="flex items-center space-x-4">
-                <div class="bg-blue-600/30 p-3.5 rounded-2xl border border-blue-400/30 backdrop-blur-md shadow-inner">
-                    <i class="fa-solid fa-video text-3xl text-blue-400"></i>
+    <header class="bg-gradient-to-r from-slate-900 via-indigo-950 to-blue-950 text-white shadow-xl relative border-b-4 border-blue-600">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center space-x-5">
+                <div class="bg-blue-600/40 p-4 rounded-2xl border-2 border-blue-400/40 backdrop-blur-md shadow-lg shrink-0">
+                    <i class="fa-solid fa-camera-web text-4xl text-blue-300"></i>
                 </div>
                 <div>
-                    <div class="flex items-center gap-2 mb-1">
-                        <span class="inline-block bg-blue-500/20 text-blue-300 text-[11px] font-bold px-2.5 py-0.5 rounded-full border border-blue-400/30 uppercase tracking-widest">
-                            SPTA Audit 2026
+                    <div class="flex flex-wrap items-center gap-2 mb-2">
+                        <span class="inline-block bg-blue-500/30 text-blue-200 text-xs sm:text-sm font-extrabold px-3 py-1 rounded-full border border-blue-400/40 uppercase tracking-wider">
+                            SPTA Audit Report 2026
                         </span>
-                        <span class="inline-block bg-emerald-500/20 text-emerald-300 text-[11px] font-bold px-2.5 py-0.5 rounded-full border border-emerald-400/30 uppercase tracking-widest">
-                            Verified Ledger
+                        <span class="inline-block bg-emerald-500/30 text-emerald-200 text-xs sm:text-sm font-extrabold px-3 py-1 rounded-full border border-emerald-400/40 uppercase tracking-wider">
+                            Official Ledger
                         </span>
                     </div>
-                    <h1 class="text-2xl sm:text-3xl font-black tracking-tight text-white">Villangit ES CCTV & Internet Materials</h1>
-                    <p class="text-xs sm:text-sm text-slate-300 font-medium mt-0.5">Comprehensive Procurement Breakdown, Budgeting & Interactive Image Catalog</p>
+                    <h1 class="text-2xl sm:text-4xl font-black tracking-tight text-white leading-tight">Villangit ES CCTV & Internet Materials</h1>
+                    <p class="text-base sm:text-lg text-slate-200 font-semibold mt-1">Procurement Financial Summary & Interactive Item Catalog</p>
                 </div>
             </div>
             
-            <div class="flex items-center gap-3 no-print">
-                <button onclick="window.print()" class="flex items-center gap-2 bg-white/10 hover:bg-white/20 active:scale-95 text-white px-4 py-2.5 rounded-xl text-sm font-semibold transition backdrop-blur-sm border border-white/10 shadow-sm">
-                    <i class="fa-solid fa-print text-blue-300"></i>
-                    <span>Print Report</span>
+            <div class="flex items-center gap-4 no-print shrink-0">
+                <button onclick="window.print()" class="flex items-center gap-2.5 bg-white text-slate-900 hover:bg-slate-100 active:scale-95 px-5 py-3.5 rounded-2xl text-base font-extrabold transition shadow-lg border-2 border-slate-300">
+                    <i class="fa-solid fa-print text-blue-700 text-lg"></i>
+                    <span>Print Financial Report</span>
                 </button>
             </div>
         </div>
@@ -95,159 +79,157 @@
 
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow space-y-8 w-full">
 
-        <!-- Financial Summary Dashboard (5 Key Metrics) -->
-        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-            <!-- 1. Total Allocated Fund -->
-            <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200/90 hover:shadow-md transition">
-                <div class="flex justify-between items-start">
-                    <div>
-                        <p class="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Gross Total Allocated</p>
-                        <h3 class="text-xl sm:text-2xl font-black text-slate-900 mt-1">₱51,072.00</h3>
-                        <p class="text-[11px] text-slate-400 mt-1">Initial Project Budget</p>
-                    </div>
-                    <div class="p-2.5 bg-blue-50 text-blue-600 rounded-xl">
+        <!-- Financial Summary Cards (Non-overlapping layout, large text for adults) -->
+        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
+            <!-- 1. Gross Total Allocated -->
+            <div class="bg-white rounded-2xl p-5 shadow-md border-2 border-slate-200 hover:border-blue-400 transition flex flex-col justify-between">
+                <div class="flex items-center justify-between gap-3 mb-2">
+                    <p class="text-xs font-black text-slate-500 uppercase tracking-wider leading-tight">1. Gross Allocation</p>
+                    <div class="p-2.5 bg-blue-100 text-blue-800 rounded-xl shrink-0 flex items-center justify-center w-10 h-10">
                         <i class="fa-solid fa-vault text-lg"></i>
                     </div>
+                </div>
+                <div>
+                    <h3 class="text-2xl xl:text-3xl font-black text-slate-900 tracking-tight">₱51,072.00</h3>
+                    <p class="text-xs font-bold text-slate-500 mt-1">Initial Project Budget</p>
                 </div>
             </div>
 
             <!-- 2. Less O.R. Fee (10%) -->
-            <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200/90 hover:shadow-md transition">
-                <div class="flex justify-between items-start">
-                    <div>
-                        <p class="text-[11px] font-bold text-amber-600 uppercase tracking-wider">Less: 10% O.R. Fee</p>
-                        <h3 class="text-xl sm:text-2xl font-black text-amber-600 mt-1">₱5,107.20</h3>
-                        <p class="text-[11px] text-amber-700/70 mt-1">Tax / Admin Charge</p>
-                    </div>
-                    <div class="p-2.5 bg-amber-50 text-amber-600 rounded-xl">
+            <div class="bg-white rounded-2xl p-5 shadow-md border-2 border-amber-200 hover:border-amber-400 transition flex flex-col justify-between">
+                <div class="flex items-center justify-between gap-3 mb-2">
+                    <p class="text-xs font-black text-amber-800 uppercase tracking-wider leading-tight">2. Less: 10% O.R. Fee</p>
+                    <div class="p-2.5 bg-amber-100 text-amber-800 rounded-xl shrink-0 flex items-center justify-center w-10 h-10">
                         <i class="fa-solid fa-file-invoice-dollar text-lg"></i>
                     </div>
+                </div>
+                <div>
+                    <h3 class="text-2xl xl:text-3xl font-black text-amber-700 tracking-tight">₱5,107.20</h3>
+                    <p class="text-xs font-bold text-amber-800/80 mt-1">Tax / Admin Charge</p>
                 </div>
             </div>
 
             <!-- 3. Net Usable Fund -->
-            <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200/90 hover:shadow-md transition">
-                <div class="flex justify-between items-start">
-                    <div>
-                        <p class="text-[11px] font-bold text-indigo-600 uppercase tracking-wider">Net Usable Fund (90%)</p>
-                        <h3 class="text-xl sm:text-2xl font-black text-indigo-700 mt-1">₱45,964.80</h3>
-                        <p class="text-[11px] text-indigo-600/70 mt-1">Effective Budget</p>
-                    </div>
-                    <div class="p-2.5 bg-indigo-50 text-indigo-600 rounded-xl">
+            <div class="bg-white rounded-2xl p-5 shadow-md border-2 border-indigo-200 hover:border-indigo-400 transition flex flex-col justify-between">
+                <div class="flex items-center justify-between gap-3 mb-2">
+                    <p class="text-xs font-black text-indigo-800 uppercase tracking-wider leading-tight">3. Net Usable Fund</p>
+                    <div class="p-2.5 bg-indigo-100 text-indigo-800 rounded-xl shrink-0 flex items-center justify-center w-10 h-10">
                         <i class="fa-solid fa-scale-balanced text-lg"></i>
                     </div>
                 </div>
+                <div>
+                    <h3 class="text-2xl xl:text-3xl font-black text-indigo-800 tracking-tight">₱45,964.80</h3>
+                    <p class="text-xs font-bold text-indigo-700 mt-1">Effective Budget (90%)</p>
+                </div>
             </div>
 
-            <!-- 4. Total Materials Cost -->
-            <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200/90 hover:shadow-md transition">
-                <div class="flex justify-between items-start">
-                    <div>
-                        <p class="text-[11px] font-bold text-rose-600 uppercase tracking-wider">Materials Expense</p>
-                        <h3 class="text-xl sm:text-2xl font-black text-rose-700 mt-1">₱39,290.00</h3>
-                        <p class="text-[11px] text-rose-600/70 mt-1">12 Items + Freight</p>
-                    </div>
-                    <div class="p-2.5 bg-rose-50 text-rose-600 rounded-xl">
+            <!-- 4. Total Materials Expense -->
+            <div class="bg-white rounded-2xl p-5 shadow-md border-2 border-rose-200 hover:border-rose-400 transition flex flex-col justify-between">
+                <div class="flex items-center justify-between gap-3 mb-2">
+                    <p class="text-xs font-black text-rose-800 uppercase tracking-wider leading-tight">4. Materials Cost</p>
+                    <div class="p-2.5 bg-rose-100 text-rose-800 rounded-xl shrink-0 flex items-center justify-center w-10 h-10">
                         <i class="fa-solid fa-cart-flatbed text-lg"></i>
                     </div>
+                </div>
+                <div>
+                    <h3 class="text-2xl xl:text-3xl font-black text-rose-800 tracking-tight">₱39,290.00</h3>
+                    <p class="text-xs font-bold text-rose-700 mt-1">12 Items + Delivery</p>
                 </div>
             </div>
 
             <!-- 5. Remaining Cash Balance -->
-            <div class="bg-gradient-to-br from-emerald-600 to-teal-700 rounded-2xl p-5 text-white shadow-md hover:shadow-lg transition col-span-1 sm:col-span-2 lg:col-span-1">
-                <div class="flex justify-between items-start">
-                    <div>
-                        <p class="text-[11px] font-bold text-emerald-100 uppercase tracking-wider">Remaining Money</p>
-                        <h3 class="text-xl sm:text-2xl font-black mt-1 text-white">₱6,674.80</h3>
-                        <p class="text-[11px] text-emerald-100/80 mt-1">Unspent Surplus Cash</p>
-                    </div>
-                    <div class="p-2.5 bg-white/20 rounded-xl backdrop-blur-sm">
+            <div class="bg-gradient-to-br from-emerald-800 via-emerald-700 to-teal-800 rounded-2xl p-5 text-white shadow-xl border-2 border-emerald-500 col-span-1 sm:col-span-2 lg:col-span-1 flex flex-col justify-between">
+                <div class="flex items-center justify-between gap-3 mb-2">
+                    <p class="text-xs font-black text-emerald-200 uppercase tracking-wider leading-tight">5. Remaining Cash</p>
+                    <div class="p-2.5 bg-white/20 rounded-xl backdrop-blur-sm border border-white/20 shrink-0 flex items-center justify-center w-10 h-10">
                         <i class="fa-solid fa-piggy-bank text-lg text-white"></i>
                     </div>
                 </div>
+                <div>
+                    <h3 class="text-2xl xl:text-3xl font-black text-white tracking-tight">₱6,674.80</h3>
+                    <p class="text-xs font-bold text-emerald-100 mt-1">Unspent Surplus Cash</p>
+                </div>
             </div>
         </section>
 
-        <!-- Financial Accounting Calculation Banner -->
-        <section class="bg-slate-900 text-white rounded-2xl p-6 shadow-md border border-slate-800">
+        <!-- Clear Calculation Formula Banner -->
+        <section class="bg-slate-900 text-white rounded-2xl p-6 shadow-lg border-2 border-slate-700">
             <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
                 <div class="space-y-1">
-                    <span class="text-xs font-bold text-blue-400 uppercase tracking-widest flex items-center gap-1.5">
-                        <i class="fa-solid fa-calculator"></i> Accounting Breakdown Equation
+                    <span class="text-sm font-black text-blue-400 uppercase tracking-widest flex items-center gap-2">
+                        <i class="fa-solid fa-calculator text-base"></i> Financial Breakdown Calculation
                     </span>
-                    <h2 class="text-lg font-extrabold text-white">Financial Reconciliation Summary</h2>
-                    <p class="text-xs text-slate-300">Exact formula used to calculate the remaining balance for the Villangit ES project.</p>
+                    <h2 class="text-xl font-black text-white">How Remaining Money is Calculated:</h2>
                 </div>
                 
-                <div class="flex flex-wrap items-center gap-3 font-mono text-xs sm:text-sm">
-                    <div class="bg-slate-800 px-3.5 py-2 rounded-xl border border-slate-700">
-                        <span class="text-slate-400 text-[10px] uppercase block">Total Funds</span>
-                        <span class="text-white font-bold">₱51,072.00</span>
+                <div class="flex flex-wrap items-center gap-3 font-mono text-sm sm:text-base">
+                    <div class="bg-slate-800 px-4 py-2.5 rounded-xl border border-slate-600">
+                        <span class="text-slate-300 text-xs font-sans font-bold uppercase block">Gross Total</span>
+                        <span class="text-white font-black">₱51,072.00</span>
                     </div>
-                    <span class="text-slate-500 font-bold text-lg">-</span>
-                    <div class="bg-slate-800 px-3.5 py-2 rounded-xl border border-slate-700">
-                        <span class="text-amber-400 text-[10px] uppercase block">10% O.R. Fee</span>
-                        <span class="text-amber-300 font-bold">₱5,107.20</span>
+                    <span class="text-slate-400 font-bold text-xl">-</span>
+                    <div class="bg-slate-800 px-4 py-2.5 rounded-xl border border-slate-600">
+                        <span class="text-amber-300 text-xs font-sans font-bold uppercase block">10% O.R. Fee</span>
+                        <span class="text-amber-200 font-black">₱5,107.20</span>
                     </div>
-                    <span class="text-slate-500 font-bold text-lg">=</span>
-                    <div class="bg-slate-800 px-3.5 py-2 rounded-xl border border-slate-700">
-                        <span class="text-indigo-400 text-[10px] uppercase block">Net Usable</span>
-                        <span class="text-indigo-300 font-bold">₱45,964.80</span>
+                    <span class="text-slate-400 font-bold text-xl">=</span>
+                    <div class="bg-slate-800 px-4 py-2.5 rounded-xl border border-slate-600">
+                        <span class="text-indigo-300 text-xs font-sans font-bold uppercase block">Net Usable</span>
+                        <span class="text-indigo-200 font-black">₱45,964.80</span>
                     </div>
-                    <span class="text-slate-500 font-bold text-lg">-</span>
-                    <div class="bg-slate-800 px-3.5 py-2 rounded-xl border border-slate-700">
-                        <span class="text-rose-400 text-[10px] uppercase block">Materials Cost</span>
-                        <span class="text-rose-300 font-bold">₱39,290.00</span>
+                    <span class="text-slate-400 font-bold text-xl">-</span>
+                    <div class="bg-slate-800 px-4 py-2.5 rounded-xl border border-slate-600">
+                        <span class="text-rose-300 text-xs font-sans font-bold uppercase block">Items Cost</span>
+                        <span class="text-rose-200 font-black">₱39,290.00</span>
                     </div>
-                    <span class="text-slate-500 font-bold text-lg">=</span>
-                    <div class="bg-emerald-950/80 px-4 py-2 rounded-xl border border-emerald-500/50">
-                        <span class="text-emerald-400 text-[10px] uppercase block font-sans font-bold">Remaining Balance</span>
-                        <span class="text-emerald-300 font-extrabold text-base">₱6,674.80</span>
+                    <span class="text-slate-400 font-bold text-xl">=</span>
+                    <div class="bg-emerald-900/90 px-5 py-2.5 rounded-xl border-2 border-emerald-400 shadow-md">
+                        <span class="text-emerald-300 text-xs font-sans font-bold uppercase block">Remaining Cash</span>
+                        <span class="text-emerald-100 font-black text-lg sm:text-xl">₱6,674.80</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Materials Inventory Section (12 Items) -->
-        <section class="bg-white rounded-2xl shadow-sm border border-slate-200/90 overflow-hidden">
-            <div class="border-b border-slate-100 bg-slate-50/70 px-6 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <!-- Materials Inventory Section -->
+        <section class="bg-white rounded-2xl shadow-md border-2 border-slate-200 overflow-hidden">
+            <div class="border-b-2 border-slate-200 bg-slate-50 px-6 py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
-                    <div class="flex items-center space-x-2.5">
-                        <i class="fa-solid fa-boxes-packing text-blue-600"></i>
-                        <h2 class="font-extrabold text-slate-900 text-lg">Procurement Materials & Items Inventory (12 Items)</h2>
+                    <div class="flex items-center space-x-3">
+                        <i class="fa-solid fa-boxes-packing text-blue-700 text-2xl"></i>
+                        <h2 class="font-black text-slate-900 text-xl sm:text-2xl">Procurement Materials List (12 Items)</h2>
                     </div>
-                    <p class="text-xs text-slate-500 mt-0.5">Click any item title or thumbnail to view product image in interactive modal</p>
+                    <p class="text-sm font-semibold text-slate-600 mt-1">Text-focused inventory design. Click "View Product Photo" to open full modal photo viewer.</p>
                 </div>
-                <div class="flex items-center gap-2">
-                    <span class="text-xs font-semibold text-slate-500 bg-slate-200/70 px-3 py-1.5 rounded-xl">
-                        Total Expense: <strong class="text-slate-900 font-black">₱39,290.00</strong>
+                <div>
+                    <span class="inline-block text-sm font-extrabold text-slate-900 bg-slate-200/90 border border-slate-300 px-4 py-2 rounded-xl">
+                        Total Expense: <strong class="text-blue-800 font-black text-base">₱39,290.00</strong>
                     </span>
                 </div>
             </div>
 
-            <!-- Desktop View Table -->
+            <!-- Desktop View Table (High Contrast & Clear Fonts) -->
             <div class="hidden md:block overflow-x-auto">
                 <table class="w-full text-left border-collapse">
                     <thead>
-                        <tr class="bg-slate-100/80 text-slate-600 text-xs font-bold uppercase tracking-wider border-b border-slate-200">
-                            <th class="py-3.5 px-4 text-center w-12">#</th>
-                            <th class="py-3.5 px-4">Preview</th>
-                            <th class="py-3.5 px-4">Item Name & Details</th>
-                            <th class="py-3.5 px-4 text-center">Unit</th>
-                            <th class="py-3.5 px-4 text-center">Qty</th>
-                            <th class="py-3.5 px-4 text-right">Unit Cost</th>
-                            <th class="py-3.5 px-4 text-right">Shipping</th>
-                            <th class="py-3.5 px-4 text-right">Total Price</th>
-                            <th class="py-3.5 px-4 text-center">Shopee Reference</th>
+                        <tr class="bg-slate-800 text-white text-xs sm:text-sm font-extrabold uppercase tracking-wider border-b-2 border-slate-900">
+                            <th class="py-4 px-5 text-center w-14">#</th>
+                            <th class="py-4 px-5">Item Description & Specifications</th>
+                            <th class="py-4 px-5 text-center">Unit</th>
+                            <th class="py-4 px-5 text-center">Qty</th>
+                            <th class="py-4 px-5 text-right">Unit Price</th>
+                            <th class="py-4 px-5 text-right">Shipping</th>
+                            <th class="py-4 px-5 text-right">Total Price</th>
+                            <th class="py-4 px-5 text-center">Actions</th>
                         </tr>
                     </thead>
-                    <tbody id="inventory-tbody" class="divide-y divide-slate-100 text-sm text-slate-700">
-                        <!-- Dynamic JavaScript populates rows with dataset -->
+                    <tbody id="inventory-tbody" class="divide-y-2 divide-slate-200 text-slate-900">
+                        <!-- Dynamic JavaScript populates text-focused high-readability rows -->
                     </tbody>
                     <tfoot>
-                        <tr class="bg-slate-900 text-white font-bold">
-                            <td colspan="7" class="py-4 px-6 text-right text-xs uppercase tracking-wider text-slate-300">Total Procurement & Shipping Expense:</td>
-                            <td class="py-4 px-4 text-right text-base text-emerald-400 font-black">₱39,290.00</td>
+                        <tr class="bg-slate-900 text-white font-black text-base">
+                            <td colspan="6" class="py-5 px-6 text-right uppercase tracking-wider text-slate-300">Total Project Expense (12 Items):</td>
+                            <td class="py-5 px-5 text-right text-xl text-emerald-400 font-black">₱39,290.00</td>
                             <td></td>
                         </tr>
                     </tfoot>
@@ -255,130 +237,142 @@
             </div>
 
             <!-- Mobile View Cards -->
-            <div id="inventory-mobile-cards" class="block md:hidden p-4 space-y-4 bg-slate-50/50 divide-y divide-slate-100">
-                <!-- Mobile items rendered dynamically -->
+            <div id="inventory-mobile-cards" class="block md:hidden p-4 space-y-5 bg-slate-100 divide-y-2 divide-slate-200">
+                <!-- Rendered dynamically -->
             </div>
         </section>
 
         <!-- Project Management & Personnel Section -->
         <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200/80 hover:shadow-md transition">
-                <div class="flex items-center space-x-3 mb-4">
-                    <div class="p-3 bg-blue-50 text-blue-600 rounded-xl">
-                        <i class="fa-solid fa-user-shield text-xl"></i>
+            <div class="bg-white rounded-2xl p-6 shadow-md border-2 border-slate-200 hover:border-slate-300 transition">
+                <div class="flex items-center space-x-4 mb-4">
+                    <div class="p-3.5 bg-blue-100 text-blue-800 rounded-2xl shrink-0">
+                        <i class="fa-solid fa-user-shield text-2xl"></i>
                     </div>
                     <div>
-                        <h3 class="font-extrabold text-slate-900">Project Manager & Lead Installer</h3>
-                        <p class="text-xs text-slate-500">Authorized System Administrator</p>
+                        <h3 class="font-black text-slate-900 text-lg">Project Lead & Technical Installer</h3>
+                        <p class="text-xs font-bold text-slate-500 uppercase tracking-wider">Authorized Personnel</p>
                     </div>
                 </div>
-                <div class="bg-slate-50 rounded-xl p-4 border border-slate-200/80 space-y-3">
+                <div class="bg-slate-50 rounded-2xl p-5 border-2 border-slate-200 space-y-3">
                     <div class="flex justify-between items-start">
                         <div>
-                            <h4 class="font-extrabold text-slate-900 text-base">Ricky Banuelos</h4>
-                            <p class="text-xs text-slate-600 font-medium">SPTA President & Lead Technical Installer</p>
+                            <h4 class="font-black text-slate-900 text-xl">Ricky Banuelos</h4>
+                            <p class="text-sm text-slate-700 font-bold mt-0.5">SPTA President & Lead Technical Installer</p>
                         </div>
-                        <span class="bg-blue-100 text-blue-800 text-xs font-bold px-2.5 py-1 rounded-full">
+                        <span class="bg-blue-800 text-white text-xs font-extrabold px-3 py-1 rounded-full uppercase shrink-0">
                             Lead Installer
                         </span>
                     </div>
-                    <div class="border-t border-slate-200/80 pt-3 text-xs space-y-2 text-slate-700">
-                        <p class="flex items-center gap-2.5">
-                            <i class="fa-solid fa-phone text-blue-600 w-4 text-center"></i> 
-                            <a href="tel:09511440060" class="hover:underline font-semibold">09511440060</a>
+                    <div class="border-t-2 border-slate-200 pt-3 text-sm font-semibold space-y-2 text-slate-800">
+                        <p class="flex items-center gap-3">
+                            <i class="fa-solid fa-phone text-blue-700 text-base w-5 text-center shrink-0"></i> 
+                            <a href="tel:09511440060" class="hover:underline font-extrabold text-blue-900">09511440060</a>
                         </p>
-                        <p class="flex items-center gap-2.5">
-                            <i class="fa-solid fa-envelope text-blue-600 w-4 text-center"></i> 
-                            <a href="mailto:ricalgen@gmail.com" class="hover:underline font-semibold">ricalgen@gmail.com</a>
+                        <p class="flex items-center gap-3">
+                            <i class="fa-solid fa-envelope text-blue-700 text-base w-5 text-center shrink-0"></i> 
+                            <a href="mailto:ricalgen@gmail.com" class="hover:underline font-extrabold text-blue-900">ricalgen@gmail.com</a>
                         </p>
                     </div>
                 </div>
             </div>
 
-            <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200/80 hover:shadow-md transition">
-                <div class="flex items-center space-x-3 mb-4">
-                    <div class="p-3 bg-emerald-50 text-emerald-600 rounded-xl">
-                        <i class="fa-solid fa-clipboard-check text-xl"></i>
+            <div class="bg-white rounded-2xl p-6 shadow-md border-2 border-slate-200 hover:border-slate-300 transition">
+                <div class="flex items-center space-x-4 mb-4">
+                    <div class="p-3.5 bg-emerald-100 text-emerald-800 rounded-2xl shrink-0">
+                        <i class="fa-solid fa-clipboard-check text-2xl"></i>
                     </div>
                     <div>
-                        <h3 class="font-extrabold text-slate-900">System Dashboard Audit Status</h3>
-                        <p class="text-xs text-slate-500">Villangit Elementary School Infrastructure</p>
+                        <h3 class="font-black text-slate-900 text-lg">Audit & Compliance Verification</h3>
+                        <p class="text-xs font-bold text-slate-500 uppercase tracking-wider">Villangit Elementary School</p>
                     </div>
                 </div>
-                <div class="space-y-2.5 text-xs text-slate-600">
-                    <p class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500 text-sm"></i> Item resources updated to <code>resources/item[1-12].jfif</code> image format.</p>
-                    <p class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500 text-sm"></i> SVG Data-URI fallbacks active (eliminating ERR_BLOCKED_BY_CLIENT network blocks).</p>
-                    <p class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500 text-sm"></i> Full Image Modal Viewport active with Zoom (+/-), Drag/Pan, and Reset.</p>
-                    <p class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500 text-sm"></i> Total Allocated ₱51,072.00 - 10% O.R. (₱5,107.20) - Materials (₱39,290.00) = ₱6,674.80.</p>
+                <div class="space-y-3 text-sm font-bold text-slate-800">
+                    <p class="flex items-start gap-2.5">
+                        <i class="fa-solid fa-circle-check text-emerald-600 text-lg shrink-0 mt-0.5"></i>
+                        <span>No text overlapping: high-visibility design custom suited for school administration & parents.</span>
+                    </p>
+                    <p class="flex items-start gap-2.5">
+                        <i class="fa-solid fa-circle-check text-emerald-600 text-lg shrink-0 mt-0.5"></i>
+                        <span>Item resource photos linking to <code>resources/item[1-12].jfif</code> with zoom/pan capabilities.</span>
+                    </p>
+                    <p class="flex items-start gap-2.5">
+                        <i class="fa-solid fa-circle-check text-emerald-600 text-lg shrink-0 mt-0.5"></i>
+                        <span>Data-URI SVG fallbacks prevent missing image errors across local & network environments.</span>
+                    </p>
+                    <p class="flex items-start gap-2.5">
+                        <i class="fa-solid fa-circle-check text-emerald-600 text-lg shrink-0 mt-0.5"></i>
+                        <span>Calculation ledger: ₱51,072.00 Gross - ₱5,107.20 (10% O.R.) = ₱45,964.80 Net - ₱39,290.00 Items = ₱6,674.80 Cash Remaining.</span>
+                    </p>
                 </div>
             </div>
         </section>
 
     </main>
 
-    <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500 no-print mt-10">
-        <div class="max-w-7xl mx-auto px-4 space-y-1">
-            <p>© 2026 Villangit Elementary School - SPTA CCTV & Internet Infrastructure Dashboard</p>
-            <p class="text-[11px] text-slate-400">All Shopee Product References & JFIM Image Resources Preserved</p>
+    <footer class="bg-white border-t-2 border-slate-300 py-8 text-center text-sm font-bold text-slate-600 no-print mt-12">
+        <div class="max-w-7xl mx-auto px-4 space-y-2">
+            <p class="text-base font-extrabold text-slate-900">© 2026 Villangit Elementary School - SPTA CCTV & Internet Infrastructure Project</p>
+            <p class="text-xs text-slate-500">Official Procurement & Ledger Management System</p>
         </div>
     </footer>
 
     <!-- INTERACTIVE IMAGE VIEWER MODAL WITH ZOOM & PAN -->
-    <div id="image-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-slate-950/80 backdrop-blur-md transition-opacity duration-200 opacity-0 no-print" onclick="handleBackdropClick(event)">
+    <div id="image-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-slate-950/85 backdrop-blur-md transition-opacity duration-200 opacity-0 no-print p-3 sm:p-6" onclick="handleBackdropClick(event)">
         
-        <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 max-w-4xl w-[92vw] overflow-hidden flex flex-col max-h-[90vh] my-auto" onclick="event.stopPropagation()">
+        <div class="bg-white rounded-2xl shadow-2xl border-2 border-slate-300 max-w-4xl w-full overflow-hidden flex flex-col max-h-[92vh] my-auto" onclick="event.stopPropagation()">
             
             <!-- Modal Header -->
-            <div class="px-5 py-4 bg-slate-50 dark:bg-slate-800/80 border-b border-slate-200 dark:border-slate-700/80 flex items-center justify-between gap-3">
+            <div class="px-6 py-4 bg-slate-900 text-white border-b-2 border-slate-800 flex items-center justify-between gap-4">
                 <div class="flex items-center space-x-3 overflow-hidden">
-                    <span id="modal-item-number" class="bg-blue-600 text-white font-black text-xs px-2.5 py-1 rounded-md shrink-0">Item #1</span>
-                    <h3 id="modal-item-title" class="font-extrabold text-slate-900 dark:text-white text-base truncate">
+                    <span id="modal-item-number" class="bg-blue-600 text-white font-black text-sm px-3 py-1 rounded-lg shrink-0">Item #1</span>
+                    <h3 id="modal-item-title" class="font-extrabold text-white text-base sm:text-lg truncate">
                         Item Title
                     </h3>
                 </div>
-                <button onclick="closeModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-white p-2 rounded-xl hover:bg-slate-200/50 dark:hover:bg-slate-700 transition">
-                    <i class="fa-solid fa-xmark text-xl"></i>
+                <button onclick="closeModal()" class="text-slate-300 hover:text-white p-2 rounded-xl hover:bg-slate-800 transition shrink-0">
+                    <i class="fa-solid fa-xmark text-2xl"></i>
                 </button>
             </div>
 
             <!-- Modal Body (Image Viewport) -->
-            <div id="viewport" class="viewport-container relative flex-1 bg-slate-950 min-h-[350px] sm:min-h-[450px] flex items-center justify-center p-4">
+            <div id="viewport" class="viewport-container relative flex-1 bg-slate-950 min-h-[350px] sm:min-h-[480px] flex items-center justify-center p-4">
                 
                 <img id="modal-image" src="" alt="Item Resource Image" class="zoom-image rounded-lg shadow-2xl" onerror="handleImageError(this, 'Modal Image')" />
 
                 <!-- Pan Hint Badge -->
-                <div class="absolute top-3 left-3 bg-slate-900/80 text-slate-300 text-[10px] font-semibold px-2.5 py-1 rounded-md backdrop-blur-sm pointer-events-none border border-slate-700">
-                    <i class="fa-solid fa-arrows-up-down-left-right mr-1"></i> Scroll to Zoom | Drag to Pan
+                <div class="absolute top-4 left-4 bg-slate-900/90 text-slate-200 text-xs font-bold px-3 py-1.5 rounded-lg backdrop-blur-sm pointer-events-none border border-slate-700 shadow-md">
+                    <i class="fa-solid fa-arrows-up-down-left-right mr-1.5 text-blue-400"></i> Scroll Wheel to Zoom | Mouse Drag to Pan
                 </div>
 
                 <!-- Zoom Level Indicator -->
-                <div id="zoom-indicator" class="absolute top-3 right-3 bg-slate-900/80 text-emerald-400 text-xs font-mono font-bold px-2.5 py-1 rounded-md backdrop-blur-sm pointer-events-none border border-slate-700">
+                <div id="zoom-indicator" class="absolute top-4 right-4 bg-slate-900/90 text-emerald-400 text-sm font-mono font-black px-3 py-1.5 rounded-lg backdrop-blur-sm pointer-events-none border border-slate-700 shadow-md">
                     100%
                 </div>
             </div>
 
             <!-- Modal Footer Controls -->
-            <div class="px-5 py-3.5 bg-slate-50 dark:bg-slate-800/80 border-t border-slate-200 dark:border-slate-700/80 flex flex-wrap items-center justify-between gap-3">
+            <div class="px-6 py-4 bg-slate-100 border-t-2 border-slate-200 flex flex-wrap items-center justify-between gap-4">
                 
                 <!-- Zoom Toolbar -->
-                <div class="flex items-center gap-1.5">
-                    <button onclick="zoomOut()" title="Zoom Out (-)" class="bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-800 dark:text-slate-100 font-bold px-3 py-1.5 rounded-lg text-xs transition flex items-center gap-1">
-                        <i class="fa-solid fa-minus"></i> Zoom Out
+                <div class="flex items-center gap-2">
+                    <button onclick="zoomOut()" title="Zoom Out (-)" class="bg-white hover:bg-slate-200 text-slate-900 border-2 border-slate-300 font-extrabold px-4 py-2 rounded-xl text-sm transition shadow-sm flex items-center gap-1.5">
+                        <i class="fa-solid fa-minus text-blue-700"></i> Zoom Out
                     </button>
-                    <button onclick="resetZoom()" title="Reset Zoom" class="bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-800 dark:text-slate-100 font-bold px-3 py-1.5 rounded-lg text-xs transition flex items-center gap-1">
-                        <i class="fa-solid fa-rotate-left"></i> Reset
+                    <button onclick="resetZoom()" title="Reset Zoom" class="bg-white hover:bg-slate-200 text-slate-900 border-2 border-slate-300 font-extrabold px-4 py-2 rounded-xl text-sm transition shadow-sm flex items-center gap-1.5">
+                        <i class="fa-solid fa-rotate-left text-blue-700"></i> Reset
                     </button>
-                    <button onclick="zoomIn()" title="Zoom In (+)" class="bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-800 dark:text-slate-100 font-bold px-3 py-1.5 rounded-lg text-xs transition flex items-center gap-1">
-                        <i class="fa-solid fa-plus"></i> Zoom In
+                    <button onclick="zoomIn()" title="Zoom In (+)" class="bg-white hover:bg-slate-200 text-slate-900 border-2 border-slate-300 font-extrabold px-4 py-2 rounded-xl text-sm transition shadow-sm flex items-center gap-1.5">
+                        <i class="fa-solid fa-plus text-blue-700"></i> Zoom In
                     </button>
                 </div>
 
-                <!-- Shopee Reference Link inside Modal -->
+                <!-- External Links inside Modal -->
                 <div class="flex items-center gap-3">
-                    <a id="modal-shopee-link" href="#" target="_blank" rel="noopener noreferrer" class="bg-orange-600 hover:bg-orange-700 text-white font-bold px-4 py-1.5 rounded-xl text-xs transition shadow-sm flex items-center gap-1.5">
+                    <a id="modal-shopee-link" href="#" target="_blank" rel="noopener noreferrer" class="bg-orange-600 hover:bg-orange-700 text-white font-extrabold px-5 py-2.5 rounded-xl text-sm transition shadow-md flex items-center gap-2">
                         <i class="fa-solid fa-bag-shopping"></i> Open Shopee Link
                     </a>
-                    <button onclick="closeModal()" class="bg-slate-800 hover:bg-slate-900 text-white font-bold px-4 py-1.5 rounded-xl text-xs transition">
+                    <button onclick="closeModal()" class="bg-slate-900 hover:bg-black text-white font-extrabold px-5 py-2.5 rounded-xl text-sm transition shadow-md">
                         Close
                     </button>
                 </div>
@@ -389,19 +383,19 @@
     </div>
 
     <script>
-        // Inline Data URI SVG Fallback Generator (Avoids ERR_BLOCKED_BY_CLIENT & Network Blocks)
+        // Inline Data URI SVG Fallback Generator
         function createSvgFallbackDataUri(text) {
-            const encodedText = encodeURIComponent(text || 'Image File Pending');
-            const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300"><rect width="400" height="300" fill="#0f172a"/><g fill="none" stroke="#334155" stroke-width="2"><rect x="30" y="30" width="340" height="240" rx="12"/><circle cx="200" cy="130" r="40"/><path d="M120 220 l60-60 l40 40 l60-60 l40 40"/></g><text x="200" y="225" font-family="sans-serif" font-size="14" font-weight="bold" fill="#94a3b8" text-anchor="middle">${encodedText}</text></svg>`;
+            const encodedText = encodeURIComponent(text || 'Image Resource Pending');
+            const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="500" height="350" viewBox="0 0 500 350"><rect width="500" height="350" fill="#0f172a"/><g fill="none" stroke="#334155" stroke-width="3"><rect x="40" y="40" width="420" height="270" rx="16"/><circle cx="250" cy="150" r="50"/><path d="M140 260 l80-80 l50 50 l80-80 l50 50"/></g><text x="250" y="260" font-family="sans-serif" font-size="16" font-weight="bold" fill="#94a3b8" text-anchor="middle">${encodedText}</text></svg>`;
             return 'data:image/svg+xml;charset=utf-8,' + svg;
         }
 
         function handleImageError(imgElem, label) {
-            imgElem.onerror = null; // Prevent infinite loop
+            imgElem.onerror = null;
             imgElem.src = createSvgFallbackDataUri(label);
         }
 
-        // 12 Items Master Dataset (Updated with .jfif extensions)
+        // 12 Items Master Dataset (Pointing to resources/item[1-12].jfif)
         const itemsData = [
             {
                 id: 1,
@@ -542,6 +536,7 @@
             return "₱" + amount.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
         }
 
+        // Render High-Readability Inventory List
         function renderInventory() {
             const tbody = document.getElementById('inventory-tbody');
             const mobileContainer = document.getElementById('inventory-mobile-cards');
@@ -550,82 +545,82 @@
             mobileContainer.innerHTML = '';
 
             itemsData.forEach((item) => {
-                const fallbackUri = createSvgFallbackDataUri(`resources/item${item.id}.jfif`);
-
-                // Desktop Table Row
+                // Desktop Table Row - High Contrast, Large Text, No Thumbnails
                 const tr = document.createElement('tr');
-                tr.className = "hover:bg-slate-50/90 transition group border-b border-slate-100";
+                tr.className = "hover:bg-blue-50/50 transition border-b-2 border-slate-200";
                 tr.innerHTML = `
-                    <td class="py-3.5 px-4 text-center font-bold text-slate-400 text-xs">${item.id}</td>
-                    <td class="py-3.5 px-4">
-                        <button onclick="openModal(${item.id})" class="group/thumb relative rounded-lg overflow-hidden border border-slate-200 block bg-slate-100 hover:ring-2 hover:ring-blue-500 transition shadow-sm w-12 h-12">
-                            <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='${fallbackUri}';" />
-                            <div class="absolute inset-0 bg-blue-900/40 opacity-0 group-hover/thumb:opacity-100 transition flex items-center justify-center text-white text-xs">
-                                <i class="fa-solid fa-magnifying-glass-plus"></i>
-                            </div>
-                        </button>
+                    <td class="py-5 px-5 text-center font-black text-slate-500 text-base">${item.id}</td>
+                    <td class="py-5 px-5">
+                        <div class="space-y-1">
+                            <span class="text-slate-900 font-extrabold text-lg sm:text-xl block leading-snug">
+                                ${item.title}
+                            </span>
+                        </div>
                     </td>
-                    <td class="py-3.5 px-4 font-semibold text-slate-900">
-                        <button onclick="openModal(${item.id})" class="text-left text-blue-600 hover:text-blue-800 font-bold hover:underline flex items-center gap-2">
-                            <span>${item.title}</span>
-                            <i class="fa-solid fa-image text-slate-400 group-hover:text-blue-500 text-xs"></i>
-                        </button>
+                    <td class="py-5 px-5 text-center">
+                        <span class="bg-slate-200 text-slate-900 text-xs sm:text-sm font-black px-3 py-1.5 rounded-lg border border-slate-300">
+                            ${item.unit}
+                        </span>
                     </td>
-                    <td class="py-3.5 px-4 text-center">
-                        <span class="bg-slate-100 text-slate-700 text-xs px-2.5 py-1 rounded-md font-bold">${item.unit}</span>
-                    </td>
-                    <td class="py-3.5 px-4 text-center font-extrabold text-slate-800">${item.qty}</td>
-                    <td class="py-3.5 px-4 text-right">${formatPHP(item.cost)}</td>
-                    <td class="py-3.5 px-4 text-right text-slate-500">${formatPHP(item.shipping)}</td>
-                    <td class="py-3.5 px-4 text-right font-black text-slate-900">${formatPHP(item.total)}</td>
-                    <td class="py-3.5 px-4 text-center">
-                        <a href="${item.shopee}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 bg-orange-50 text-orange-600 hover:bg-orange-100 border border-orange-200 text-xs px-3 py-1.5 rounded-xl font-bold transition shadow-sm">
-                            <i class="fa-solid fa-bag-shopping"></i> Shopee
-                        </a>
+                    <td class="py-5 px-5 text-center font-black text-slate-900 text-lg">${item.qty}</td>
+                    <td class="py-5 px-5 text-right font-bold text-slate-700 text-base">${formatPHP(item.cost)}</td>
+                    <td class="py-5 px-5 text-right font-bold text-slate-600 text-base">${formatPHP(item.shipping)}</td>
+                    <td class="py-5 px-5 text-right font-black text-slate-900 text-xl">${formatPHP(item.total)}</td>
+                    <td class="py-5 px-5 text-center">
+                        <div class="flex flex-col sm:flex-row items-center justify-center gap-2">
+                            <button onclick="openModal(${item.id})" class="inline-flex items-center gap-2 bg-blue-700 hover:bg-blue-800 text-white text-xs sm:text-sm font-black px-3.5 py-2 rounded-xl transition shadow-sm shrink-0">
+                                <i class="fa-solid fa-expand text-blue-200"></i>
+                                <span>View Photo</span>
+                            </button>
+                            <a href="${item.shopee}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 bg-orange-100 hover:bg-orange-200 text-orange-900 border border-orange-300 text-xs sm:text-sm font-black px-3 py-2 rounded-xl transition shadow-sm shrink-0">
+                                <i class="fa-solid fa-bag-shopping text-orange-600"></i> Shopee
+                            </a>
+                        </div>
                     </td>
                 `;
                 tbody.appendChild(tr);
 
-                // Mobile Card View
+                // Mobile Card View - High Readability, No Thumbnails
                 const card = document.createElement('div');
-                card.className = "bg-white p-4 rounded-2xl border border-slate-200/90 shadow-sm space-y-3";
+                card.className = "bg-white p-5 rounded-2xl border-2 border-slate-200 shadow-sm space-y-4";
                 card.innerHTML = `
-                    <div class="flex items-start gap-3">
-                        <button onclick="openModal(${item.id})" class="shrink-0 w-16 h-16 rounded-xl overflow-hidden border border-slate-200 bg-slate-100 relative">
-                            <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='${fallbackUri}';" />
-                            <div class="absolute inset-0 bg-black/20 flex items-center justify-center text-white text-xs">
-                                <i class="fa-solid fa-expand"></i>
-                            </div>
-                        </button>
-                        <div class="flex-1 space-y-1">
-                            <div class="flex items-center justify-between">
-                                <span class="text-[10px] font-extrabold bg-blue-100 text-blue-800 px-2 py-0.5 rounded-md">Item #${item.id}</span>
-                                <span class="text-[10px] font-extrabold bg-slate-100 text-slate-700 px-2 py-0.5 rounded-md">${item.qty} ${item.unit}</span>
-                            </div>
-                            <button onclick="openModal(${item.id})" class="font-bold text-slate-900 text-xs text-left hover:text-blue-600 line-clamp-2">
-                                ${item.title}
-                            </button>
-                        </div>
+                    <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+                        <span class="text-xs font-black bg-blue-800 text-white px-3 py-1 rounded-lg">Item #${item.id}</span>
+                        <span class="text-xs font-black bg-slate-200 text-slate-900 px-3 py-1 rounded-lg">${item.qty} ${item.unit}</span>
                     </div>
-                    <div class="grid grid-cols-2 text-xs bg-slate-50 p-2.5 rounded-xl border border-slate-100 text-slate-600">
-                        <div>Unit: <span class="font-bold text-slate-800">${formatPHP(item.cost)}</span></div>
-                        <div class="text-right">Shipping: <span class="font-bold text-slate-800">${formatPHP(item.shipping)}</span></div>
+
+                    <div>
+                        <h3 class="font-black text-slate-900 text-lg sm:text-xl leading-snug">
+                            ${item.title}
+                        </h3>
                     </div>
+
+                    <div class="grid grid-cols-2 text-sm bg-slate-100 p-3 rounded-xl border border-slate-200 font-bold text-slate-800">
+                        <div>Unit Price: <span class="font-black text-slate-900">${formatPHP(item.cost)}</span></div>
+                        <div class="text-right">Shipping: <span class="font-black text-slate-900">${formatPHP(item.shipping)}</span></div>
+                    </div>
+
                     <div class="flex items-center justify-between pt-1">
-                        <a href="${item.shopee}" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-orange-600 bg-orange-50 border border-orange-200 px-3 py-1.5 rounded-xl flex items-center gap-1.5">
-                            <i class="fa-solid fa-bag-shopping"></i> Shopee
-                        </a>
-                        <div class="text-right">
-                            <span class="text-[10px] text-slate-400 block uppercase">Total Cost</span>
-                            <span class="font-black text-slate-900 text-base">${formatPHP(item.total)}</span>
+                        <div class="text-left">
+                            <span class="text-xs font-bold text-slate-500 block uppercase">Total Item Cost</span>
+                            <span class="font-black text-slate-900 text-2xl">${formatPHP(item.total)}</span>
                         </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-2 pt-2 border-t border-slate-100">
+                        <button onclick="openModal(${item.id})" class="w-full justify-center inline-flex items-center gap-2 bg-blue-700 hover:bg-blue-800 text-white text-xs font-black px-3 py-2.5 rounded-xl transition shadow-sm">
+                            <i class="fa-solid fa-expand"></i> View Photo
+                        </button>
+                        <a href="${item.shopee}" target="_blank" rel="noopener noreferrer" class="w-full justify-center inline-flex items-center gap-1.5 bg-orange-100 hover:bg-orange-200 text-orange-900 border border-orange-300 text-xs font-black px-3 py-2.5 rounded-xl transition shadow-sm">
+                            <i class="fa-solid fa-bag-shopping text-orange-600"></i> Shopee
+                        </a>
                     </div>
                 `;
                 mobileContainer.appendChild(card);
             });
         }
 
-        // Modal State & Zoom/Pan Controller
+        // Modal Zoom/Pan State Controls
         let currentScale = 1;
         let translateX = 0;
         let translateY = 0;
@@ -737,7 +732,7 @@
             isDragging = false;
         });
 
-        // Keyboard navigation (Escape to close, + / - to zoom)
+        // Keyboard Navigation Shortcuts
         window.addEventListener('keydown', (e) => {
             if (!modal.classList.contains('hidden')) {
                 if (e.key === 'Escape') closeModal();
